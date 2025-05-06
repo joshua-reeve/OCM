@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outbound Clipboard Manager</title>
+  <link rel="icon" type="image/x-icon" href="S:\hscgroups\Front Office Services\CALL CENTER\Outbound\SMS Project\favicon.ico">
+  <body style="background-color: #ffffff;">
+
+<style>
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+  .button-container {
+    display: flex;
+    align-items: center;
+    margin: 0px 0;
+    border: 0px solid #ccc;
+    padding: 0px;
+    background-color: 8fd4ff;
+    width: fit-content;
+  }
+  .button-container:hover {
+    background-color: 8fd4ff;
+  }
+.copy-box {
+  border: 0px solid #ccc;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  width: 350px;
+  cursor: pointer;
+  background-color: DodgerBlue;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: sans-serif;
+  transition: transform 0.0s ease, background-color 0.0s ease;
+}
+.copy-box:active {
+  transform: scale(0.95);
+  background-color: #1e90ff;
+}
+  .copy-box:hover {
+    background-color: DeepSkyBlue;
+  }
+  .delete-button {
+    background-color: #FFE4E1;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    color: black;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  .edit-button {
+    background-color: #EEE8AA;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    color: black;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  .delete-button:hover {
+    background-color: #FFC0CB;
+  }
+  .edit-button:hover {
+    background-color: #BDB76B;
+  }
+
+  form {
+    margin-bottom: 0px;
+  }
+  input[type="text"] {
+    width: 80%;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 5px;
+    margin-right: 10px;
+    resize: vertical;
+    font-family: sans-serif;
+  }
+  .btn {
+  font-size: 20px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  }
+  .btn-increase {
+  background-color: #4CAF50;
+  color: white;
+  }
+  .btn-decrease {
+  background-color: #f44336;
+  color: white;
+  }
+  .btn-reset {
+  background-color: #008CBA;
+  color: white;
+  }
+  .drag-over {
+  background-color: #f0f0f0;
+  }
+  .preview {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+    z-index: 1000;
+  }
+
+.squircle-foreground {
+  background-color: #8fd4ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.squircle-background {
+  background-color: #ccecff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.danger {
+  background-color: #ffdddd;
+  border-left: 6px solid #f44336;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+.success {
+  background-color: #ddffdd;
+  border-left: 6px solid #04AA6D;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+.info {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196F3;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+
+.warning {
+  background-color: #ffffcc;
+  border-left: 6px solid #ffeb3b;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+.webtext {
+  background-color: #edebf5;
+  border-left: 6px solid #604be8;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+.topnav {
+  background-color: #6495ED;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 5px 5px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 15px;    
+  border: none;
+  outline: none;
+  color: black;
+  padding: 5px 5px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #6495ED;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 5px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 5px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+</style>
+
+<body>
+<div class="topnav" id="myTopnav">
+  <a href="#Custom Buttons">Custom Buttons</a>
+  <a href="#Appt Notes">Appt Notes</a>
+  <a href="#Email">Email</a>
+  <div class="dropdown">
+    <button class="dropbtn">Initiatives▾ 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#PT Wait List">PT Wait List</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">SMS▾ 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#Bump Text SMS Messages">Bump Text SMS Messages</a>
+      <a href="#Virtual Visit Change Texts">Virtual Visit Change Texts</a>
+      <a href="#COVID InPatient Texts">COVID InPatient Texts</a>
+      <a href="#RX Texts">RX Texts</a>
+      <a href="#Web Scheduled Visit Texts">Web Scheduled Visit Texts</a>
+      <a href="#Misc Texts and Responses">Misc Texts and Responses</a>
+      <a href="#SMS PT Wait List">PT Wait List</a>
+      <a href="#Inpatient Follow Up">Inpatient Follow Up</a>
+      <a href="#Kidney Non Compliant">Kidney Non Compliant</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Utilities ▾
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</a>
+    </div>
+  </div>
+  <a href="#About">About</a>
+  <a href="#Settings">Settings</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+<br>
+<br>
+<br>
+
+<div class="squircle-background">
+
+<h1 id="Custom Buttons"> </h1>
+<h1>Custom Buttons</h1>
+
+<div class="danger">
+❗ Clearing your browser's cache will delete all your custom buttons!
+</div>
+<br>
+
+<form id="addButtonForm">
+  <input type="text" id="buttonText" placeholder="Button Label (optional)">
+  <textarea id="buttonContent" placeholder="Button Content" ></textarea>
+  
+  <div>
+<b>Color:</b>
+    <select id="colorDropdown" required>
+      <option value="DodgerBlue">Dodger Blue (Default)</option>
+      <option value="red">Red</option>
+      <option value="orange">Orange</option>
+      <option value="yellow">Yellow</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+      <option value="purple">Purple</option>
+      <option value="gray">Gray</option>
+      <option value="chartreuse">Chartreuse</option>
+      <option value="cornflowerblue">CornflowerBlue</option>
+      <option value="goldenrod">GoldenRod</option>
+      <option value="orchid">Orchid</option>
+      <option value="salmon">Salmon</option>
+    </select>
+  </div>
+
+  <br><button type="submit"><b>➕ Add Button</b></button></br>
+</form>
+
+<br>
+
+<div id="buttonsContainer"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', loadButtons);
+
+  document.getElementById('addButtonForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const buttonText = document.getElementById('buttonText').value.trim();
+    const buttonContent = document.getElementById('buttonContent').value.trim();
+    const buttonColor = document.getElementById('colorDropdown').value;
+
+    if (!buttonContent) {
+      alert('Button content is required!');
+      return;
+    }
+
+    if (!buttonColor) {
+      alert('Please select a color!');
+      return;
+    }
+
+    const buttonLabel = buttonText || buttonContent.slice(0, 50);
+    createButton(buttonLabel, buttonContent, buttonColor);
+    saveButtonToStorage(buttonLabel, buttonContent, buttonColor);
+
+    this.reset();
+  });
+
+  function createButton(label, content, color) {
+    const container = document.getElementById('buttonsContainer');
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+    buttonContainer.draggable = true;
+    buttonContainer.dataset.label = label;
+
+    const copyButton = document.createElement('div');
+    copyButton.className = 'copy-box';
+    copyButton.textContent = label;
+    copyButton.style.backgroundColor = color;
+    copyButton.onclick = () => copyText(content);
+
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-button';
+    editButton.textContent = '✏️';
+    editButton.onclick = (e) => {
+      e.stopPropagation();
+      editButtonContent(label);
+    };
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-button';
+    deleteButton.textContent = '❌';
+    deleteButton.onclick = (e) => {
+      e.stopPropagation();
+      deleteButtonFromStorage(label);
+      container.removeChild(buttonContainer);
+    };
+
+    buttonContainer.appendChild(copyButton);
+    buttonContainer.appendChild(editButton);
+    buttonContainer.appendChild(deleteButton);
+
+    buttonContainer.addEventListener('dragstart', dragStart);
+    buttonContainer.addEventListener('dragover', dragOver);
+    buttonContainer.addEventListener('drop', drop);
+
+    container.appendChild(buttonContainer);
+  }
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert(`Copied: ${text}`);
+    });
+  }
+
+  function saveButtonToStorage(label, content, color) {
+    const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
+    savedButtons.push({ label, content, color });
+    localStorage.setItem('buttons', JSON.stringify(savedButtons));
+  }
+
+  function deleteButtonFromStorage(labelToDelete) {
+    let savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
+    savedButtons = savedButtons.filter(button => button.label !== labelToDelete);
+    localStorage.setItem('buttons', JSON.stringify(savedButtons));
+  }
+
+function editButtonContent(label) {
+  const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
+  const button = savedButtons.find(button => button.label === label);
+  if (button) {
+    const editContainer = document.createElement('div');
+    editContainer.className = 'edit-container';
+
+    const labelLabel = document.createElement('label');
+    labelLabel.textContent = '🏷️ Button Label:';
+    labelLabel.style.fontWeight = 'bold';
+    const labelInput = document.createElement('input');
+    labelInput.type = 'text';
+    labelInput.value = button.label;
+    labelInput.placeholder = 'Button Label';
+    labelInput.style.width = '100%';
+
+    const contentLabel = document.createElement('label');
+    contentLabel.textContent = '💬 Button Content:';
+    contentLabel.style.fontWeight = 'bold';
+    const textArea = document.createElement('textarea');
+    textArea.value = button.content;
+    textArea.rows = 5;
+    textArea.style.width = '100%';
+
+    const colorLabel = document.createElement('label');
+    colorLabel.textContent = '🎨 Button Color (optional):';
+    colorLabel.style.fontWeight = 'bold';
+    const colorInput = document.createElement('input');
+    colorInput.type = 'text';
+    colorInput.value = button.color;
+    colorInput.placeholder = 'Enter a valid color (optional)';
+
+    const saveButton = document.createElement('button');
+    saveButton.textContent = '✅ Save';
+    saveButton.style.marginRight = '10px'; // Adds spacing between buttons
+    saveButton.onclick = () => {
+      button.label = labelInput.value.trim() || button.content.slice(0, 50);
+
+      button.content = textArea.value;
+
+      const newColor = colorInput.value.trim();
+      if (newColor && newColor.toLowerCase() !== 'undefined') {
+        const tempElement = document.createElement('div');
+        tempElement.style.color = newColor;
+        if (tempElement.style.color) {
+          button.color = newColor;
+        } else {
+          alert('Invalid color. Please enter a valid color name.');
+          return;
+        }
+      }
+
+      localStorage.setItem('buttons', JSON.stringify(savedButtons));
+      document.body.removeChild(editContainer);
+      location.reload();
+    };
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = '❌ Cancel';
+
+    cancelButton.onclick = () => {
+      document.body.removeChild(editContainer);
+    };
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.justifyContent = 'flex-end';
+    buttonContainer.style.marginTop = '10px';
+    buttonContainer.appendChild(saveButton);
+    buttonContainer.appendChild(cancelButton);
+
+    editContainer.appendChild(labelLabel);
+    editContainer.appendChild(labelInput);
+    editContainer.appendChild(contentLabel);
+    editContainer.appendChild(textArea);
+    editContainer.appendChild(colorLabel);
+    editContainer.appendChild(colorInput);
+    editContainer.appendChild(buttonContainer);
+
+    editContainer.style.position = 'fixed';
+    editContainer.style.top = '50%';
+    editContainer.style.left = '50%';
+    editContainer.style.transform = 'translate(-50%, -50%)';
+    editContainer.style.backgroundColor = 'lightyellow';
+    editContainer.style.padding = '20px';
+    editContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+    editContainer.style.zIndex = 1000;
+
+    document.body.appendChild(editContainer);
+  }
+}
+
+  function loadButtons() {
+    const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
+    savedButtons.forEach(button => createButton(button.label, button.content, button.color));
+  }
+
+  let draggedItem = null;
+
+  function dragStart(event) {
+    draggedItem = event.target;
+    event.dataTransfer.effectAllowed = "move";
+    setTimeout(() => (event.target.style.opacity = "0.5"), 0);
+  }
+
+  function dragOver(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+    const container = document.getElementById('buttonsContainer');
+    const children = Array.from(container.children);
+
+    const draggingOverElement = children.find(el => el !== draggedItem && event.clientY < el.getBoundingClientRect().bottom);
+    if (draggingOverElement) {
+      container.insertBefore(draggedItem, draggingOverElement);
+    } else {
+      container.appendChild(draggedItem);
+    }
+  }
+
+  function drop(event) {
+    event.preventDefault();
+    draggedItem.style.opacity = "1";
+    saveNewOrder();
+  }
+
+  function saveNewOrder() {
+    const container = document.getElementById('buttonsContainer');
+    const newOrder = Array.from(container.children).map(child => ({
+      label: child.dataset.label,
+      content: JSON.parse(localStorage.getItem('buttons')).find(b => b.label === child.dataset.label).content,
+      color: JSON.parse(localStorage.getItem('buttons')).find(b => b.label === child.dataset.label).color
+    }));
+    localStorage.setItem('buttons', JSON.stringify(newOrder));
+  }
+</script>
+
+</div>
+<br>
+
+<div class="squircle-background">
+
+<h1>Initiatives:</h1>
+
+<h2 id="PT Wait List">PT Wait List</h2>
+<div class="info">
+ℹ️<i><b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a></i>
+</div>
+<div class="squircle-foreground">
+<h3>SMS Offer Builder:</h3>
+
+<form id="messageForm">
+    <div class="form-group">
+      <label for="patientName">1. Patient Name:</label>
+      <input type="text" id="patientName" style="max-width: 75px;">
+    </div>
+    <div class="form-group">
+      <label for="existingDate">2. Existing Date:</label>
+      <input type="date" id="existingDate">
+    </div>
+    <div class="form-group">
+      <label for="existingTime">3. Existing Time:</label>
+      <input type="time" id="existingTime">
+    </div>
+    <div class="form-group">
+      <label for="providerName">4. Provider Name:</label>
+      <select id="providerName">
+        <option value="">-- Select Provider --</option>
+            <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
+            <option value="Beck, OT, Lauren">Beck, Lauren</option>
+            <option value="Bennion, PT, David">Bennion, David</option>
+            <option value="Berke, PT, Matthew">Berke, Matthew</option>
+            <option value="Bildsten, SLP, Sarah">Bildsten, Sarah</option>
+            <option value="Birely, PT, Alex">Birely, Alex</option>
+            <option value="Black-Bain, DPT, Kristen">Black-Bain, Kristen</option>
+            <option value="Boynton, PT, McKail">Boynton, McKail</option>
+            <option value="Brown, OT, Tanita">Brown, Tanita</option>
+            <option value="Call, DPT, Christopher">Call, Christopher</option>
+            <option value="Corwin, PT, Andrea">Corwin, Andrea</option>
+            <option value="Covey, PT, Conner">Covey, Conner</option>
+            <option value="Culp, PT, Megan">Culp, Megan</option>
+            <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
+            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
+            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
+            <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
+            <option value="Graddy, PT, Emma">Graddy, Emma</option>
+            <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
+            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
+            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
+            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
+            <option value="James, PT, Daniel">James, Daniel</option>
+            <option value="Jensen, SLP, Brayden">Jensen, SLP, Brayden</option>
+            <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
+            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
+            <option value="Khong, DPT, Taryn">Khong, Taryn</option>
+            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
+            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
+            <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
+            <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
+            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
+            <option value="Miller, DPT, Jason">Miller, Jason</option>
+            <option value="Moyer, DPT, Cara">Moyer, Cara</option>
+            <option value="Muhn, PT, Peter">Muhn, Peter</option>
+            <option value="Mullen, DPT, Christina">Mullen, Christina</option>
+            <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
+            <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
+            <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
+            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
+            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
+            <option value="Reich, DPT, Todd">Reich, Todd</option> 
+            <option value="Reierson, PT, Karl">Reierson, Karl</option>
+            <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
+            <option value="Romero, PT, Julian">Romero, Julian</option> 
+            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
+            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
+            <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
+            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
+            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
+            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
+            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
+            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
+            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
+            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
+            <option value="Taylor, PT, Imani">Taylor, Imani</option>
+            <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
+            <option value="Tucker, DPT, Kara">Tucker, Kara</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="newDate">5. New Date:</label>
+      <input type="date" id="newDate">
+    </div>
+    <div class="form-group">
+      <label for="newTime">6. New Time:</label>
+      <input type="time" id="newTime">
+    </div>
+  </form>
+
+<label>7. SMS Format:</label>
+<br>
+  <button onclick="generateOriginal()">Reschedule</button>
+  <button onclick="generateAltEnglish()">Additional Visit</button>
+  <br>
+  <button onclick="generateSpanishEarlier()">Reschedule (Spanish)</button>
+  <button onclick="generateSpanishAdditional()">Additional Visit (Spanish)</button>
+<br>
+
+<label>8. Click to Copy:</label>
+<br>
+  <div class="copy-box" id="copyBox">
+Please fill out above form to generate the SMS you will send to the patient.
+  </div>
+  <label>9. Add to CRM</label>
+<br>
+<div class="copy-box" id="summaryBox">
+  for [NEW DATE] at [NEW TIME] with [PROVIDER]
+</div>
+</div>
+
+  <script>
+    const formatDate = (inputDate) => {
+      if (!inputDate) return '';
+      const [year, month, day] = inputDate.split('-');
+      return `${month}/${day}`;
+    };
+
+    const formatTime = (inputTime) => {
+      if (!inputTime) return '';
+      let [hour, minute] = inputTime.split(':');
+      hour = parseInt(hour);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12 || 12;
+      return `${hour}:${minute} ${ampm}`;
+    };
+
+const getFields = () => {
+const providerRaw = document.getElementById('providerName').value;
+let providerName = '[PROVIDER NAME]';
+
+if (providerRaw.includes(',')) {
+  const parts = providerRaw.split(',').map(part => part.trim());
+  if (parts.length === 3) {
+    const [last, credential, first] = parts;
+    providerName = `${first} ${last}, ${credential}`;
+  } else if (parts.length === 2) {
+    const [last, first] = parts;
+    providerName = `${first} ${last}`;
+  } else {
+    providerName = providerRaw; // fallback
+  }
+} else if (providerRaw) {
+  providerName = providerRaw;
+}
+
+  return {
+    patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
+    existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
+    existingTime: formatTime(document.getElementById('existingTime').value) || '[EXISTING TIME]',
+    providerName: providerName,
+    newDate: formatDate(document.getElementById('newDate').value) || '[NEW DATE]',
+    newTime: formatTime(document.getElementById('newTime').value) || '[NEW TIME]'
+  };
+};
+const updateSummaryBox = () => {
+  const f = getFields();
+  const msg = `for ${f.newDate} at ${f.newTime} with ${f.providerName}`;
+  document.getElementById('summaryBox').textContent = msg;
+  document.getElementById('summaryBox').addEventListener('click', () => {
+  const text = document.getElementById('summaryBox').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const box = document.getElementById('summaryBox');
+    const original = box.textContent;
+    setTimeout(() => updateSummaryBox(), 1000); // Restore original after 1s
+  });
+});
+};
+
+// Add event listeners to update summary in real time
+['newDate', 'newTime', 'providerName'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateSummaryBox);
+});
+    const generateOriginal = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
+Existing visit: ${f.existingDate} at ${f.existingTime} ${f.providerName}  
+New visit: ${f.newDate} at ${f.newTime}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateAltEnglish = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
+New visit: ${f.newDate} at ${f.newTime} ${f.providerName}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateSpanishEarlier = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
+Visita existente: ${f.existingDate} a las ${f.existingTime} ${f.providerName}  
+Nueva visita: ${f.newDate} a las ${f.newTime}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateSpanishAdditional = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
+Nueva visita: ${f.newDate} a las ${f.newTime} ${f.providerName}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    document.getElementById('copyBox').addEventListener('click', () => {
+      const text = document.getElementById('copyBox').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+      }).catch(err => {
+        alert('Failed to copy text: ' + err);
+      });
+    });
+  </script>
+
+<br>
+<div class="squircle-foreground">
+<h3>Wait List Message:</h3>
+
+<div class="info">
+ℹ️ Note: To set your UID, go to <a href="#Settings">Settings</a>
+</div>
+
+<div class="copy-box" data-message="No availability, [DATE]: [UID]">Wait List Message - No availability</div>
+</div>
+</div>
+   <br>
+<div class="squircle-background">
+<h1 id="Email">Email</h1>
+
+<div class="squircle-foreground">
+<h3>Contacts:</h3>
+
+<div class="copy-box" data-message="Mindee.Miller@hsc.utah.edu">Mindee Miller</div>
+<div class="copy-box" data-message="Templates@hsc.utah.edu">Templates Team</div>
+
+</div>
+</div>
+
+<br>
+<div class="squircle-background">
+
+<h1>SMS</h1>
+<div class="webtext">
+💬 Set WebText tool to UHealth General Number: 801-213-9500
+</div>
+
+<div class="danger">
+❗Text Messages to patients should NEVER include emojis, abbreviated phrasing, slang to derogatory comments. All communication must be to University standard. If none of the below responses fit for the interaction you're having, please consult Kim or Mindee before responding.
+</div>
+
+<br>
+
+
+<div class="squircle-foreground">
+<h3 id="Bump Text SMS Messages"><b>Bump Text SMS Messages:</b></h3>
+
+<div class="copy-box" data-message="UofU Health: Your appt on @ needs to be rescheduled. We apologize for any inconvenience. Please call U of U Health 801-213-9500 to reschedule.">Future Manual Bump</div>
+<div class="copy-box" data-message="UofU Health: Es necesario reprogramar su cita del @. Nos disculpamos por la inconveniencia. Por favor llame a U of U Health al 801-213-9500 para reprogramarla.">Future Manual Bump (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (Name) your appt on (Date) has been canceled. Please contact us at 801-213-9500 to reschedule . We apologize for this inconvenience.">Canceled Appointment</div>
+<div class="copy-box" data-message="UofU Health: (Name) la cita del (date) se canceló. Llámenos al 801-213-9500 para reprogramarla. Discúlpenos por la inconveniencia.">Canceled Appointment (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your appt on @ has been cancelled and needs to be rescheduled. We apologize for any inconvenience. Please use the Mychart scheduling ticket we have sent you or call us at 801-213-9500 to reschedule.">Same day & Short Notice Bump (under 4 days)</div>
+<div class="copy-box" data-message="UofU Health: Su cita en @ ha sido cancelada y necesita ser reprogramada. Pedimos disculpas por cualquier inconveniente. Utilice el boleto de programación de Mychart que le hemos enviado o llámenos al 801-213-9500 para reprogramar">Same day & Short Notice Bump (under 4 days) (Spanish)</div>
+</div>
+<br>
+<div class="squircle-foreground">
+<h3 id="Virtual Visit Change Texts"><b>Virtual Visit Change Texts:</b></h3>
+
+<div class="copy-box" data-message="UofU Health: Your appt today @ Time has changed to a video visit. Log onto MyChart.med.utah.edu for your appt. To reschedule, call 801-213-9500">MyChart Active (Appt Today)</div>
+<div class="copy-box" data-message="UofU Health: Su cita de hoy @ Time ha cambiado a una visita por video. Inicie sesión en MyChart.med.utah.edu para su cita. Para reprogramar, llame al 801-213-9500">MyChart Active (Appt Today) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your appt on Date @ Time has changed to a video visit. Log onto MyChart.med.utah.edu for your appt. To reschedule, call 801-213-9500">MyChart Active  (Future Appt)</div>
+<div class="copy-box" data-message="UofU Health: Su cita en Fecha @ Hora ha cambiado a una visita por video. Inicie sesión en MyChart.med.utah.edu para su cita. Para reprogramar, llame al 801-213-9500">MyChart Active  (Future Appt) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your appt today @ Time has changed to a video visit. You will receive a video link prior to your appt. To reschedule: 801-213-9500">Non-MyChart Active (Appt Today)</div>
+<div class="copy-box" data-message="UofU Health: Su cita de hoy @ Time ha cambiado a una visita por video. Recibirá un enlace de video antes de su cita. Para reprogramar: 801-213-9500">Non-MyChart Active (Appt Today) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your appt on Date @ Time has changed to a video visit. You will receive a video link prior to your appt. To reschedule: 801-213-9500">Non-MyChart Active (Future Appt)</div>
+<div class="copy-box" data-message="UofU Health: Su cita en Fecha @ Hora ha cambiado a una visita por video. Recibirá un enlace de video antes de su cita. Para reprogramar: 801-213-9500">Non-MyChart Active (Future Appt) (Spanish)</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="COVID InPatient Texts"><b>COVID InPatient Texts</b></h3>
+<br>
+
+<div class="copy-box" data-message="UofU Health: Attempting to schedule 2nd COVID vaccine, will you be in town anytime from 00/00 - 00/00? If not, contact local health dept for 2nd dose. Thank you!">COVID 2nd Dose Out Of State</div>
+<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available via MyChart.med.utah.edu, or at vaccines.gov.">No Availability  - Mychart Active</div>
+<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available at vaccines.gov.">No Availability  - Inactive Mychart</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="RX Texts"><b>RX Texts:</b></h3>
+<br>
+<div class="webtext">
+💬 Set WebText tool to RX Refill: 801-213-5090</br>
+</div>
+
+<br><b>Denied:</b></br>
+
+<div class="copy-box" data-message="UofU Health: Your refill request has been denied and requires an office appointment. Please CALL U of U Health to schedule 801-213-5090.">Denied - Office Appt</div>
+<div class="copy-box" data-message="UofU Health: Negaron el resurtido que pidió y necesita hacer una cita. Llame U of U Health para programar la cita: 801-213-5090.">Denied - Office Appt (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your refill request has been denied and requires lab work. Please CALL U of U Health to schedule 801-213-5090.">Denied - Lab</div>
+<div class="copy-box" data-message="UofU Health: Negaron el resurtido que pidió y necesita análisis de laboratorio. Llame U of U Health para programar la cita: 801-213-5090.">Denied - Lab (Spanish)</div>
+
+<b>Approved:</b>
+
+<div class="copy-box" data-message="UofU Health: Your refill request has been fulfilled and sent to your preferred pharmacy. Please CALL U of U Health with any questions 801-213-5090.">Approved</div>
+<div class="copy-box" data-message="UofU Health: Ya se envió a su farmacia de preferencia el resurtido que pidió. Llame a U of U Health si tiene preguntas: 801-213-5090.">Approved (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your refill request has been fulfilled, but an office appointment is needed before next time. Please CALL U of U Health to schedule 8012135090.">Approved - Office Appt</div>
+<div class="copy-box" data-message="UofU Health: Ya se envió el resurtido que pidió, pero necesita una consulta antes de adquirir más. Llame a U of U Health para programarla: 801-213-5090.">Approved - Office Appt (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your refill request has been fulfilled, but labs are needed before next time. Please CALL U of U Health to schedule 801-213-5090.">Approved - Lab</div>
+<div class="copy-box" data-message="UofU Health: Ya se envió el resurtido que pidió, pero se necesitan análisis de laboratorio antes de adquirir más. Llame a U of U Health para hacérselos: 801-213-5090.">Approved - Lab (Spanish)</div>
+
+<b>Responses:</b>
+
+<div class="copy-box" data-message="Thank You">Thank You</div>
+<div class="copy-box" data-message="¡Muchas gracias!">Thank You (Spanish)</div>
+<div class="copy-box" data-message="Thank You. May I call you to schedule this appointment?">Wants to Schedule</div>
+<div class="copy-box" data-message="¡Muchas gracias! ¿Puedo llamarlo(a) para programar esta cita?">Wants to Schedule (Spanish)</div>
+<div class="copy-box" data-message="We apologize for this inconvenience.">Apology</div>
+<div class="copy-box" data-message="Discúlpenos por la inconveniencia.">Apology (Spanish)</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="Web Scheduled Visit Texts"><b>Web Scheduled Visit Texts</b></h3>
+
+<div class="copy-box" data-message="UofUHealth: (NAME), more information is REQUIRED before your video visit on MM/DD. To continue via text, reply with the patient's last name and zip code. If preferred, you may call us at 801-213-9500 to complete required registration.">Template: WSV Reg - Text 1</div>
+<div class="copy-box" data-message="Your response does not match what we have on file for this account. Please ensure that there are no typos and try again.">Demographics don't match</div>
+
+<font color="Green"><b>Adult - MyChart Active</b></font>
+
+<div class="copy-box" data-message="Thank you for verifying your account. I will now ask 3 additional questions to complete registration. Question 1 of 3: What is the patient's preferred language?">Identity Validated & Question 1</div>
+<div class="copy-box" data-message="Question 2 of 3: Is the reason for this visit due to an accident or injury? Reply: YES or NO.">Question 2</div>
+<div class="copy-box" data-message="Someone from our team will need to call you to discuss further. Expect a phone call shortly from 801-213-9500. Thank you.">Question 2 - Answer 1 (YES)</div>
+<div class="copy-box" data-message="Question 3 of 3: We have communication aides for those with disabilities related to hearing, vision or speech. Is this support needed? Reply: YES or NO.">Question 3</div>
+<div class="copy-box" data-message="What type of service will the patient need? Guide/Assistant, Note Taker/Scribe, Qualified Reader, Sign Language Interpreter">Question 3 - Answer 1 (YES)</div>
+<div class="copy-box" data-message="Thank you. The video visit is confirmed for MM/YY at APPTTIME. Please contact your insurance to verify coverage for provider and facility. ?'s, call 801-213-9500. ">Final Message</div>
+
+<font color="Gold"><b>Adult - MyChart InActive</b></font>
+
+<div class="copy-box" data-message="Thank you for verifying your account. A MyChart account is required for this video visit. Can I text you an activation link so you can sign up? Reply: YES or NO">Identity Validated & Question 1</div>
+<div class="copy-box" data-message="The MyChart invitation will come from 32359. I will now ask 3 additional questions to complete registration.">MyChart Activation - Answer (YES)</div>
+<div class="copy-box" data-message="MyChart is required to complete the video visit. Would you like me to cancel this video visit or call you to schedule an in person visit? Reply CANCEL or CALL">MyChart Activation - Answer (NO)</div>
+<div class="copy-box" data-message="The visit on 00/00 has been cancelled. You may call us at 801-213-9500 if you have further questions.">MyChart Activation - Answer (NO) - CANCEL</div>
+<div class="copy-box" data-message="Question 1 of 3: What is the patient's preferred language?">Question 1</div>
+<div class="copy-box" data-message="Question 2 of 3: Is the reason for this visit due to an accident or injury? Reply: YES or NO.">Question 2</div>
+<div class="copy-box" data-message="Someone from our team will need to call you to discuss further. Expect a phone call shortly from 801-213-9500. Thank you.">Question 2 - Answer (YES)</div>
+<div class="copy-box" data-message="Question 3 of 3: We have communication aides for those with disabilities related to hearing, vision or speech. Is this support needed? Reply: YES or NO.">Question 3</div>
+<div class="copy-box" data-message="What type of service will the patient need? Guide/Assistant, Note Taker/Scribe, Qualified Reader, Sign Language Interpreter">Question 3 - Answer (YES)</div>
+<div class="copy-box" data-message="Thank you. The video visit is confirmed for MM/YY at APPTTIME. Please contact your insurance to verify coverage for provider and facility. ?'s, call 801-213-9500. ">Final Message</div>
+
+<font color="DarkSalmon"><b>Minor - MyChart Active</b></font>
+
+<div class="copy-box" data-message="Thank you. I will now ask you a few questions in order to complete the appt registration. There will be 4 questions total. Question 1 of 4: What is the patient's preferred language?">Identity Validated & Question 1</div>
+<div class="copy-box" data-message="Question 2 of 4: Is the reason for this visit due to an accident or injury? Reply: YES or NO.">Question 2</div>
+<div class="copy-box" data-message="Someone from our team will need to call you to discuss further. Expect a phone call shortly from 801-213-9500. Thank you.">Question 2 - Answer (YES)</div>
+<div class="copy-box" data-message="Question 3 of 4: We have communication aides for those with disabilities related to hearing, vision or speech. Is this support needed? Reply: YES or NO.">Question 3</div>
+<div class="copy-box" data-message="What type of service will the patient need? Guide/Assistant, Note Taker/Scribe, Qualified Reader, Sign Language Interpreter">Question 3 - Answer (YES)</div>
+<div class="copy-box" data-message="Question 4 of 4: We have (GUARNAME) listed as being financially responsible for the account. Can you confirm their address, employer name and employment status?">Question 4</div>
+<div class="copy-box" data-message="Thank you. The video visit is confirmed for MM/YY at APPTTIME. Please contact your insurance to verify coverage for provider and facility. ?'s, call 801-213-9500.">Final Message</div>
+
+<font color="CornflowerBlue"><b>Minor - MyChart InActive</b></font>
+
+<div class="copy-box" data-message="Thank you. A MyChart account is required for this video visit. To activate, please call MyChart support at 801-213-5555. I will now ask you 4 questions in order to complete registration. Question 1 of 4: What is the patient's preferred language?">Identity Validated & MyChart Activation</div>
+<div class="copy-box" data-message="Question 2 of 4: Is the reason for this visit due to an accident or injury? Reply: YES or NO.">Question 2</div>
+<div class="copy-box" data-message="Someone from our team will need to call you to discuss further. Expect a phone call shortly from 801-213-9500. Thank you.">Question 2 - Answer (YES)</div>
+<div class="copy-box" data-message="Question 3 of 4: We have communication aides for those with disabilities related to hearing, vision or speech. Is this support needed? Reply: YES or NO.">Question 3</div>
+<div class="copy-box" data-message="What type of service will the patient need? Guide/Assistant, Note Taker/Scribe, Qualified Reader, Sign Language Interpreter">Question 3 - Answer (YES)</div>
+<div class="copy-box" data-message="Question 4 of 4: We have (GUARNAME) listed as being financially responsible for the account. Can you confirm their address, employer name and employment status?">Question 4</div>
+<div class="copy-box" data-message="Thank you. The video visit is confirmed for MM/YY at APPTTIME. Please contact your insurance to verify coverage for provider and facility. ?'s, call 801-213-9500.">Final Message</div>
+
+<font color="MediumSlateBlue"><b>Return Patient</b></font>
+
+<div class="copy-box" data-message="Thank you for verifying your account. I will now ask additional questions to complete registration.">Introduction</div>
+<div class="copy-box" data-message="Is the reason for this visit due to an accident or injury? Reply: YES or NO.">Accident Related</div>
+<div class="copy-box" data-message="Someone from our team will need to call you to discuss further. Expect a phone call shortly from 801-213-9500. Thank you.">Accident Related - Answer (YES)</div>
+<div class="copy-box" data-message="Thank you. The video visit is confirmed for 00/00 at 0:00 AM/PM. Please verify insurance coverage for provider and facility. For questions, call 801-213-9500.">Final Message</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="Misc Texts and Responses"><b>Misc Texts and Responses:</b></h3>
+<br><b>Misc</b></br>
+
+<div class="copy-box" data-message="UofU Health: I'm sorry to hear this. We recommend downloading the SafeUT app to talk with one of our crisis counselors directly.">SafeUT Resource</div>
+<div class="copy-box" data-message="UofU Health: Sentimos mucho escuchar lo que pasó. Le recomendamos descargar la aplicación SafeUT para hablar directamente con nuestros terapeutas especializados en crisis.">SafeUT Resource (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: We apologize, we’re unable to opt you out due to refills requiring a response.">Opt Out Text</div>
+<div class="copy-box" data-message="UofU Health: Lo sentimos, pero no nos es posible cambiar las notificaciones que recibe para resurtir sus recetas, dado que es necesario que la farmacia reciba una respuesta de usted.">Opt Out Text (Spanish)</div>
+<div class="copy-box" data-message="U of U Health: Your appt on @ XXX will be completed @ XXX, due to your providers location change. For ?'s CALL 801-213-9500.">Location Change</div>
+<div class="copy-box" data-message="U of Utah Health: Su cita del XX será en ENTER HEALTH CENTER HERE, ya que su proveedor estará allí. ¿Preguntas? LLAME al 801-213-9500.">Location Change (Spanish)</div>
+<div class="copy-box" data-message="U of U Health: Your appt on XX was moved to XX @ . For ?'s CALL 801-213-9500.">Time Change</div>
+<div class="copy-box" data-message="U of U Health: Your appt on XXX  @  will be completed by a different provider, due to your provider not being available. For ?'s CALL 801-213-9500.">Provider Change</div>
+<div class="copy-box" data-message="U of U Health: Su cita el día XX se hará con otro proveedor, porque su proveedor no está disponible. ¿Preguntas? LLAME al 801-213-9500.">Provider Change (Spanish)</div>
+<div class="copy-box" data-message="U of U Health: Your appt on @ will be completed @ XXX, due to your providers location change. For ?'s CALL 801-213-9500.">Permanent Location Change</div>
+<div class="copy-box" data-message="U of Utah Health: Su cita del XX será en INSERT HEALTH CENTER HERE, ya que su proveedor se trasladó allí. ¿Preguntas? LLAME al 801-213-9500.">Permanent Location Change (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Due to HIPAA regulations we are unable to assist via text message. For assistance please call us at 801-213-9500.">Generic Response</div>
+<div class="copy-box" data-message="U of U Health: We have important questions regarding your appointment on Date, please call us back at ______. (dept/service #)">MAT/Covititi</div>
+
+<b>Responses</b>
+
+<div class="copy-box" data-message="Thank You.">Thank You</div>
+<div class="copy-box" data-message="¡Muchas gracias!">Thank You (Spanish)</div>
+<div class="copy-box" data-message="CORRECTION UofU Health: Please disregard previous text message. Apologies for the inconvenience">Correction</div>
+<div class="copy-box" data-message="Thank You. May I call you to reschedule this appointment?">Wants to Reschedule</div>
+<div class="copy-box" data-message="¡Muchas gracias! ¿Puedo llamarlo(a) para programar esta cita?">Wants to Reschedule (Spanish)</div>
+<div class="copy-box" data-message="We apologize for this inconvenience. The provider is not available at this time. I can call you to reschedule if you'd like?">Apology</div>
+<div class="copy-box" data-message="Discúlpenos por la inconveniencia. Esta ocasión no se encuentra el proveedor. Puedo llamarlo(a) si quiere para reprogramar.">Apology (Spanish)</div>
+<div class="copy-box" data-message="To ensure we get all the correct medication information may I call you?">Medication Request</div>
+<div class="copy-box" data-message="Para asegurarnos de adquirir la información correcta de medicamentos, ¿puedo llamarlo(a)?">Medication Request (Spanish)</div>
+<div class="copy-box" data-message="(Name) has an appt on (Date) at (Time) at U of U Health (Location).">Confirm other Appt</div>
+<div class="copy-box" data-message="(Name) tiene una cita el (Date) a las (Time) en U of U Health (Location).">Confirm other Appt (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your provider has requested you make an appointment. Please call UofU Health (service line/dept) for more information and to schedule">Provider request appt</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="SMS PT Wait List"><b>PT Wait List</b></h3>
+<div class="info">
+ℹ️<b> See Also: Documentation: </b><a href="#PT Wait List">PT Wait List</a>
+</div>
+
+<div class="copy-box" data-message="UofU Health: (PT NAME), an earlier visit is available: Existing visit: 00/00 at 00:00 AM/PM PROVIDER NAME New visit: 00/00 at 00:00 AM/PM This has been offered to multiple patients. Don't delay. Reply 1 to accept.">Identity Verification Text (RESCHEDULE Appt)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), una visita anterior está disponible: Visita existente: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Nueva visita: 00/00 a las 00:00 AM/PM Esto se ha ofrecido a varios pacientes. No te demores.  Responda 1 para aceptar.">Identity Verification Text (RESCHEDULE Appt) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), an additional visit is available: New visit: 00/00 at 00:00 AM/PM PROVIDER NAME This has been offered to multiple patients. Don't delay. Reply 1 to accept.">Identity Verification Text (ADD Appt)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), hay una visita adicional disponible: Nueva visita: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Esto se ha ofrecido a varios pacientes. No te demores.  Responda 1 para aceptar.">Identity Verification Text (ADD Appt) (Spanish)</div>
+<div class="copy-box" data-message="Success! (NAME), your updated visit is now scheduled on 00/00 at 0:00 am/pm. You can find information about your visit in MyChart.">Question 1 - Accept (Reply 1)</div>
+<div class="copy-box" data-message="¡Éxito! (NAME), su visita actualizada ahora está programada para el 00/00 a las 0:00 AM/PM Puede encontrar información sobre su visita en MyChart.">Question 1 - Accept (Reply 1) (Spanish)</div>
+<div class="copy-box" data-message="Thank you for letting us know. You'll be notified again if another time becomes available. Your original visit remains available in Mychart.">Pt declines offer</div>
+<div class="copy-box" data-message="Gracias por hacérnoslo saber. Se le notificará nuevamente si hay otro horario disponible. Su visita original sigue estando disponible en Mychart.">Pt declines offer (Spanish)</div>
+<div class="copy-box" data-message="Sorry, this visit is no longer available. You'll be notified again if a new time becomes available.">Response received outside of offer timeframe</div>
+<div class="copy-box" data-message="Lo sentimos, esta visita ya no está disponible. Se le notificará nuevamente si hay una nueva hora disponible.">Response received outside of offer timeframe (Spanish)</div>
+<div class="copy-box" data-message="Thank you for letting us know. You won't receive any more offers for this appointment.">Remove from Waitlist</div>
+<div class="copy-box" data-message="Gracias por hacérnoslo saber. No recibirás más ofertas para esta cita.">Remove from Waitlist (Spanish)</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="Inpatient Follow Up"><b>Inpatient Follow Up</b></h3>
+
+<div class="copy-box" data-message="UofU Health: (NAME), you need to follow up with your Primary Care provider. Text your last name and zip code to schedule or text CALL to schedule by phone.">Initial Outreach</div>
+<div class="copy-box" data-message="UofU Health: (NAME), necesitas realizar un seguimiento con tu proveedor de atención primaria. Envía tu apellido y código postal para programar o escribe LLAMADA para hacerlo por teléfono.">Initial Outreach (Spanish)</div>
+<div class="copy-box" data-message="Thank you. Our team will call you shortly from 801-213-9500.">Response: CALL</div>
+<div class="copy-box" data-message="Gracias. Nuestro equipo te llamará en breve desde el 801-213-9500.">Response: CALL (Spanish)</div>
+<div class="copy-box" data-message="Thank you. To schedule an in office visit, text OFFICE. To schedule a video visit, text VIDEO.">Text 1 - Response: Name & Zip Code</div>
+<div class="copy-box" data-message="Gracias. Para programar una cita en la oficina, escribe OFICINA. Para una visita por video, escribe VIDEO.">Text 1 - Response: Name & Zip Code (Spanish)</div>
+<div class="copy-box" data-message="A visit is available with (Provider) at (LOC) on 0/0 at 0:00am/pm. Text YES to accept or NO to see other options.">Response: OFFICE</div>
+<div class="copy-box" data-message="Hay una cita disponible con (PROVIDER) en (LOCATION) el 0/0 a las 0:00am/pm. Responde SÍ para aceptar o NO para ver otras opciones.">Response: OFFICE (Spanish)</div>
+<div class="copy-box" data-message="A video visit is available with (PROVIDER) on 0/0 at 0:00am/pm. Text YES to accept or NO to see other options.">Response: VIRTUAL</div>
+<div class="copy-box" data-message="Una visita por video está disponible con (PROVIDER) el 0/0 a las 0:00am/pm. Responde SÍ para aceptar o NO para ver otras opciones.">Response: VIRTUAL (Spanish)</div>
+<div class="copy-box" data-message="Your visit is confirmed. Contact your insurance to verify coverage for provider and facility. To cancel, reschedule or for questions, call 801-213-9500. Thank you.">Response (1st offer): YES (Accept)</div>
+<div class="copy-box" data-message="Tu cita está confirmada. Si necesitas cancelar, reprogramar o tienes preguntas, llama al 801-213-9500. Gracias.">Response (1st offer): YES (Accept) (Spanish)</div>
+
+<b>Response (1st offer): NO (Decline)</b> - Same offer script but offering a different date/time.
+
+<div class="copy-box" data-message="Your visit is confirmed. Contact your insurance to verify coverage for provider and facility. To cancel, reschedule or for questions, call 801-213-9500. Thank you.">Response (2nd offer): YES (Accept)</div>
+<div class="copy-box" data-message="Tu cita está confirmada. Si necesitas cancelar, reprogramar o tienes preguntas, llama al 801-213-9500. Gracias.">Response (2nd offer): YES (Accept) (Spanish)</div>
+<div class="copy-box" data-message="One of our team members will call you to discuss more scheduling options. Expect a call from 801-213-9500 shortly.">Response (2nd offer): NO (Decline)</div>
+<div class="copy-box" data-message="Un miembro de nuestro equipo te llamará para hablar sobre más opciones de programación. Espera la llamada desde el 801-213-9500 en breve.">Response (2nd offer): NO (Decline) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: Your visit is scheduled on (date) at (time) at (Location). For details or to reschedule, call 801-213-9500 or login to MyChart. Please verify insurance coverage prior to visit.">If no response from initial outreach</div>
+<div class="copy-box" data-message="UofU Health: Su visita está programada para el (DATE) a (TIME) en (LOCATION). Para obtener detalles o para reprogramar, llame al 801-213-9500 o inicie sesión en MyChart. Verifique la cobertura del seguro antes de la visita.">If no response from initial outreach (Spanish)</div>
+
+</div>
+<br>
+<div class="squircle-foreground">
+
+<h3 id="Kidney Non Compliant"><b>Kidney Non Compliant</b></h3>
+
+<div class="copy-box" data-message="UofU Health: (NAME), an appointment has been scheduled for you on 00/00 at 0:00 at (Location). To reschedule or cancel, or if you are receiving care with an external provider, please call 801-581-2634 or log in to MyChart.">In Office</div>
+<div class="copy-box" data-message="UofU Health: (NAME), hemos programado una cita para usted el 00/00 a las 0:00 en (LOCATION). Para reprogramar o cancelar, o si está recibiendo atención con un proveedor externo, llame al 801-581-2634 o ingrese a MyChart.">In Office (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (NAME), a video visit has been scheduled for you on 00/00 at 0:00. To reschedule or cancel, or if you are receiving care with an external provider, please call 801-581-2634 or log in to MyChart.">Virtual</div>
+<div class="copy-box" data-message="UofU Health: (NAME), hemos programado una visita por video para usted el 00/00 a las 0:00. Para reprogramar o cancelar, o si está recibiendo atención con un proveedor externo, llame al 801-581-2634 o ingrese a MyChart.">Virtual (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (NAME), an appointment has been scheduled for you on 00/00 at 0:00 at (LOCATION). Please complete lab work 1-2 days prior to this visit. To reschedule or cancel, or if you are receiving care with an external provider, please call 801-581-2634 or log in to MyChart.">In Office (Lab Work Required)</div>
+<div class="copy-box" data-message="UofU Health: (NAME), se ha programado una cita para usted el 00/00 a las 0:00 en (LOCATION). Complete los análisis de laboratorio 1-2 días antes de esta visita. Para reprogramar o cancelar, o si está recibiendo atención con un proveedor externo, llame al 801-581-2634 o inicie sesión en MyChart.">In Office (Lab Work Required) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (NAME), a video visit has been scheduled for you on 00/00 at 0:00. Please complete lab work 1-2 days prior to this visit. To reschedule or cancel, or if you are receiving care with an external provider, please call 801-581-2634 or log in to MyChart.">Virtual (Lab Work Required)</div>
+<div class="copy-box" data-message="UofU Health: (NAME), se ha programado una visita por video para usted el 00/00 a las 0:00. Complete los análisis de laboratorio 1-2 días antes de esta visita. Para reprogramar o cancelar, o si está recibiendo atención con un proveedor externo, llame al 801-581-2634 o inicie sesión en MyChart.">Virtual (Lab Work Required) (Spanish)</div>
+
+<b>FOLLOW PROCESS BELOW FOR OUT OF STATE PATIENTS ONLY</b>
+
+<div class="copy-box" data-message="UofU Health: (NAME), we are attempting to gather information regarding your compliance status. To continue via text, respond with your last name and zip code. If you prefer, call 801-581-2634.">Initial Outreach</div>
+<div class="copy-box" data-message="UofU Health: (NAME), estamos intentando recopilar información sobre tu estado de cumplimiento. Para continuar por mensaje de texto, responde con tu apellido y código postal. Si prefieres, llama al 801-581-2634.">Initial Outreach (Spanish)</div>
+<div class="copy-box" data-message="Thank you. You have not completed required follow up care with our kidney transplant team. Have you received this care outside of UofU Health? Reply: YES or NO">Text 1</div>
+<div class="copy-box" data-message="Gracias. No has completado el seguimiento necesario con nuestro equipo de trasplante de riñón. ¿Recibiste esta atención fuera de UofU Health? Responde: SÍ o NO.">Text 1 (Spanish)</div>
+<div class="copy-box" data-message="Can you please provide the name, address and phone number of the facility where you are receiving care?">Text 1 - (Response: YES)</div>
+<div class="copy-box" data-message="¿Podrías darnos el nombre, dirección y teléfono del centro donde estás recibiendo atención?">Text 1 - (Response: YES) (Spanish)</div>
+<div class="copy-box" data-message="This information has been shared with your transplant team. We will reach out if further information is needed. Thank you.">Response - Outside Facility</div>
+<div class="copy-box" data-message="Esta información ya se ha compartido con tu equipo de trasplante. Nos comunicaremos si necesitamos más detalles. Gracias.">Response - Outside Facility (Spanish)</div>
+<div class="copy-box" data-message="Can I help you schedule a follow up appointment now?">Text 2 - (Text 1 Response: NO)</div>
+<div class="copy-box" data-message="¿Te ayudo a programar una cita de seguimiento ahora?">Text 2 - (Text 1 Response: NO) (Spanish)</div>
+<div class="copy-box" data-message="Your healthcare is important to us. If you decide you would like to schedule, please call 801-581-2634. for assistance.">Response: (NO)</div>
+<div class="copy-box" data-message="Tu salud es muy importante para nosotros. Si deseas programar, por favor llama al 801-581-2634 para asistencia">Response: (NO) (Spanish)</div>
+
+</div>
+</div>
+   <br>
+<div class="squircle-background">
+
+<h1 id="Appt Notes">Appt Notes</h1>
+
+<div class="copy-box" data-message="Call 34674 to remove hold">Call 34674 to remove hold</div>
+<div class="copy-box" data-message="**CN correcting error**">**CN correcting error**</div>
+<div class="copy-box" data-message="*SMS sent re appt cancelation*">*SMS sent re appt cancelation*</div>
+<div class="copy-box" data-message="*SMS sent re appt time change*">*SMS sent re appt time change*</div>
+<div class="copy-box" data-message="*SMS sent re change to virtual*">*SMS sent re change to virtual*</div>
+<div class="copy-box" data-message="*SMS sent re location change*">*SMS sent re location change*</div>
+<div class="copy-box" data-message="*SMS sent re provider change*">*SMS sent re provider change*</div>
+<div class="copy-box" data-message="*MyChart message sent, If pt not billing Tricare please remove from HAR for this appt, If the patient is billing Tricare advise that an Auth # will be needed for the visit and to contact their VA PCP. If pt has other information regarding their insurance coverage, add it to appt notes. Outbound Team*">MAT/Cotiviti</div>
+
+</div>
+<br>
+<div class="squircle-background">
+<h1>Utilities</h1>
+<div class="squircle-foreground">
+<h2 id="Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</h2>
+<br>
+<form id="dateRangeForm">
+  <label for="sleepTestDate">Date of Patient's Sleep Test:</label>
+  <input type="date" id="sleepTestDate" name="sleepTestDate" required>
+  <button type="button" onclick="calculateSleepDateRange()">Calculate Date Range</button>
+</form>
+<div id="sleepResult"></div>
+
+<script>
+  function formatSleepDisplayDate(dateObj) {
+    const month = dateObj.getMonth() + 1;
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear().toString().slice(-2);
+    return `${month}/${day}/${year}`;
+  }
+
+  function calculateSleepDateRange() {
+    const inputDateValue = document.getElementById('sleepTestDate').value;
+    if (!inputDateValue) {
+      document.getElementById('sleepResult').innerText = 'Please enter a valid date.';
+      return;
+    }
+
+    const inputDate = new Date(inputDateValue);
+    const startRange = new Date(inputDate);
+    startRange.setDate(startRange.getDate() + 61);
+
+    const endRange = new Date(inputDate);
+    endRange.setDate(endRange.getDate() + 90);
+
+    const startFormatted = formatSleepDisplayDate(startRange);
+    const endFormatted = formatSleepDisplayDate(endRange);
+
+    document.getElementById('sleepResult').innerHTML =
+      `<br><div class="info">
+ℹ️ Patient should be scheduled between:<br><b>${startFormatted}</b> and <b>${endFormatted}</b>.</div>`;
+  }
+</script>
+</div>
+</div>
+<br>
+
+<div class="squircle-background">
+
+<h1 id="Settings">Settings</h1>
+
+<div class="squircle-foreground">
+
+<br>
+  <form id="uidForm">
+    <label for="userUid">Enter Your UID (Please use lowercase u):</label>
+    <input type="text" id="userUid" placeholder="UID" required>
+    <button type="submit">Save UID</button>
+  </form>
+
+
+
+  <div style="margin-top: 20px;">
+<div class="success">
+    <p>✅<b> UID set to: <span id="displayUid"></span></b></p>
+  </div>
+  </div>
+
+</div>
+<br>
+
+<div class="squircle-foreground">
+
+  <div>
+    <input type="checkbox" id="previewToggle">
+    <label for="previewToggle">Enable button previews on hover <br>(Note: Does not work with Custom Buttons)</label>
+  </div>
+
+
+
+  <script>
+    const uidForm = document.getElementById("uidForm");
+    const displayUid = document.getElementById("displayUid");
+
+    uidForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form from reloading the page
+      const uidInput = document.getElementById("userUid").value.trim();
+
+      if (uidInput) {
+        localStorage.setItem("userUid", uidInput);
+        displayUid.textContent = uidInput;
+        alert("UID saved successfully!");
+      }
+    });
+
+    const storedUid = localStorage.getItem("userUid");
+    if (storedUid) {
+      displayUid.textContent = storedUid;
+    }
+
+    document.querySelectorAll(".copy-box").forEach(button => {
+      button.addEventListener("click", function() {
+        const now = new Date();
+
+        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+        const day = now.getDate().toString().padStart(2, '0');
+        const year = now.getFullYear();
+        const today = `${month}/${day}/${year}`;
+
+        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        const uid = localStorage.getItem("userUid") || "[UID not set, please set in Settings section of Outbound Clipboard Manager.]";
+
+        let message = this.dataset.message
+          .replace("[DATE]", today)
+          .replace("[TIME]", time)
+          .replace("[UID]", uid);
+        
+        navigator.clipboard.writeText(message);
+      });
+    });
+
+  const previewToggle = document.getElementById("previewToggle");
+
+  window.addEventListener("load", () => {
+    const savedState = localStorage.getItem("previewToggleState");
+    if (savedState !== null) {
+      previewToggle.checked = savedState === "true"; // Restore state
+    }
+  });
+
+  previewToggle.addEventListener("change", () => {
+    localStorage.setItem("previewToggleState", previewToggle.checked);
+  });
+
+  document.querySelectorAll(".copy-box").forEach(button => {
+    const preview = document.createElement("div");
+    preview.className = "preview";
+    document.body.appendChild(preview);
+
+    button.addEventListener("mouseover", function(event) {
+      if (previewToggle.checked) {
+        const message = button.dataset.message;
+        preview.textContent = message;
+        preview.style.left = `${event.pageX + 10}px`;
+        preview.style.top = `${event.pageY + 10}px`;
+        preview.style.display = "block";
+      }
+    });
+
+    button.addEventListener("mousemove", function(event) {
+      if (previewToggle.checked) {
+        preview.style.left = `${event.pageX + 10}px`;
+        preview.style.top = `${event.pageY + 10}px`;
+      }
+    });
+
+    button.addEventListener("mouseout", function() {
+      preview.style.display = "none";
+    });
+  });
+  </script>
+</div>
+</div>
+<br>
+
+<div class="squircle-background">
+
+<h1 id="About">About</h1>
+
+<div class="squircle-foreground">
+<br><b>Outbound Clipboard Manager created and maintained by Joshua Reeve. For comments or suggestions, email <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b></br>
+<br><b>Last updated: 5/5/25</b></br>
+
+  <script>
+    function copyText(text) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999); // For mobile compatibility
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    }
+  </script>
+
+</div>
+</div>
+
+</body>
+</html>
