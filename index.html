@@ -291,8 +291,114 @@ textarea {
     text-align: left;
   }
 
+<!--PT WL Initiative Script-->
 </style>
+  <script>
+    const formatDate = (inputDate) => {
+      if (!inputDate) return '';
+      const [year, month, day] = inputDate.split('-');
+      return `${month}/${day}`;
+    };
 
+    const formatTime = (inputTime) => {
+      if (!inputTime) return '';
+      let [hour, minute] = inputTime.split(':');
+      hour = parseInt(hour);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12 || 12;
+      return `${hour}:${minute} ${ampm}`;
+    };
+
+const getFields = () => {
+const providerRaw = document.getElementById('providerName').value;
+let providerName = '[PROVIDER NAME]';
+
+if (providerRaw.includes(',')) {
+  const parts = providerRaw.split(',').map(part => part.trim());
+  if (parts.length === 3) {
+    const [last, credential, first] = parts;
+    providerName = `${first} ${last}, ${credential}`;
+  } else if (parts.length === 2) {
+    const [last, first] = parts;
+    providerName = `${first} ${last}`;
+  } else {
+    providerName = providerRaw; // fallback
+  }
+} else if (providerRaw) {
+  providerName = providerRaw;
+}
+
+  return {
+    patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
+    existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
+    existingTime: formatTime(document.getElementById('existingTime').value) || '[EXISTING TIME]',
+    providerName: providerName,
+    newDate: formatDate(document.getElementById('newDate').value) || '[NEW DATE]',
+    newTime: formatTime(document.getElementById('newTime').value) || '[NEW TIME]'
+  };
+};
+const updateSummaryBox = () => {
+  const f = getFields();
+  const msg = `for ${f.newDate} at ${f.newTime} with ${f.providerName}`;
+  document.getElementById('summaryBox').textContent = msg;
+  document.getElementById('summaryBox').addEventListener('click', () => {
+  const text = document.getElementById('summaryBox').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const box = document.getElementById('summaryBox');
+    const original = box.textContent;
+    setTimeout(() => updateSummaryBox(), 1000); // Restore original after 1s
+  });
+});
+};
+
+// Add event listeners to update summary in real time
+['newDate', 'newTime', 'providerName'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateSummaryBox);
+});
+    const generateOriginal = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
+Existing visit: ${f.existingDate} at ${f.existingTime} ${f.providerName}  
+New visit: ${f.newDate} at ${f.newTime}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateAltEnglish = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
+New visit: ${f.newDate} at ${f.newTime} ${f.providerName}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateSpanishEarlier = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
+Visita existente: ${f.existingDate} a las ${f.existingTime} ${f.providerName}  
+Nueva visita: ${f.newDate} a las ${f.newTime}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    const generateSpanishAdditional = () => {
+      const f = getFields();
+      const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
+Nueva visita: ${f.newDate} a las ${f.newTime} ${f.providerName}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+      document.getElementById('copyBox').textContent = msg;
+    };
+
+    document.getElementById('copyBox').addEventListener('click', () => {
+      const text = document.getElementById('copyBox').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+      }).catch(err => {
+        alert('Failed to copy text: ' + err);
+      });
+    });
+  </script>
+	  
+<head>
 <body>
 <div class="topnav" id="myTopnav">
   <a href="#Custom Buttons">Custom Buttons</a>
@@ -731,111 +837,6 @@ Please fill out above form to generate the SMS you will send to the patient.
   for [NEW DATE] at [NEW TIME] with [PROVIDER]
 </div>
 </div>
-
-  <script>
-    const formatDate = (inputDate) => {
-      if (!inputDate) return '';
-      const [year, month, day] = inputDate.split('-');
-      return `${month}/${day}`;
-    };
-
-    const formatTime = (inputTime) => {
-      if (!inputTime) return '';
-      let [hour, minute] = inputTime.split(':');
-      hour = parseInt(hour);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      hour = hour % 12 || 12;
-      return `${hour}:${minute} ${ampm}`;
-    };
-
-const getFields = () => {
-const providerRaw = document.getElementById('providerName').value;
-let providerName = '[PROVIDER NAME]';
-
-if (providerRaw.includes(',')) {
-  const parts = providerRaw.split(',').map(part => part.trim());
-  if (parts.length === 3) {
-    const [last, credential, first] = parts;
-    providerName = `${first} ${last}, ${credential}`;
-  } else if (parts.length === 2) {
-    const [last, first] = parts;
-    providerName = `${first} ${last}`;
-  } else {
-    providerName = providerRaw; // fallback
-  }
-} else if (providerRaw) {
-  providerName = providerRaw;
-}
-
-  return {
-    patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
-    existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
-    existingTime: formatTime(document.getElementById('existingTime').value) || '[EXISTING TIME]',
-    providerName: providerName,
-    newDate: formatDate(document.getElementById('newDate').value) || '[NEW DATE]',
-    newTime: formatTime(document.getElementById('newTime').value) || '[NEW TIME]'
-  };
-};
-const updateSummaryBox = () => {
-  const f = getFields();
-  const msg = `for ${f.newDate} at ${f.newTime} with ${f.providerName}`;
-  document.getElementById('summaryBox').textContent = msg;
-  document.getElementById('summaryBox').addEventListener('click', () => {
-  const text = document.getElementById('summaryBox').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const box = document.getElementById('summaryBox');
-    const original = box.textContent;
-    setTimeout(() => updateSummaryBox(), 1000); // Restore original after 1s
-  });
-});
-};
-
-// Add event listeners to update summary in real time
-['newDate', 'newTime', 'providerName'].forEach(id => {
-  document.getElementById(id).addEventListener('input', updateSummaryBox);
-});
-    const generateOriginal = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
-Existing visit: ${f.existingDate} at ${f.existingTime} ${f.providerName}  
-New visit: ${f.newDate} at ${f.newTime}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateAltEnglish = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
-New visit: ${f.newDate} at ${f.newTime} ${f.providerName}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateSpanishEarlier = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
-Visita existente: ${f.existingDate} a las ${f.existingTime} ${f.providerName}  
-Nueva visita: ${f.newDate} a las ${f.newTime}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateSpanishAdditional = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
-Nueva visita: ${f.newDate} a las ${f.newTime} ${f.providerName}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    document.getElementById('copyBox').addEventListener('click', () => {
-      const text = document.getElementById('copyBox').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-      }).catch(err => {
-        alert('Failed to copy text: ' + err);
-      });
-    });
-  </script>
 
 <br>
 <div class="squircle-foreground">
