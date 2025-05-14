@@ -99,18 +99,7 @@ textarea {
   border: none;
   border-radius: 5px;
   }
-  .btn-increase {
-  background-color: #4CAF50;
-  color: white;
-  }
-  .btn-decrease {
-  background-color: #f44336;
-  color: white;
-  }
-  .btn-reset {
-  background-color: #008CBA;
-  color: white;
-  }
+
   .drag-over {
   background-color: #f0f0f0;
   }
@@ -140,7 +129,6 @@ textarea {
   max-width: 600px;
   margin: 0 auto;
 }
-
 .danger {
   background-color: #ffdddd;
   border-left: 6px solid #f44336;
@@ -149,7 +137,6 @@ textarea {
   border-radius: 5px;
   padding: 4px 12px;
 }
-
 .success {
   background-color: #ddffdd;
   border-left: 6px solid #04AA6D;
@@ -158,7 +145,6 @@ textarea {
   border-radius: 5px;
   padding: 4px 12px;
 }
-
 .info {
   background-color: #e7f3fe;
   border-left: 6px solid #2196F3;
@@ -167,8 +153,6 @@ textarea {
   border-radius: 5px;
   padding: 4px 12px;
 }
-
-
 .warning {
   background-color: #ffffcc;
   border-left: 6px solid #ffeb3b;
@@ -186,6 +170,182 @@ textarea {
   padding: 4px 12px;
 }
 
+#mySidenav {
+  position: fixed;
+  top: 200px;
+  right: 0;
+  z-index: 999;
+}
+
+#mySidenav a {
+  position: fixed;
+  right: -165px; /* Start hidden on the right */
+  transition: 0.3s; /* Smooth sliding effect */
+  padding: 15px;
+  width: 180px; /* Adjust width for icons and text */
+  text-decoration: none; /* Remove underline */
+  font-size: 18px; /* Font size for text */
+  color: white; /* Text color */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically align icon and text */
+  gap: 10px; /* Add space between the icon and text */
+}
+
+#mySidenav a:hover {
+  right: 0; /* Slide into view */
+}
+
+#richText {
+  top: 60px;
+  background-color: #FFD600;/
+}
+
+#todoList {
+  top: 120px;
+  background-color: #2196F3;
+}
+
+#phoneNumbers {
+  top: 180px;
+  background-color: #04AA6D;
+  font-size: 12px;
+}
+
+/* Style for Material Icons */
+.material-icons {
+  font-size: 24px; /* Adjust icon size */
+  color: white; /* Ensure icons are white */
+}
+
+/* Modals */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* On top of other elements */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scrolling if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white; /* Default background color (will be updated dynamically) */
+  position: absolute;
+  top: 50%; /* Vertically center the modal */
+  right: -100%; /* Start off-screen on the right */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  padding: 20px;
+  border: 0px solid #888;
+  width: 85%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.5s forwards; /* Trigger slide-in animation */
+}
+
+/* Slide-in animation */
+@keyframes slide-in {
+  from {
+    right: -100%; /* Start off-screen */
+  }
+  to {
+    right: 0; /* Slide into view */
+  }
+}
+
+/* Slide-out animation */
+@keyframes slide-out {
+  from {
+    right: 0; /* Start in view */
+  }
+  to {
+    right: -100%; /* Slide out of view */
+  }
+}
+
+/* Responsive Design for Skinny Windows */
+@media screen and (max-width: 400px) {
+  .modal-content {
+    width: 90%; /* On very narrow screens, take up 90% of the width */
+    min-width: unset; /* Remove the minimum width constraint */
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+
+.rich-text-area {
+  width: 80%; /* Adjust width as needed */
+  margin: 0 auto; 
+  height: 150px; 
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-input {
+  width: calc(100% - 30px);
+  padding: 5px;
+  font-size: 16px;
+}
+
+.todo-list-item {
+  flex-grow: 1;
+}
+
+.todo-list-item.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.todo-delete {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+
+.todo-delete:hover {
+  background-color: #d32f2f;
+}
+
+.phone-numbers-list {
+  list-style-type: none;
+  padding: 0;
+}
 .topnav {
   background-color: #6495ED;
   position: fixed;
@@ -290,10 +450,10 @@ textarea {
     width: 100%;
     text-align: left;
   }
-
-
 </style>
-	  
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <head>
 <body>
 <div class="topnav" id="myTopnav">
@@ -346,6 +506,132 @@ function myFunction() {
   }
 }
 </script>
+<div id="mySidenav" class="sidenav">
+  <a href="#" id="richText" onclick="openModal('stickyNoteModal', '#FFFDE7')">
+    <span class="material-icons">note</span> Sticky Note
+  </a>
+  <a href="#" id="todoList" onclick="openModal('todoListModal', '#E1F5FE')">
+    <span class="material-icons">checklist</span> To-Do List
+  </a>
+  <a href="#" id="phoneNumbers" onclick="openModal('phoneNumbersModal', '#E8F5E9')">
+    <span class="material-icons">phone</span> Phone Numbers
+  </a>
+</div>
+
+<div id="stickyNoteModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('stickyNoteModal')">&times;</span>
+    <h2>Rich Text Sticky Note</h2>
+    <textarea id="stickyNote" class="rich-text-area" placeholder="Type your notes here..."></textarea>
+  </div>
+</div>
+
+<div id="todoListModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('todoListModal')">&times;</span>
+    <h2>To-Do List</h2>
+    <ul id="todoList" class="todo-list">
+      <li><input type="text" class="todo-input" placeholder="Add a new task..." onkeypress="addTask(event)"></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Example Modal for Phone Numbers -->
+<div id="phoneNumbersModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('phoneNumbersModal')">&times;</span>
+    <h2>Phone Numbers</h2>
+    <ul>
+      <li><strong>General Number:</strong> 801-213-9500</li>
+    </ul>
+    <h3>Community Clinics</h3>
+    <ul>
+      <li>CHC: 801-693-7900</li>
+      <li>FHC: 801-213-3200</li>
+      <li>GWC: 801-213-9400</li>
+      <li>MHC: 801-581-8000</li>
+      <li>PWC: 801-234-8600</li>
+      <li>RSC: 435-658-9200</li>
+      <li>RWC: 801-213-9900</li>
+      <li>SJHC: 801-213-4500</li>
+      <li>SBC: 435-843-3000</li>
+      <li>SHC: 801-581-2000</li>
+      <li>WRC: 801-213-9200</li>
+    </ul>
+    <h3>Gender Health</h3>
+    <ul>
+      <li>WH: 801-213-2995</li>
+      <li>Men's Health/Uro: 801-213-2700</li>
+    </ul>
+    <h3>Moran</h3>
+    <ul>
+      <li>JMEC: 801-581-2352</li>
+      <li>Midvalley: 801-585-3937</li>
+      <li>Neuro-Ophthalmology: 801-585-6540</li>
+    </ul>
+    <h3>Orthopedics</h3>
+    <ul>
+      <li>SHC Rehab: 801-581-2221</li>
+      <li>UOC: 801-587-7109</li>
+      <li>UOC PT: 801-587-7005</li>
+    </ul>
+    <h3>Specialty</h3>
+    <ul>
+      <li>CVC: 801-585-7676</li>
+      <li>Echo/Vascular: 801-585-2905</li>
+      <li>General Surgery: 801-585-1618</li>
+      <li>Organ Transplant: 801-581-6795</li>
+      <li>Plastics: 801-581-7719</li>
+      <li>SWC: 801-581-2016</li>
+    </ul>
+    <h3>Primary Care</h3>
+    <ul>
+      <li>UH Peds: 801-581-2205</li>
+    </ul>
+    <h3>Miscellaneous</h3>
+    <ul>
+      <li>NRH Outpatient & Wound Therapy/NRH Social Services: 801-581-2267</li>
+    </ul>
+  </div>
+</div>
+<script>
+function openModal(modalId, color) {
+  const modal = document.getElementById(modalId);
+  const modalContent = modal.querySelector('.modal-content');
+  if (modal) {
+    modal.style.display = 'block'; // Show the modal
+    modalContent.style.backgroundColor = color; // Set the modal background color
+    modalContent.style.animation = 'slide-in 0.5s forwards'; // Trigger slide-in animation
+  }
+}
+
+// Function to close a modal
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  const modalContent = modal.querySelector('.modal-content');
+  if (modal) {
+    modalContent.style.animation = 'slide-out 0.5s forwards'; // Trigger slide-out animation
+    setTimeout(() => {
+      modal.style.display = 'none'; // Hide the modal after the animation
+    }, 500); // Match the animation duration (0.5s)
+  }
+}
+
+// Close modal when clicking outside of it
+window.onclick = function (event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach((modal) => {
+    if (event.target === modal) {
+      const modalContent = modal.querySelector('.modal-content');
+      modalContent.style.animation = 'slide-out 0.5s forwards'; // Slide out
+      setTimeout(() => {
+        modal.style.display = 'none'; // Hide modal after animation
+      }, 500); // Match the animation duration
+    }
+  });
+};
+</script>
+
 <br>
 <br>
 <br>
@@ -902,8 +1188,6 @@ document.addEventListener('DOMContentLoaded', () => {
   summaryBox.addEventListener('click', () => {
     const text = summaryBox.textContent;
     navigator.clipboard.writeText(text).then(() => {
-      summaryBox.textContent = 'Copied!';
-      setTimeout(updateSummaryBox, 1000); // Restore original content after 1 second
     }).catch(err => {
       console.error('Failed to copy text:', err);
     });
