@@ -640,8 +640,8 @@ function editButtonContent(label) {
       <input type="time" id="existingTime">
     </div>
     <div class="form-group">
-      <label for="providerName">4. Provider Name:</label>
-      <select id="providerName">
+      <label for="existingProviderName">4. Provider Name:</label>
+      <select id="existingProviderName">
         <option value="">-- Select Provider --</option>
             <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
             <option value="Beck, OT, Lauren">Beck, Lauren</option>
@@ -704,17 +704,83 @@ function editButtonContent(label) {
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
       </select>
     </div>
+<div class="form-group">
+  <label for="newProviderName">5. New Provider Name:</label>
+  <select id="newProviderName">
+          <option value="">-- Select Provider --</option>
+            <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
+            <option value="Beck, OT, Lauren">Beck, Lauren</option>
+            <option value="Bennion, PT, David">Bennion, David</option>
+            <option value="Berke, PT, Matthew">Berke, Matthew</option>
+            <option value="Bildsten, SLP, Sarah">Bildsten, Sarah</option>
+            <option value="Birely, PT, Alex">Birely, Alex</option>
+            <option value="Black-Bain, DPT, Kristen">Black-Bain, Kristen</option>
+            <option value="Boynton, PT, McKail">Boynton, McKail</option>
+            <option value="Brown, OT, Tanita">Brown, Tanita</option>
+            <option value="Call, DPT, Christopher">Call, Christopher</option>
+            <option value="Corwin, PT, Andrea">Corwin, Andrea</option>
+            <option value="Covey, PT, Conner">Covey, Conner</option>
+            <option value="Culp, PT, Megan">Culp, Megan</option>
+            <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
+            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
+            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
+            <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
+            <option value="Graddy, PT, Emma">Graddy, Emma</option>
+            <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
+            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
+            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
+            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
+            <option value="James, PT, Daniel">James, Daniel</option>
+            <option value="Jensen, SLP, Brayden">Jensen, SLP, Brayden</option>
+            <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
+            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
+            <option value="Khong, DPT, Taryn">Khong, Taryn</option>
+            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
+            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
+            <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
+            <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
+            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
+            <option value="Miller, DPT, Jason">Miller, Jason</option>
+            <option value="Moyer, DPT, Cara">Moyer, Cara</option>
+            <option value="Muhn, PT, Peter">Muhn, Peter</option>
+            <option value="Mullen, DPT, Christina">Mullen, Christina</option>
+            <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
+            <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
+            <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
+            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
+            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
+            <option value="Reich, DPT, Todd">Reich, Todd</option> 
+            <option value="Reierson, PT, Karl">Reierson, Karl</option>
+            <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
+            <option value="Romero, PT, Julian">Romero, Julian</option> 
+            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
+            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
+            <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
+            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
+            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
+            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
+            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
+            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
+            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
+            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
+            <option value="Taylor, PT, Imani">Taylor, Imani</option>
+            <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
+            <option value="Tucker, DPT, Kara">Tucker, Kara</option>
+            <option value="Walburn, PT, Monica">Walburn, Monica</option>
+  </select>
+</div> 
     <div class="form-group">
-      <label for="newDate">5. New Date:</label>
+      <label for="newDate">6. New Date:</label>
       <input type="date" id="newDate">
+      <button type="button" id="setTodayButton">Today</button>
     </div>
     <div class="form-group">
-      <label for="newTime">6. New Time:</label>
+      <label for="newTime">7. New Time:</label>
       <input type="time" id="newTime">
     </div>
   </form>
 
-<label>7. SMS Format:</label>
+<label>8. SMS Format:</label>
 <br>
   <button onclick="generateOriginal()">Reschedule</button>
   <button onclick="generateAltEnglish()">Additional Visit</button>
@@ -723,122 +789,181 @@ function editButtonContent(label) {
   <button onclick="generateSpanishAdditional()">Additional Visit (Spanish)</button>
 <br>
 
-<label>8. Click to Copy:</label>
+<label>9. Click to Copy:</label>
 <br>
   <div class="copy-box" id="copyBox">
 Please fill out above form to generate the SMS you will send to the patient.
   </div>
-  <label>9. Add to CRM</label>
+  <label>10. Add to CRM</label>
 <br>
 <div class="copy-box" id="summaryBox">
   for [NEW DATE] at [NEW TIME] with [PROVIDER]
 </div>
 </div>
 <!--PT WL Initiative Script-->
-  <script>
-    const formatDate = (inputDate) => {
-      if (!inputDate) return '';
-      const [year, month, day] = inputDate.split('-');
-      return `${month}/${day}`;
-    };
-
-    const formatTime = (inputTime) => {
-      if (!inputTime) return '';
-      let [hour, minute] = inputTime.split(':');
-      hour = parseInt(hour);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      hour = hour % 12 || 12;
-      return `${hour}:${minute} ${ampm}`;
-    };
-
-const getFields = () => {
-const providerRaw = document.getElementById('providerName').value;
-let providerName = '[PROVIDER NAME]';
-
-if (providerRaw.includes(',')) {
-  const parts = providerRaw.split(',').map(part => part.trim());
-  if (parts.length === 3) {
-    const [last, credential, first] = parts;
-    providerName = `${first} ${last}, ${credential}`;
-  } else if (parts.length === 2) {
-    const [last, first] = parts;
-    providerName = `${first} ${last}`;
-  } else {
-    providerName = providerRaw; // fallback
-  }
-} else if (providerRaw) {
-  providerName = providerRaw;
-}
-
-  return {
-    patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
-    existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
-    existingTime: formatTime(document.getElementById('existingTime').value) || '[EXISTING TIME]',
-    providerName: providerName,
-    newDate: formatDate(document.getElementById('newDate').value) || '[NEW DATE]',
-    newTime: formatTime(document.getElementById('newTime').value) || '[NEW TIME]'
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
-};
-const updateSummaryBox = () => {
-  const f = getFields();
-  const msg = `for ${f.newDate} at ${f.newTime} with ${f.providerName}`;
-  document.getElementById('summaryBox').textContent = msg;
-  document.getElementById('summaryBox').addEventListener('click', () => {
-  const text = document.getElementById('summaryBox').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const box = document.getElementById('summaryBox');
-    const original = box.textContent;
-    setTimeout(() => updateSummaryBox(), 1000); // Restore original after 1s
+
+  // Add event listener to the "Today" button
+  document.getElementById('setTodayButton').addEventListener('click', () => {
+    const todayDate = getTodayDate();
+    document.getElementById('newDate').value = todayDate;
+    console.log(`Set New Date to: ${todayDate}`); // Debugging log
+    // Trigger any updates tied to the "New Date" field
+    document.getElementById('newDate').dispatchEvent(new Event('input'));
+  });
+
+  // Helper function to format dates
+  const formatDate = (inputDate) => {
+    if (!inputDate) return '[NEW DATE]';
+    const [year, month, day] = inputDate.split('-');
+    return `${month}/${day}`;
+  };
+
+  // Helper function to format times
+  const formatTime = (inputTime) => {
+    if (!inputTime) return '[NEW TIME]';
+    let [hour, minute] = inputTime.split(':');
+    hour = parseInt(hour, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12 || 12;
+    return `${hour}:${minute} ${ampm}`;
+  };
+
+  // Function to get form field values
+  const getFields = () => {
+    const existingProviderRaw = document.getElementById('existingProviderName').value || '[EXISTING PROVIDER NAME]';
+    const newProviderRaw = document.getElementById('newProviderName').value;
+
+    const formatProviderName = (providerRaw) => {
+      if (providerRaw && providerRaw.includes(',')) {
+        const parts = providerRaw.split(',').map(part => part.trim());
+        if (parts.length === 3) {
+          const [last, credential, first] = parts;
+          return `${first} ${last}, ${credential}`;
+        } else if (parts.length === 2) {
+          const [last, first] = parts;
+          return `${first} ${last}`;
+        } else {
+          return providerRaw; // fallback
+        }
+      } else if (providerRaw) {
+        return providerRaw;
+      }
+      return ''; // Return an empty string if no provider is selected
+    };
+
+    return {
+      patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
+      existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
+      existingTime: formatTime(document.getElementById('existingTime').value) || '[EXISTING TIME]',
+      existingProviderName: formatProviderName(existingProviderRaw),
+      newDate: formatDate(document.getElementById('newDate').value),
+      newTime: formatTime(document.getElementById('newTime').value),
+      newProviderName: formatProviderName(newProviderRaw),
+    };
+  };
+
+  // Function to update the summary box dynamically
+  const updateSummaryBox = () => {
+    const { newDate, newTime, newProviderName, existingProviderName } = getFields();
+    const providerName = newProviderName || existingProviderName; // Default to new provider if selected, otherwise existing provider
+    const msg = `for ${newDate} at ${newTime} with ${providerName}`;
+    document.getElementById('summaryBox').textContent = msg;
+  };
+
+  // Debounce function to limit the frequency of updates
+  const debounce = (func, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  // Attach debounced event listeners to form fields
+  const debouncedUpdate = debounce(updateSummaryBox, 300);
+  ['newDate', 'newTime', 'newProviderName', 'existingProviderName'].forEach(id => {
+    document.getElementById(id).addEventListener('input', debouncedUpdate);
+  });
+
+  // Add click-to-copy functionality for the summary box
+  const summaryBox = document.getElementById('summaryBox');
+  summaryBox.addEventListener('click', () => {
+    const text = summaryBox.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      summaryBox.textContent = 'Copied!';
+      setTimeout(updateSummaryBox, 1000); // Restore original content after 1 second
+    }).catch(err => {
+      console.error('Failed to copy text:', err);
+    });
+  });
+
+  // SMS generation functions
+  const generateOriginal = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
+Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}  
+New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+    document.getElementById('copyBox').textContent = msg;
+  };
+
+  const generateAltEnglish = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
+New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+    document.getElementById('copyBox').textContent = msg;
+  };
+
+  const generateSpanishEarlier = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
+Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}  
+Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+    document.getElementById('copyBox').textContent = msg;
+  };
+
+  const generateSpanishAdditional = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
+Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+    document.getElementById('copyBox').textContent = msg;
+  };
+
+  // Attach event listeners to SMS generation buttons
+  document.querySelector('button[onclick="generateOriginal()"]').addEventListener('click', generateOriginal);
+  document.querySelector('button[onclick="generateAltEnglish()"]').addEventListener('click', generateAltEnglish);
+  document.querySelector('button[onclick="generateSpanishEarlier()"]').addEventListener('click', generateSpanishEarlier);
+  document.querySelector('button[onclick="generateSpanishAdditional()"]').addEventListener('click', generateSpanishAdditional);
+
+  // Add click-to-copy functionality for the SMS box
+  const copyBox = document.getElementById('copyBox');
+  copyBox.addEventListener('click', () => {
+    const text = copyBox.textContent;
+    navigator.clipboard.writeText(text).catch(err => {
+      alert('Failed to copy text: ' + err);
+    });
   });
 });
-};
-
-// Add event listeners to update summary in real time
-['newDate', 'newTime', 'providerName'].forEach(id => {
-  document.getElementById(id).addEventListener('input', updateSummaryBox);
-});
-    const generateOriginal = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
-Existing visit: ${f.existingDate} at ${f.existingTime} ${f.providerName}  
-New visit: ${f.newDate} at ${f.newTime}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateAltEnglish = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
-New visit: ${f.newDate} at ${f.newTime} ${f.providerName}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateSpanishEarlier = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
-Visita existente: ${f.existingDate} a las ${f.existingTime} ${f.providerName}  
-Nueva visita: ${f.newDate} a las ${f.newTime}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    const generateSpanishAdditional = () => {
-      const f = getFields();
-      const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
-Nueva visita: ${f.newDate} a las ${f.newTime} ${f.providerName}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-      document.getElementById('copyBox').textContent = msg;
-    };
-
-    document.getElementById('copyBox').addEventListener('click', () => {
-      const text = document.getElementById('copyBox').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-      }).catch(err => {
-        alert('Failed to copy text: ' + err);
-      });
-    });
-  </script>
+</script>
 
 
 <br>
