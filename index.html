@@ -886,15 +886,13 @@ function closeModal(modalId) {
     copyButton.style.backgroundColor = color;
     copyButton.onclick = () => copyText(content);
 
-    const editButton = document.createElement('button');
-    editButton.className = 'edit-button';
-    editButton.textContent = '<span class="material-symbols-outlined">
-edit
-</span>';
-    editButton.onclick = (e) => {
-      e.stopPropagation();
-      editButtonContent(label);
-    };
+const editButton = document.createElement('button');
+editButton.className = 'edit-button';
+editButton.innerHTML = '<span class="material-symbols-outlined">edit</span>'; // Use innerHTML for HTML content
+editButton.onclick = (e) => {
+  e.stopPropagation();
+  editButtonContent(label);
+};
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
