@@ -888,7 +888,12 @@ function closeModal(modalId) {
 
 const editButton = document.createElement('button');
 editButton.className = 'edit-button';
-editButton.innerHTML = '<span class="material-symbols-outlined">edit</span>'; // Use innerHTML for HTML content
+
+const iconSpan = document.createElement('span');
+iconSpan.className = 'material-symbols-outlined';
+iconSpan.textContent = 'edit';
+
+editButton.appendChild(iconSpan);
 editButton.onclick = (e) => {
   e.stopPropagation();
   editButtonContent(label);
