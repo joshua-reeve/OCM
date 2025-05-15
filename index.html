@@ -886,18 +886,13 @@ function closeModal(modalId) {
     copyButton.style.backgroundColor = color;
     copyButton.onclick = () => copyText(content);
 
-const editButton = document.createElement('button');
-editButton.className = 'edit-button';
-
-const iconSpan = document.createElement('span');
-iconSpan.className = 'material-symbols-outlined';
-iconSpan.textContent = 'edit';
-
-editButton.appendChild(iconSpan);
-editButton.onclick = (e) => {
-  e.stopPropagation();
-  editButtonContent(label);
-};
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-button';
+    editButton.textContent = '✏️';
+    editButton.onclick = (e) => {
+      e.stopPropagation();
+      editButtonContent(label);
+    };
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
