@@ -888,7 +888,9 @@ function closeModal(modalId) {
 
     const editButton = document.createElement('button');
     editButton.className = 'edit-button';
-    editButton.textContent = '✏️';
+    editButton.textContent = '<span class="material-symbols-outlined">
+edit
+</span>';
     editButton.onclick = (e) => {
       e.stopPropagation();
       editButtonContent(label);
