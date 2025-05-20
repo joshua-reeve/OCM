@@ -9,9 +9,18 @@
 
 <style>
 
+/* General Typography */
 body, html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif; /* Material font */
+  font-size: 16px; /* Base font size */
+  line-height: 1.5; /* Improved readability */
+  color: #212121; /* Dark text for better contrast */
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa; /* Material Design light background */
 }
+
+/* Buttons */
   .button-container {
     display: flex;
     align-items: center;
@@ -25,78 +34,141 @@ body, html {
     background-color: 8fd4ff;
   }
 .copy-box {
-  border: 0px solid #ccc;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 5px;
+  border: none; /* Remove unnecessary border */
+  padding: 5px; /* Increase padding for better touch targets */
+  margin: 5px; /* Adjust margin for spacing consistency */
+  border-radius: 4px; /* Standard Material Design corner radius */
   width: 350px;
   cursor: pointer;
-  background-color: DodgerBlue;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  background-color: #2196F3; /* Material Blue 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
   text-align: center;
-  font-family: sans-serif;
-  transition: transform 0.0s ease, background-color 0.0s ease;
+  font-family: 'Roboto', sans-serif; /* Material typography */
+  font-size: 14px;
+  color: white; /* White text for contrast */
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .copy-box:active {
-  transform: scale(0.95);
-  background-color: #1e90ff;
+  transform: scale(0.97); /* Slight press effect */
+  background-color: #1976D2; /* Material Blue 700 */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); /* Reduced elevation */
 }
-  .copy-box:hover {
-    background-color: DeepSkyBlue;
-  }
-  .delete-button {
-    background-color: #FFE4E1;
-	box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    color: black;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
-  }
-  .edit-button {
-    background-color: #EEE8AA;
-	box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    color: black;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
-  }
-  .delete-button:hover {
-    background-color: #FFC0CB;
-  }
-  .edit-button:hover {
-    background-color: #BDB76B;
-  }
+.copy-box:hover {
+  background-color: #64B5F6; /* Material Blue 300 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hover elevation */
+}
+.copy-box-small {
+  width: 200px;       /* or whatever smaller width you want */
+  font-size: 12px;    /* optional: make text smaller */
+  padding: 1px;       /* optional: reduce padding */
+}
+.delete-button {
+  background-color: #F44336; /* Material Red 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
+  color: white; /* White text for contrast */
+  border: none;
+  padding: 5px; /* Increase padding for better touch targets */
+  margin: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500; /* Slightly bold text */
+  text-transform: uppercase; /* Material Design's uppercase text */
+  border-radius: 4px; /* Standard corner radius */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #D32F2F; /* Material Red 700 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hover elevation */
+}
+
+.delete-button:active {
+  background-color: #B71C1C; /* Material Red 900 */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); /* Press elevation */
+}
+.edit-button {
+  background-color: #FDD835; /* Material Yellow 600 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
+  color: #212121; /* Dark text for contrast */
+  border: none;
+  padding: 5px; /* Increase padding for better touch targets */
+  margin: 3px auto;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500; /* Slightly bold text */
+  text-transform: uppercase; /* Material Design's uppercase text */
+  border-radius: 4px; /* Standard corner radius */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #FBC02D; /* Material Yellow 700 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hover elevation */
+}
+
+.edit-button:active {
+  background-color: #FBC02D; /* Material Yellow 700 */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); /* Press elevation */
+}
+button, .btn {
+  background-color: #4CAF50; /* Material green */
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  margin: 3px auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: #45A049; /* Darker green on hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled, .btn:disabled {
+  background-color: #E0E0E0;
+  color: #9E9E9E;
+  cursor: not-allowed;
+}
   form {
     margin-bottom: 0px;
   }
-  input[type="text"] {
-    width: 80%;
-    padding: 5px;
-    margin-right: 10px;
-  }
+  
+/* Input Fields */
+input[type="text"], textarea {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #BDBDBD;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #212121;
+  transition: border-color 0.3s ease;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  width: 90%;
+  padding: 10px;
+  border-color: #4CAF50;
+  box-shadow: 0px 2px 4px rgba(0, 153, 51, 0.2);
+}
   button {
     padding: 5px 10px;
     cursor: pointer;
   }
 textarea {
-    width: 80%;
+    width: 90%;
     height: 100px;
-    padding: 5px;
-    margin-right: 10px;
+    padding: 10px;
     resize: vertical;
     font-family: sans-serif;
-  }
-  .btn {
-  font-size: 20px;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
   }
 
   .drag-over {
@@ -111,70 +183,110 @@ textarea {
     z-index: 1000;
   }
 
+/* Foreground Section (Primary Card) */
 .squircle-foreground {
-  background-color: #8fd4ff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  background-color: #FFFFFF; /* Material white for primary sections */
+  padding: 16px; /* Standard Material Design padding */
+  border-radius: 8px; /* Material-rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Material elevation */
   max-width: 600px;
-  margin: 0 auto;
+  margin: 16px auto; /* Add spacing between sections */
+  color: #212121; /* Dark text for contrast */
 }
 
+/* Background Section (Secondary Card) */
 .squircle-background {
-  background-color: #ccecff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  background-color: #E3F2FD;
+  padding: 16px; /* Standard Material Design padding */
+  border-radius: 8px; /* Material-rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
   max-width: 600px;
-  margin: 0 auto;
+  margin: 16px auto; /* Consistent spacing between sections */
+  color: #424242; /* Slightly lighter dark text */
 }
+
  .phone-modal-foreground {
   background-color: #A5D6A7;
-  padding: 5px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin: 5px;
   max-width: 600px;
-  margin: 0 auto;
 }
+
+ .dotphrases-modal-foreground {
+  background-color: #CE93D8;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin: 5px;
+  max-width: 600px;
+}
+
+.edit-container {
+  background-color: #FFFFFF; /* Material white for primary sections */
+  padding: 16px; /* Standard Material Design padding */
+  border-radius: 8px; /* Material-rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Material elevation */
+  max-width: 600px;
+  margin: 16px auto; /* Add spacing between sections */
+  color: #212121; /* Dark text for contrast */
+}
+
+/* General Styles for Communication Bubbles */
 .danger {
-  background-color: #ffdddd;
-  border-left: 6px solid #f44336;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 4px 12px;
+  background-color: #FFEBEE; /* Material Red 50 */
+  border-left: 6px solid #F44336; /* Material Red 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
+  margin-bottom: 16px;
+  border-radius: 8px; /* Material rounded corners */
+  padding: 12px 16px; /* Increased padding for readability */
+  font-family: 'Roboto', sans-serif;
+  color: #B71C1C; /* Material Red 900 for text */
 }
+
 .success {
-  background-color: #ddffdd;
-  border-left: 6px solid #04AA6D;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 4px 12px;
+  background-color: #E8F5E9; /* Material Green 50 */
+  border-left: 6px solid #4CAF50; /* Material Green 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
+  margin-bottom: 16px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #1B5E20; /* Material Green 900 for text */
 }
+
 .info {
-  background-color: #e7f3fe;
-  border-left: 6px solid #2196F3;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 4px 12px;
+  background-color: #BBDEFB; /* Material Blue 100 - slightly darker */
+  border-left: 6px solid #1976D2; /* Material Blue 700 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
+  margin-bottom: 16px;
+  border-radius: 8px; /* Material-rounded corners */
+  padding: 12px 16px; /* Increased padding for readability */
+  font-family: 'Roboto', sans-serif;
+  color: #0D47A1; /* Material Blue 900 for text */
 }
+
 .warning {
-  background-color: #ffffcc;
-  border-left: 6px solid #ffeb3b;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 4px 12px;
+  background-color: #FFF8E1; /* Material Yellow 50 */
+  border-left: 6px solid #FFC107; /* Material Amber 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
+  margin-bottom: 16px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #FF6F00; /* Material Amber 900 for text */
 }
+
 .webtext {
-  background-color: #edebf5;
-  border-left: 6px solid #604be8;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  border-radius: 5px;
-  padding: 4px 12px;
+  background-color: #F3E5F5; /* Material Purple 50 */
+  border-left: 6px solid #9C27B0; /* Material Purple 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material elevation */
+  margin-bottom: 16px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #4A148C; /* Material Purple 900 for text */
 }
 
 #mySidenav {
@@ -217,8 +329,14 @@ textarea {
   top: 120px;
   background-color: #04AA6D;
   font-size: 12px;
+  
 }
-.material-icons {
+#dotPhrases {
+  top: 180px; /* Adjust this value so it doesn't overlap with the others */
+  background-color: #6a1b9a; /* Pick a color you like */
+}
+.material-symbols-outlined {
+  display: block;
   font-size: 24px;
   color: white;
 }
@@ -233,6 +351,7 @@ textarea {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal-content {
   background-color: white;
   position: absolute;
@@ -240,16 +359,13 @@ textarea {
   right: -100%;
   transform: translateY(-50%);
   padding: 20px;
-  border: 0px solid #888;
-  width: 85%;
-  max-width: 500px;
+  border-radius: 8px;
+  width: 90%;
   max-height: 90vh;
+  max-width: 500px;
   overflow-y: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  animation: slide-in 0.5s forwards; /* Trigger slide-in animation */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 @keyframes slide-in {
   from {
@@ -292,7 +408,7 @@ textarea {
 
 
 .rich-text-area {
-  width: 90%; /* Adjust width as needed */
+  width: 90%;
   margin: 0 auto; 
   height: 150px; 
   padding: 10px;
@@ -347,8 +463,10 @@ textarea {
   list-style-type: none;
   padding: 0;
 }
+/* Navigation (Topnav) */
 .topnav {
-  background-color: #6495ED;
+  background-color: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   width: 100%;
@@ -358,11 +476,18 @@ textarea {
 .topnav a {
   float: left;
   display: block;
-  color: #000000;
+  color: #212121;
   text-align: center;
-  padding: 5px 5px;
+  padding: 1px 5px;
   text-decoration: none;
-  font-size: 15px;
+  border-radius: 0px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.topnav a:hover {
+  background-color: #F0F0F0;
+  color: #4CAF50;
 }
 
 .active {
@@ -376,6 +501,7 @@ textarea {
 
 .dropdown {
   float: left;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -384,7 +510,6 @@ textarea {
   border: none;
   outline: none;
   color: black;
-  padding: 5px 5px;
   background-color: inherit;
   font-family: inherit;
   margin: 0;
@@ -451,13 +576,50 @@ textarea {
     width: 100%;
     text-align: left;
   }
+  /* Cards and Containers */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px 16px;
+  background: white;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Shadows and Elevation */
+.elevation-1 {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.elevation-2 {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.elevation-3 {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
 </style>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"  />
+  
 <head>
 <body>
+
 <div class="topnav" id="myTopnav">
+  <a href="#section3" class="nav-link active">Go To:</a>
   <a href="#Custom Buttons">Custom Buttons</a>
   <a href="#Appt Notes">Appt Notes</a>
   <a href="#Email">Email</a>
@@ -509,11 +671,15 @@ function myFunction() {
 </script>
 <div id="mySidenav" class="sidenav">
   <a href="#" id="richText" onclick="openModal('stickyNoteModal', '#FFFDE7')">
-   <span class="material-icons">sticky_note_2</span> Notes
+   <span class="material-symbols-outlined">sticky_note_2</span> Notes
   </a>  
   <a href="#" id="phoneNumbers" onclick="openModal('phoneNumbersModal', '#E8F5E9')">
-    <span class="material-icons">phone</span> Phone Numbers
+    <span class="material-symbols-outlined">phone</span> Phone Numbers
   </a>
+  <a href="#" id="dotPhrases" onclick="openModal('dotPhrasesModal', '#ede7f6')">
+  <span class="material-symbols-outlined">more_horiz</span>
+  Dot Phrases
+</a>
 </div>
 
 <div id="stickyNoteModal" class="modal">
@@ -527,11 +693,12 @@ function myFunction() {
 <div id="phoneNumbersModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('phoneNumbersModal')">&times;</span>
-    <h2><u>Phone Numbers</u></h2>
+    <h2><u>Phone Number Reference Tab</u></h2>
     <div class="phone-modal-foreground">
-    <strong>General Number:</strong> 801-213-9500</li>
+    <strong>General Number: </strong>801-213-9500</li>
+	
 	</div>
-	<br>
+	
 	<div class="phone-modal-foreground">
     <b>Community Clinics:</b>
     <ul>
@@ -548,7 +715,7 @@ function myFunction() {
       <li>WRC: 801-213-9200</li>
     </ul>
 	</div>
-	<br>
+	
 	<div class="phone-modal-foreground">
     <b>Gender Health:</b>
     <ul>
@@ -556,7 +723,7 @@ function myFunction() {
       <li>Men's Health/Uro: 801-213-2700</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
     <b>Moran:</b>
     <ul>
@@ -565,7 +732,7 @@ function myFunction() {
       <li>Neuro-Ophthalmology: 801-585-6540</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
     <b>Orthopedics:</b>
     <ul>
@@ -574,7 +741,7 @@ function myFunction() {
       <li>UOC PT: 801-587-7005</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
     <b>Specialty:</b>
     <ul>
@@ -591,14 +758,14 @@ function myFunction() {
 	  <li>UH Clinical Nutrition GI: 801-213-8284</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
     <b>Primary Care:</b>
     <ul>
       <li>UH Peds: 801-581-2205</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
     <b>Miscellaneous:</b>
     <ul>
@@ -610,7 +777,7 @@ function myFunction() {
 	  <li>South Main: 801-587-2525</li>
     </ul>
 	</div>
-	<br>
+
 	<div class="phone-modal-foreground">
 	<div id="interpreterInstructions">
   <b><u>Interpreter Instructions:</u></b>
@@ -643,6 +810,121 @@ function myFunction() {
   </ol>
 </div>
 </div>
+  </div>
+</div>
+<div id="dotPhrasesModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('dotPhrasesModal')">&times;</span>
+    <h2><u>Dot Phrase Reference Tab</u></h2>
+	
+	<div class="info">
+ℹ️ For the most up-to-date info on Outbound Dot Phrases, visit: <br> <a href="https://uofu.service-now.com/kbcn?sys_kb_id=6546a8cd472dea10d3d05a5c346d437d&id=uu_kb_article_view&sysparm_rank=10">Dot Phrases Outbound - Care Navigation Outbound - KB0021854</a>
+</div>
+	<div class="dotphrases-modal-foreground">
+    <table border="1" cellpadding="4" cellspacing="0">
+  <thead>
+    <tr>
+      <th>DOT PHRASE</th>
+      <th>PURPOSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>.PHLIST</td><td>Phone options for different service lines.</td></tr>
+    <tr>
+      <td colspan="2"><b>Bumps &amp; Appt Changes</b></td>
+    </tr>
+    <tr><td>.BUMPAPPTCHANGE</td><td>Used to send Mychart message to a patient that appt has changed time/location/provider and SMS is not an option.</td></tr>
+    <tr><td>.BUMPTICKET</td><td>Used when creating a MyChart ticket after cancelling same-day bumps</td></tr>
+    <tr><td>.BUMPTICKETSP</td><td>Spanish Version of bumpticket</td></tr>
+    <tr><td>.CANCELRESCHEDULE</td><td>Used when the appointment is canceled and a ticket is sent to help with rescheduling</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr>
+      <td colspan="2"><b>PT CRM Request</b></td>
+    </tr>
+    <tr><td>.ADDHM</td><td>Health maintenance request appt already scheduled</td></tr>
+    <tr><td>.ADDMED</td><td>Adds additional meds for refill request</td></tr>
+    <tr><td>.CRMREPLY</td><td>Used for replying to CRM messages (Name/Sex Change or spelling errors, lodging, preferred pharmacy change, scheduling)</td></tr>
+    <tr><td>.CRMINS</td><td>Used for Pt CRM messages for insurance updates</td></tr>
+    <tr>
+      <td colspan="2"><b>Appointment Requests</b></td>
+    </tr>
+    <tr><td>.APPTTICKETPROVIDER</td><td>Used for replying to mychart request (providerleft, don't support, waitlist no appt, no template, ticket sent etc )</td></tr>
+    <tr><td>.APPTTICKETPROCESS</td><td>Used for replying to mychart when needs further process for request (order, referral, labs, vaccine etc )</td></tr>
+    <tr><td>.APPTSCHEDULE</td><td>Used when the patient has sent in a MyChart appointment request for an existing appointment for the same concerns/provider scheduled before the request was sent and the patient was added to the wait list</td></tr>
+    <tr><td>.MORANVISITINSTRUCTIONS</td><td>Used to send instructions for moran visits. (adult, child, contact, retina, post op, Iritits/uvetitis)</td></tr>
+    <tr><td>.ORTHOVISITINSTRUCTIONS</td><td>Used when sending tickets for ortho joint appts that requires paperwork. Mychart message explaining we will needed imaging brought to appt.</td></tr>
+    <tr><td>.TRIAGEMORAN</td><td>Used when a mychart appointment request for Moran as triage symptoms</td></tr>
+    <tr><td>.TRTMT</td><td>Used when a request for a specific medication or treatment (medication, treatment, consult for procedure, Spanish versions)</td></tr>
+    <tr>
+      <td colspan="2"><b>Inpatient Discharge Scheduling</b></td>
+    </tr>
+    <tr><td>.IPDISCHARGE</td><td>Used discharge Mychart message when appointment scheduled</td></tr>
+    <tr><td>.IPNOCONTACT</td><td>Used in CRM/Patient List to explain why we did not outreach to the patient to schedule apt with PCP after inpatient stay.</td></tr>
+    <tr><td>.IPPATIENTSCH</td><td>Used to document inpatient discharge scheduling when the patient already had a f/u scheduled.</td></tr>
+    <tr><td>.IPSCHPL</td><td>Used to document SMS text sent with scheduled appt for inpatient discharge scheduling.</td></tr>
+    <tr><td>.IPDISCHARGESP</td><td>Used for discharge Mychart Message when appt scheduled Spanish version.</td></tr>
+    <tr><td>.IPCRM</td><td>Used for CRM note updates for contacts</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr>
+      <td colspan="2"><b>Endoscopic Spine</b></td>
+    </tr>
+    <tr><td>.ENDOIMAGE</td><td>Used for Endospine image collection attempts</td></tr>
+    <tr><td>.ENDOIMAGEFAX</td><td>Used for when a fax request for images needs to be sent</td></tr>
+    <tr><td>.ENDOIMAGEFOLLOWUP</td><td>Used to document follow-up attempts for image collection</td></tr>
+    <tr><td>.ENDOTICKET</td><td>Used for Mychart message when ticket sent for Endospine</td></tr>
+    <tr><td>.UTR</td><td>Used when advocates have tried to reach a patient two times with no answer</td></tr>
+    <tr>
+      <td colspan="2"><b>Well U HRA</b></td>
+    </tr>
+    <tr><td>.HRAPCP</td><td>Used for WELL U HRA mychart message</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr><td>.UTR</td><td>Used when advocates have tried to reach a patient two times with no answer</td></tr>
+    <tr>
+      <td colspan="2"><b>Non Compliant Kidney</b></td>
+    </tr>
+    <tr><td>.NONCOMPLIANTCRM</td><td>Used to document contacts regarding communication for Non Compliant Kidney</td></tr>
+    <tr><td>.NONCOMPLIANTTICKET</td><td>Used to send Mychart message for Non Compliant Kidney explaining ticket was sent to scheduel</td></tr>
+    <tr><td>.NONCOMPLIAANTOOS</td><td>Used for Kidney Non compliant for out of state patients under 1 year post transplant</td></tr>
+    <tr>
+      <td colspan="2"><b>New American Scheduling</b></td>
+    </tr>
+    <tr><td>.NEWAMERICANREQ</td><td>Used to document in CRM work done for New American Scheduling.</td></tr>
+    <tr>
+      <td colspan="2"><b>Ortho Web Requests</b></td>
+    </tr>
+    <tr><td>.PMREMAIL</td><td>Used to document web requests for Ortho &amp; contacts made</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr>
+      <td colspan="2"><b>Prescription Request</b></td>
+    </tr>
+    <tr><td>.RXLVM</td><td>Used for when VM left for rx request an appointment needs to be scheduled.</td></tr>
+    <tr><td>.RXREQUEST</td><td>Used for when RX refill requires an appointment and we have sent a scheduling ticket.<br>Used for when RX refill requires an appointment for services we don't support to have them call to schedule.</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr>
+      <td colspan="2"><b>Waitlist</b></td>
+    </tr>
+    <tr><td>.PTWAITLISTOFFER</td><td>Used to send mychart message to offer a sooner appt</td></tr>
+    <tr><td>.PTDAILY</td><td>Used to document work done &amp; instructions on SJHC PT waitlist</td></tr>
+    <tr><td>.PTWLREPLY</td><td>Used to document SJHC PT when the patient confirms the appointment.</td></tr>
+    <tr><td>.WLTICKET</td><td>Used for waitlist ticket</td></tr>
+    <tr>
+      <td colspan="2"><b>SSIR</b></td>
+    </tr>
+    <tr><td>.SSIRADDINFO</td><td>Used for a SSIR when additional information or action is needed from the patient.</td></tr>
+    <tr><td>.SSIRINFORM</td><td>Used when sending patient Mychart message related to SSIR to inform patient but that doesn't require action on their part. (referral needed, referral needs review, complete test/labs before appt, 2 appts same concern, TOC, no license for state, misc. )</td></tr>
+    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+    <tr>
+      <td colspan="2"><b>Registration</b></td>
+    </tr>
+    <tr><td>.WSVTRESIDENTDEFERRAL</td><td>Used when deferring an appt on Web Shceuled VT WQ due to reg missing attending</td></tr>
+    <tr><td>.REG</td><td>Used for when we need to update registration on an appointment</td></tr>
+    <tr>
+      <td colspan="2"><b>MAT Emails</b></td>
+    </tr>
+    <tr><td>.MATCOTIVITIEMAIL</td><td>Used for MAT</td></tr>
+  </tbody>
+</table>
+  </div>
   </div>
 </div>
 <script>
@@ -769,11 +1051,13 @@ function openModal(modalId, color) {
     modal.style.display = 'block';
     modal.setAttribute('aria-hidden', 'false');
     modalContent.style.backgroundColor = color;
+    modalContent.style.animation = ''; // Reset any previous animation
+    // Force reflow to restart animation
+    void modalContent.offsetWidth;
     modalContent.style.animation = 'slide-in 0.5s forwards';
 
     trapFocus(modal); // Trap focus in the modal
 
-    // Save the last focused element
     modal.dataset.lastFocused = document.activeElement;
     setTimeout(() => {
       const focusable = modal.querySelector('button, input, textarea');
@@ -788,12 +1072,12 @@ function closeModal(modalId) {
 
   const modalContent = modal.querySelector('.modal-content');
   if (modalContent) {
+    modalContent.style.animation = ''; // Reset animation
+    void modalContent.offsetWidth;
     modalContent.style.animation = 'slide-out 0.5s forwards';
     setTimeout(() => {
       modal.style.display = 'none';
       modal.setAttribute('aria-hidden', 'true');
-
-      // Restore focus to the last focused element
       const lastFocused = modal.dataset.lastFocused;
       if (lastFocused) lastFocused.focus();
     }, 500);
@@ -803,7 +1087,7 @@ function closeModal(modalId) {
 
 <br>
 <br>
-<br>
+
 
 <div class="squircle-background">
 
@@ -813,7 +1097,7 @@ function closeModal(modalId) {
 <div class="danger">
 ❗ Clearing your browser's cache will delete all your custom buttons!
 </div>
-<br>
+
 
 <form id="addButtonForm">
   <input type="text" id="buttonText" placeholder="Button Label (optional)">
@@ -822,7 +1106,7 @@ function closeModal(modalId) {
   <div>
 <b>Color:</b>
     <select id="colorDropdown" required>
-      <option value="DodgerBlue">Dodger Blue (Default)</option>
+      <option value="#2196F3">Material Blue (Default)</option>
       <option value="red">Red</option>
       <option value="orange">Orange</option>
       <option value="yellow">Yellow</option>
@@ -838,11 +1122,12 @@ function closeModal(modalId) {
     </select>
   </div>
 
-  <br><button type="submit"><b><span class="material-icons" style="font-size: 15px; color: green;">add</span> Add Button</b></button></br>
-</form>
-
 <br>
 
+<button type="submit"><span class="material-symbols-outlined" style="font-size: 18px;">variable_add</span> Add Button</button>
+</form>
+<br>
+<br>
 <div id="buttonsContainer"></div>
 
 <script>
@@ -887,7 +1172,7 @@ function closeModal(modalId) {
 
     const editButton = document.createElement('button');
     editButton.className = 'edit-button';
-    editButton.textContent = '✏️';
+    editButton.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">edit</span>';
     editButton.onclick = (e) => {
       e.stopPropagation();
       editButtonContent(label);
@@ -895,7 +1180,7 @@ function closeModal(modalId) {
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
-    deleteButton.textContent = '❌';
+    deleteButton.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">delete</span>';
     deleteButton.onclick = (e) => {
       e.stopPropagation();
       deleteButtonFromStorage(label);
@@ -939,24 +1224,24 @@ function editButtonContent(label) {
     editContainer.className = 'edit-container';
 
     const labelLabel = document.createElement('label');
-    labelLabel.textContent = '🏷️ Button Label:';
+    labelLabel.textContent = 'Button Label:';
     labelLabel.style.fontWeight = 'bold';
     const labelInput = document.createElement('input');
     labelInput.type = 'text';
     labelInput.value = button.label;
     labelInput.placeholder = 'Button Label';
-    labelInput.style.width = '100%';
+    labelInput.style.width = '90%';
 
     const contentLabel = document.createElement('label');
-    contentLabel.textContent = '💬 Button Content:';
+    contentLabel.textContent = 'Button Content:';
     contentLabel.style.fontWeight = 'bold';
     const textArea = document.createElement('textarea');
     textArea.value = button.content;
     textArea.rows = 5;
-    textArea.style.width = '100%';
+    textArea.style.width = '90%';
 
     const colorLabel = document.createElement('label');
-    colorLabel.textContent = '🎨 Button Color (optional):';
+    colorLabel.textContent = 'Button Color (optional):';
     colorLabel.style.fontWeight = 'bold';
     const colorInput = document.createElement('input');
     colorInput.type = 'text';
@@ -1014,8 +1299,8 @@ function editButtonContent(label) {
     editContainer.style.top = '50%';
     editContainer.style.left = '50%';
     editContainer.style.transform = 'translate(-50%, -50%)';
-    editContainer.style.backgroundColor = 'lightyellow';
-    editContainer.style.padding = '20px';
+    editContainer.style.backgroundColor = '#ffffff';
+    editContainer.style.padding = '10px';
     editContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
     editContainer.style.zIndex = 1000;
 
@@ -1068,34 +1353,104 @@ function editButtonContent(label) {
 </script>
 
 </div>
-<br>
 
 <div class="squircle-background">
 
 <h1>Initiatives:</h1>
 
-<h2 id="PT Wait List">PT Wait List</h2>
+<div class="squircle-foreground">
+<h2 id="PT Wait List"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">physical_therapy</span> PT Wait List</h2>
 <div class="info">
-ℹ️<i><b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a></i>
+ℹ️<b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a>
 </div>
 <div class="squircle-foreground">
-<h3>SMS Offer Builder:</h3>
+<h3><u>SMS Offer Builder:</u></h3>
+
+
+<b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_repeat</span> Start here for reschedule:</b>
 
 <form id="messageForm">
+
     <div class="form-group">
-      <label for="patientName">1. Patient Name:</label>
-      <input type="text" id="patientName" style="max-width: 75px;">
-    </div>
-    <div class="form-group">
-      <label for="existingDate">2. Existing Date:</label>
+      <label for="existingDate">1. Existing Date:</label>
       <input type="date" id="existingDate">
     </div>
     <div class="form-group">
-      <label for="existingTime">3. Existing Time:</label>
+      <label for="existingTime">2. Existing Time:</label>
       <input type="time" id="existingTime">
     </div>
+
+  <label for="newProviderName">3. New Provider Name (if applicable):</label>
+  <select id="newProviderName">
+          <option value="">-- Select Provider --</option>
+            <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
+            <option value="Beck, OT, Lauren">Beck, Lauren</option>
+            <option value="Bennion, PT, David">Bennion, David</option>
+            <option value="Berke, PT, Matthew">Berke, Matthew</option>
+            <option value="Bildsten, SLP, Sarah">Bildsten, Sarah</option>
+            <option value="Birely, PT, Alex">Birely, Alex</option>
+            <option value="Black-Bain, DPT, Kristen">Black-Bain, Kristen</option>
+            <option value="Boynton, PT, McKail">Boynton, McKail</option>
+            <option value="Brown, OT, Tanita">Brown, Tanita</option>
+            <option value="Call, DPT, Christopher">Call, Christopher</option>
+            <option value="Corwin, PT, Andrea">Corwin, Andrea</option>
+            <option value="Covey, PT, Conner">Covey, Conner</option>
+            <option value="Culp, PT, Megan">Culp, Megan</option>
+            <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
+            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
+            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
+            <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
+            <option value="Graddy, PT, Emma">Graddy, Emma</option>
+            <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
+            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
+            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
+            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
+            <option value="James, PT, Daniel">James, Daniel</option>
+            <option value="Jensen, SLP, Brayden">Jensen, SLP, Brayden</option>
+            <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
+            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
+            <option value="Khong, DPT, Taryn">Khong, Taryn</option>
+            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
+            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
+            <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
+            <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
+            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
+            <option value="Miller, DPT, Jason">Miller, Jason</option>
+            <option value="Moyer, DPT, Cara">Moyer, Cara</option>
+            <option value="Muhn, PT, Peter">Muhn, Peter</option>
+            <option value="Mullen, DPT, Christina">Mullen, Christina</option>
+            <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
+            <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
+            <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
+            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
+            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
+            <option value="Reich, DPT, Todd">Reich, Todd</option> 
+            <option value="Reierson, PT, Karl">Reierson, Karl</option>
+            <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
+            <option value="Romero, PT, Julian">Romero, Julian</option> 
+            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
+            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
+            <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
+            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
+            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
+            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
+            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
+            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
+            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
+            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
+            <option value="Taylor, PT, Imani">Taylor, Imani</option>
+            <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
+            <option value="Tucker, DPT, Kara">Tucker, Kara</option>
+            <option value="Walburn, PT, Monica">Walburn, Monica</option>
+  </select>
+<br>4. <u>Continue to Step 5.</u></br>
+<br><b><span class="material-symbols-outlined" style="font-size: 20px; color: green;">calendar_add_on</span> Start here for additional appointment:</b></br>
     <div class="form-group">
-      <label for="existingProviderName">4. Provider Name:</label>
+      <label for="patientName">5. Patient Name:</label>
+      <input type="text" id="patientName" style="max-width: 75px;">
+    </div>
+    <div class="form-group">
+      <label for="existingProviderName">6. Existing Provider Name:</label>
       <select id="existingProviderName">
         <option value="">-- Select Provider --</option>
             <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
@@ -1159,83 +1514,20 @@ function editButtonContent(label) {
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
       </select>
     </div>
+	</form>
 <div class="form-group">
-  <label for="newProviderName">5. New Provider Name:</label>
-  <select id="newProviderName">
-          <option value="">-- Select Provider --</option>
-            <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
-            <option value="Beck, OT, Lauren">Beck, Lauren</option>
-            <option value="Bennion, PT, David">Bennion, David</option>
-            <option value="Berke, PT, Matthew">Berke, Matthew</option>
-            <option value="Bildsten, SLP, Sarah">Bildsten, Sarah</option>
-            <option value="Birely, PT, Alex">Birely, Alex</option>
-            <option value="Black-Bain, DPT, Kristen">Black-Bain, Kristen</option>
-            <option value="Boynton, PT, McKail">Boynton, McKail</option>
-            <option value="Brown, OT, Tanita">Brown, Tanita</option>
-            <option value="Call, DPT, Christopher">Call, Christopher</option>
-            <option value="Corwin, PT, Andrea">Corwin, Andrea</option>
-            <option value="Covey, PT, Conner">Covey, Conner</option>
-            <option value="Culp, PT, Megan">Culp, Megan</option>
-            <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
-            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
-            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
-            <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
-            <option value="Graddy, PT, Emma">Graddy, Emma</option>
-            <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
-            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
-            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
-            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
-            <option value="James, PT, Daniel">James, Daniel</option>
-            <option value="Jensen, SLP, Brayden">Jensen, SLP, Brayden</option>
-            <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
-            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
-            <option value="Khong, DPT, Taryn">Khong, Taryn</option>
-            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
-            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
-            <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
-            <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
-            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
-            <option value="Miller, DPT, Jason">Miller, Jason</option>
-            <option value="Moyer, DPT, Cara">Moyer, Cara</option>
-            <option value="Muhn, PT, Peter">Muhn, Peter</option>
-            <option value="Mullen, DPT, Christina">Mullen, Christina</option>
-            <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
-            <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
-            <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
-            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
-            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
-            <option value="Reich, DPT, Todd">Reich, Todd</option> 
-            <option value="Reierson, PT, Karl">Reierson, Karl</option>
-            <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
-            <option value="Romero, PT, Julian">Romero, Julian</option> 
-            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
-            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
-            <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
-            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
-            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
-            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
-            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
-            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
-            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
-            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
-            <option value="Taylor, PT, Imani">Taylor, Imani</option>
-            <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
-            <option value="Tucker, DPT, Kara">Tucker, Kara</option>
-            <option value="Walburn, PT, Monica">Walburn, Monica</option>
-  </select>
-</div> 
     <div class="form-group">
-      <label for="newDate">6. New Date:</label>
+      <label for="newDate">7. New Date:</label>
       <input type="date" id="newDate">
       <button type="button" id="setTodayButton">Today</button>
     </div>
     <div class="form-group">
-      <label for="newTime">7. New Time:</label>
+      <label for="newTime">8. New Time:</label>
       <input type="time" id="newTime">
     </div>
-  </form>
 
-<label>8. SMS Format:</label>
+
+<label>9. SMS Format:</label>
 <br>
   <button onclick="generateOriginal()">Reschedule</button>
   <button onclick="generateAltEnglish()">Additional Visit</button>
@@ -1244,17 +1536,17 @@ function editButtonContent(label) {
   <button onclick="generateSpanishAdditional()">Additional Visit (Spanish)</button>
 <br>
 
-<label>9. Click to Copy:</label>
+<label>10. Click to Copy:</label>
 <br>
   <div class="copy-box" id="copyBox">
 Please fill out above form to generate the SMS you will send to the patient.
   </div>
-  <label>10. Add to CRM</label>
+  <label>11. Add to CRM</label>
 <br>
 <div class="copy-box" id="summaryBox">
   for [NEW DATE] at [NEW TIME] with [PROVIDER]
 </div>
-</div>
+
 <!--PT WL Initiative Script-->
  <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1377,7 +1669,7 @@ This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
     const f = getFields();
     const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
     const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
-New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
+New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}  
 This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
     document.getElementById('copyBox').textContent = msg;
   };
@@ -1396,7 +1688,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
     const f = getFields();
     const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
     const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
-Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
+Nueva visita: ${f.newDate} a las ${f.newTime} with ${f.existingProviderName} 
 Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
     document.getElementById('copyBox').textContent = msg;
   };
@@ -1417,10 +1709,9 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
   });
 });
 </script>
-
-
 <br>
-<div class="squircle-foreground">
+<hr>
+
 <h3>Wait List Message:</h3>
 
 <div class="info">
@@ -1430,12 +1721,14 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="No availability, [DATE]: [UID]">Wait List Message - No availability</div>
 </div>
 </div>
-   <br>
+</div>
+</div>
+
 <div class="squircle-background">
-<h1 id="Email">Email</h1>
+<h1 id="Email"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">mail</span> Email</h1>
 
 <div class="squircle-foreground">
-<h3>Contacts:</h3>
+<h3><span class="material-symbols-outlined" style="color: black; font-size: 25px;">contact_mail</span> Contacts:</h3>
 
 <div class="copy-box" data-message="Mindee.Miller@hsc.utah.edu">Mindee Miller</div>
 <div class="copy-box" data-message="Templates@hsc.utah.edu">Templates Team</div>
@@ -1443,23 +1736,20 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 </div>
 </div>
 
-<br>
+
 <div class="squircle-background">
 
-<h1>SMS</h1>
+<h1><span class="material-symbols-outlined" style="color: black; font-size: 35px;">chat</span> SMS</h1>
 <div class="webtext">
-💬 Set WebText tool to UHealth General Number: 801-213-9500
+<span class="material-symbols-outlined" style="font-size: 20px; color: purple">quick_phrases</span> Set WebText tool to UHealth General Number: 801-213-9500
 </div>
 
 <div class="danger">
 ❗Text Messages to patients should NEVER include emojis, abbreviated phrasing, slang to derogatory comments. All communication must be to University standard. If none of the below responses fit for the interaction you're having, please consult Kim or Mindee before responding.
 </div>
 
-<br>
-
-
 <div class="squircle-foreground">
-<h3 id="Bump Text SMS Messages"><b>Bump Text SMS Messages:</b></h3>
+<h3 id="Bump Text SMS Messages"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">ink_eraser</span><b> Bump Text SMS Messages:</b></h3>
 
 <div class="copy-box" data-message="UofU Health: Your appt on @ needs to be rescheduled. We apologize for any inconvenience. Please call U of U Health 801-213-9500 to reschedule.">Future Manual Bump</div>
 <div class="copy-box" data-message="UofU Health: Es necesario reprogramar su cita del @. Nos disculpamos por la inconveniencia. Por favor llame a U of U Health al 801-213-9500 para reprogramarla.">Future Manual Bump (Spanish)</div>
@@ -1468,9 +1758,9 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="UofU Health: Your appt on @ has been cancelled and needs to be rescheduled. We apologize for any inconvenience. Please use the Mychart scheduling ticket we have sent you or call us at 801-213-9500 to reschedule.">Same day & Short Notice Bump (under 4 days)</div>
 <div class="copy-box" data-message="UofU Health: Su cita en @ ha sido cancelada y necesita ser reprogramada. Pedimos disculpas por cualquier inconveniente. Utilice el boleto de programación de Mychart que le hemos enviado o llámenos al 801-213-9500 para reprogramar">Same day & Short Notice Bump (under 4 days) (Spanish)</div>
 </div>
-<br>
+
 <div class="squircle-foreground">
-<h3 id="Virtual Visit Change Texts"><b>Virtual Visit Change Texts:</b></h3>
+<h3 id="Virtual Visit Change Texts"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">video_chat</span><b> Virtual Visit Change Texts:</b></h3>
 
 <div class="copy-box" data-message="UofU Health: Your appt today @ Time has changed to a video visit. Log onto MyChart.med.utah.edu for your appt. To reschedule, call 801-213-9500">MyChart Active (Appt Today)</div>
 <div class="copy-box" data-message="UofU Health: Su cita de hoy @ Time ha cambiado a una visita por video. Inicie sesión en MyChart.med.utah.edu para su cita. Para reprogramar, llame al 801-213-9500">MyChart Active (Appt Today) (Spanish)</div>
@@ -1482,24 +1772,24 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="UofU Health: Su cita en Fecha @ Hora ha cambiado a una visita por video. Recibirá un enlace de video antes de su cita. Para reprogramar: 801-213-9500">Non-MyChart Active (Future Appt) (Spanish)</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
-<h3 id="COVID InPatient Texts"><b>COVID InPatient Texts</b></h3>
+<h3 id="COVID InPatient Texts"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">coronavirus</span><b> COVID InPatient Texts</b></h3>
 <br>
 
 <div class="copy-box" data-message="UofU Health: Attempting to schedule 2nd COVID vaccine, will you be in town anytime from 00/00 - 00/00? If not, contact local health dept for 2nd dose. Thank you!">COVID 2nd Dose Out Of State</div>
-<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available via MyChart.med.utah.edu, or at vaccines.gov.">No Availability  - Mychart Active</div>
-<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available at vaccines.gov.">No Availability  - Inactive Mychart</div>
+<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available via MyChart.med.utah.edu, or at vaccines.gov.">No Availability - Mychart Active</div>
+<div class="copy-box" data-message="UofU Health: Patient Name, 2nd COVID vaccines available at vaccines.gov.">No Availability - Inactive Mychart</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
-<h3 id="RX Texts"><b>RX Texts:</b></h3>
+<h3 id="RX Texts"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">medication</span><b> RX Texts:</b></h3>
 <br>
 <div class="webtext">
-💬 Set WebText tool to RX Refill: 801-213-5090</br>
+<span class="material-symbols-outlined" style="font-size: 20px; color: purple">quick_phrases</span> Set WebText tool to RX Refill: 801-213-5090</br>
 </div>
 
 <br><b>Denied:</b></br>
@@ -1528,7 +1818,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="Discúlpenos por la inconveniencia.">Apology (Spanish)</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
 <h3 id="Web Scheduled Visit Texts"><b>Web Scheduled Visit Texts</b></h3>
@@ -1586,7 +1876,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="Thank you. The video visit is confirmed for 00/00 at 0:00 AM/PM. Please verify insurance coverage for provider and facility. For questions, call 801-213-9500.">Final Message</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
 <h3 id="Misc Texts and Responses"><b>Misc Texts and Responses:</b></h3>
@@ -1622,10 +1912,10 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="UofU Health: Your provider has requested you make an appointment. Please call UofU Health (service line/dept) for more information and to schedule">Provider request appt</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
-<h3 id="SMS PT Wait List"><b>PT Wait List</b></h3>
+<h3 id="SMS PT Wait List"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">physical_therapy</span><b> PT Wait List</b></h3>
 <div class="info">
 ℹ️ See Also: Initiatives: </b><a href="#PT Wait List">PT Wait List</a>
 </div>
@@ -1644,10 +1934,10 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="Gracias por hacérnoslo saber. No recibirás más ofertas para esta cita.">Remove from Waitlist (Spanish)</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
-<h3 id="Inpatient Follow Up"><b>Inpatient Follow Up</b></h3>
+<h3 id="Inpatient Follow Up"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">inpatient</span><b> Inpatient Follow Up</b></h3>
 
 <div class="copy-box" data-message="UofU Health: (NAME), you need to follow up with your Primary Care provider. Text your last name and zip code to schedule or text CALL to schedule by phone.">Initial Outreach</div>
 <div class="copy-box" data-message="UofU Health: (NAME), necesitas realizar un seguimiento con tu proveedor de atención primaria. Envía tu apellido y código postal para programar o escribe LLAMADA para hacerlo por teléfono.">Initial Outreach (Spanish)</div>
@@ -1672,10 +1962,10 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="UofU Health: Su visita está programada para el (DATE) a (TIME) en (LOCATION). Para obtener detalles o para reprogramar, llame al 801-213-9500 o inicie sesión en MyChart. Verifique la cobertura del seguro antes de la visita.">If no response from initial outreach (Spanish)</div>
 
 </div>
-<br>
+
 <div class="squircle-foreground">
 
-<h3 id="Kidney Non Compliant"><b>Kidney Non Compliant</b></h3>
+<h3 id="Kidney Non Compliant"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">nephrology</span><b> Kidney Non Compliant</b></h3>
 
 <div class="copy-box" data-message="UofU Health: (NAME), an appointment has been scheduled for you on 00/00 at 0:00 at (Location). To reschedule or cancel, or if you are receiving care with an external provider, please call 801-581-2634 or log in to MyChart.">In Office</div>
 <div class="copy-box" data-message="UofU Health: (NAME), hemos programado una cita para usted el 00/00 a las 0:00 en (LOCATION). Para reprogramar o cancelar, o si está recibiendo atención con un proveedor externo, llame al 801-581-2634 o ingrese a MyChart.">In Office (Spanish)</div>
@@ -1703,10 +1993,10 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
 </div>
 </div>
-   <br>
+
 <div class="squircle-background">
 
-<h1 id="Appt Notes">Appt Notes</h1>
+<h1 id="Appt Notes"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">event_note</span> Appt Notes</h1>
 
 <div class="copy-box" data-message="Call 34674 to remove hold">Call 34674 to remove hold</div>
 <div class="copy-box" data-message="**CN correcting error**">**CN correcting error**</div>
@@ -1718,15 +2008,16 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="copy-box" data-message="*MyChart message sent, If pt not billing Tricare please remove from HAR for this appt, If the patient is billing Tricare advise that an Auth # will be needed for the visit and to contact their VA PCP. If pt has other information regarding their insurance coverage, add it to appt notes. Outbound Team*">MAT/Cotiviti</div>
 
 </div>
-<br>
+
 <div class="squircle-background">
-<h1>Utilities</h1>
+<h1><span class="material-symbols-outlined" style="color: black; font-size: 35px;">construction</span> Utilities</h1>
 <div class="squircle-foreground">
 <h2 id="Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</h2>
 <br>
 <form id="dateRangeForm">
   <label for="sleepTestDate">Date of Patient's Sleep Test:</label>
   <input type="date" id="sleepTestDate" name="sleepTestDate" required>
+  <br>
   <button type="button" onclick="calculateSleepDateRange()">Calculate Date Range</button>
 </form>
 <div id="sleepResult"></div>
@@ -1742,7 +2033,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
   function calculateSleepDateRange() {
     const inputDateValue = document.getElementById('sleepTestDate').value;
     if (!inputDateValue) {
-      document.getElementById('sleepResult').innerText = 'Please enter a valid date.';
+      document.getElementById('sleepResult').innerHTML = '<div class="info">ℹ️ Please enter a valid date.</div>';
       return;
     }
 
@@ -1763,11 +2054,10 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 </script>
 </div>
 </div>
-<br>
 
 <div class="squircle-background">
 
-<h1 id="Settings">Settings</h1>
+<h1 id="Settings"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">settings</span> Settings</h1>
 
 <div class="squircle-foreground">
 
@@ -1781,13 +2071,12 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
 
   <div style="margin-top: 20px;">
-<div class="success">
-    <p>✅<b> UID set to: <span id="displayUid"></span></b></p>
+<div class="info">
+    <p>ℹ️<b> UID set to: <span id="displayUid"></span></b></p>
   </div>
   </div>
 
 </div>
-<br>
 
 <div class="squircle-foreground">
 
@@ -1882,17 +2171,19 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
   </script>
 </div>
 </div>
-<br>
 
 <div class="squircle-background">
 
-<h1 id="About">About</h1>
+<h1 id="About"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">info</span> About</h1>
 
 <div class="squircle-foreground">
 <b>Outbound Clipboard Manager created and maintained by Joshua Reeve. 
 	<br>
+	<br>
 	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
-<br><b>Last updated: 5/7/25</b>
+<br>
+<br>
+<b>Last updated: 5/20/25</b>
 
   <script>
     function copyText(text) {
