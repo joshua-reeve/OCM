@@ -6,7 +6,9 @@
   <title>Outbound Clipboard Manager</title>
   <link rel="icon" type="image/x-icon" href="https://joshua-reeve.github.io/OCM/favicon.ico">
   <body style="background-color: #ffffff;">
+  <link rel="manifest" href="manifest.json">
 
+  
 <style>
 
 /* General Typography */
@@ -613,7 +615,7 @@ li {
 }
 </style>
 
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"  />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
   
 <head>
 <body>
@@ -1094,6 +1096,10 @@ function closeModal(modalId) {
 <h1 id="Custom Buttons"> </h1>
 <h1>Custom Buttons</h1>
 
+<button id="installBtn" style="display:none;">
+  Install this app
+</button>
+
 <div class="danger">
 <span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons!
 </div>
@@ -1442,7 +1448,6 @@ function editButtonContent(label) {
             <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
             <option value="Tucker, DPT, Kara">Tucker, Kara</option>
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
-            <option value="Williams, PT, Christina">Williams, Christina</option>
   </select>
 <br>4. <u>Continue to Step 5.</u></br>
 <br><b><span class="material-symbols-outlined" style="font-size: 20px; color: green;">calendar_add_on</span> Start here for additional appointment offer:</b></br>
@@ -1513,7 +1518,6 @@ function editButtonContent(label) {
             <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
             <option value="Tucker, DPT, Kara">Tucker, Kara</option>
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
-            <option value="Williams, PT, Christina">Williams, Christina</option>
       </select>
     </div>
 	</form>
@@ -1690,7 +1694,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
     const f = getFields();
     const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
     const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
-Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName} 
+Nueva visita: ${f.newDate} a las ${f.newTime} with ${f.existingProviderName} 
 Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
     document.getElementById('copyBox').textContent = msg;
   };
@@ -2200,6 +2204,40 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
       document.body.removeChild(tempInput);
     }
   </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(reg => console.log('Service Worker registered', reg))
+    .catch(err => console.log('Service Worker registration failed', err));
+}
+</script>
+
+  <script>
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-infobar from appearing on mobile
+  e.preventDefault();
+  // Stash the event so it can be triggered later
+  deferredPrompt = e;
+  // Show the install button
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    // Optionally hide the button if accepted
+    if (outcome === 'accepted') {
+      installBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  }
+});
+</script>
 
 </div>
 </div>
