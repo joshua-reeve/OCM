@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Outbound Clipboard Manager</title>
   <link rel="icon" type="image/x-icon" href="https://joshua-reeve.github.io/OCM/favicon.ico">
-  <link rel="manifest" href="/OCM/manifest.json">
-  <body style="background-color: #ffffff;">
   
 <style>
 
@@ -618,7 +616,8 @@ li {
 
    
   </head>
-<body>
+	
+<body style="background-color: #ffffff;">
 
 <div class="topnav" id="myTopnav">
   <a href="#section3" class="nav-link active">Go To:</a>
@@ -1095,10 +1094,6 @@ function closeModal(modalId) {
 
 <h1 id="Custom Buttons"> </h1>
 <h1>Custom Buttons</h1>
-
-<button id="installBtn" style="display:none;">
-  Install this app
-</button>
 
 <div class="danger">
 <span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons!
@@ -2208,39 +2203,6 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
 </div>
 </div>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .then(reg => console.log('Service Worker registered', reg))
-    .catch(err => console.log('Service Worker registration failed', err));
-}
-</script>
-
-  <script>
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent the mini-infobar from appearing on mobile
-  e.preventDefault();
-  // Stash the event so it can be triggered later
-  deferredPrompt = e;
-  // Show the install button
-  installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    // Optionally hide the button if accepted
-    if (outcome === 'accepted') {
-      installBtn.style.display = 'none';
-    }
-    deferredPrompt = null;
-  }
-});
-</script>
 
 </body>
 </html>
