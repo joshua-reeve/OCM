@@ -818,7 +818,7 @@ function myFunction() {
     <h2><u>Dot Phrase Reference Tab</u></h2>
 	
 	<div class="info">
-ℹ️ For the most up-to-date info on Outbound Dot Phrases, visit: <br> <a href="https://uofu.service-now.com/kbcn?sys_kb_id=6546a8cd472dea10d3d05a5c346d437d&id=uu_kb_article_view&sysparm_rank=10">Dot Phrases Outbound - Care Navigation Outbound - KB0021854</a>
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> For the most up-to-date info on Outbound Dot Phrases, visit: <br> <a href="https://uofu.service-now.com/kbcn?sys_kb_id=6546a8cd472dea10d3d05a5c346d437d&id=uu_kb_article_view&sysparm_rank=10">Dot Phrases Outbound - Care Navigation Outbound - KB0021854</a>
 </div>
 	<div class="dotphrases-modal-foreground">
     <table border="1" cellpadding="4" cellspacing="0">
@@ -1095,7 +1095,7 @@ function closeModal(modalId) {
 <h1>Custom Buttons</h1>
 
 <div class="danger">
-❗ Clearing your browser's cache will delete all your custom buttons!
+<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons!
 </div>
 
 
@@ -1361,13 +1361,13 @@ function editButtonContent(label) {
 <div class="squircle-foreground">
 <h2 id="PT Wait List"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">physical_therapy</span> PT Wait List</h2>
 <div class="info">
-ℹ️<b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a>
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a>
 </div>
 <div class="squircle-foreground">
 <h3><u>SMS Offer Builder:</u></h3>
 
 
-<b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_repeat</span> Start here for reschedule:</b>
+<b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_repeat</span> Start here for reschedule appointment offer:</b>
 
 <form id="messageForm">
 
@@ -1444,7 +1444,7 @@ function editButtonContent(label) {
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
   </select>
 <br>4. <u>Continue to Step 5.</u></br>
-<br><b><span class="material-symbols-outlined" style="font-size: 20px; color: green;">calendar_add_on</span> Start here for additional appointment:</b></br>
+<br><b><span class="material-symbols-outlined" style="font-size: 20px; color: green;">calendar_add_on</span> Start here for additional appointment offer:</b></br>
     <div class="form-group">
       <label for="patientName">5. Patient Name:</label>
       <input type="text" id="patientName" style="max-width: 75px;">
@@ -1715,7 +1715,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <h3>Wait List Message:</h3>
 
 <div class="info">
-ℹ️ Note: To set your UID, go to <a href="#Settings">Settings</a>
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Note: To set your UID, go to <a href="#Settings">Settings</a>
 </div>
 
 <div class="copy-box" data-message="No availability, [DATE]: [UID]">Wait List Message - No availability</div>
@@ -1740,13 +1740,15 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 <div class="squircle-background">
 
 <h1><span class="material-symbols-outlined" style="color: black; font-size: 35px;">chat</span> SMS</h1>
+
+<div class="danger">
+<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Text Messages to patients should NEVER include emojis, abbreviated phrasing, slang to derogatory comments. All communication must be to University standard. If none of the below responses fit for the interaction you're having, please consult Kim or Mindee before responding.
+</div>
+
 <div class="webtext">
 <span class="material-symbols-outlined" style="font-size: 20px; color: purple">quick_phrases</span> Set WebText tool to UHealth General Number: 801-213-9500
 </div>
 
-<div class="danger">
-❗Text Messages to patients should NEVER include emojis, abbreviated phrasing, slang to derogatory comments. All communication must be to University standard. If none of the below responses fit for the interaction you're having, please consult Kim or Mindee before responding.
-</div>
 
 <div class="squircle-foreground">
 <h3 id="Bump Text SMS Messages"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">ink_eraser</span><b> Bump Text SMS Messages:</b></h3>
@@ -1917,7 +1919,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
 <h3 id="SMS PT Wait List"><span class="material-symbols-outlined" style="color: black; font-size: 25px;">physical_therapy</span><b> PT Wait List</b></h3>
 <div class="info">
-ℹ️ See Also: Initiatives: </b><a href="#PT Wait List">PT Wait List</a>
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> See Also: Initiatives: </b><a href="#PT Wait List">PT Wait List</a>
 </div>
 
 <div class="copy-box" data-message="UofU Health: (PT NAME), an earlier visit is available: Existing visit: 00/00 at 00:00 AM/PM PROVIDER NAME New visit: 00/00 at 00:00 AM/PM This has been offered to multiple patients. Don't delay. Reply 1 to accept.">Identity Verification Text (RESCHEDULE Appt)</div>
@@ -2033,7 +2035,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
   function calculateSleepDateRange() {
     const inputDateValue = document.getElementById('sleepTestDate').value;
     if (!inputDateValue) {
-      document.getElementById('sleepResult').innerHTML = '<div class="info">ℹ️ Please enter a valid date.</div>';
+      document.getElementById('sleepResult').innerHTML = '<div class="info"><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Please enter a valid date.</div>';
       return;
     }
 
@@ -2049,7 +2051,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
     document.getElementById('sleepResult').innerHTML =
       `<br><div class="info">
-ℹ️ Patient should be scheduled between:<br><b>${startFormatted}</b> and <b>${endFormatted}</b>.</div>`;
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Patient should be scheduled between:<br><b>${startFormatted}</b> and <b>${endFormatted}</b>.</div>`;
   }
 </script>
 </div>
@@ -2072,7 +2074,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 
   <div style="margin-top: 20px;">
 <div class="info">
-    <p>ℹ️<b> UID set to: <span id="displayUid"></span></b></p>
+    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> UID set to: <span id="displayUid"></span></b></p>
   </div>
   </div>
 
