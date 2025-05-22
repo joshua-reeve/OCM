@@ -73,7 +73,6 @@ body, html {
   margin: 3px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500; /* Slightly bold text */
   text-transform: uppercase; /* Material Design's uppercase text */
   border-radius: 4px; /* Standard corner radius */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -97,7 +96,6 @@ body, html {
   margin: 3px auto;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500; /* Slightly bold text */
   text-transform: uppercase; /* Material Design's uppercase text */
   border-radius: 4px; /* Standard corner radius */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -399,17 +397,23 @@ textarea {
   right: 16px;
   float: right;
   z-index: 10;
-  background: #FFCDD2;
-  border-radius: 10%;
   font-size: 28px;
-  color: black;
+  background-color: #F44336; /* Material Red 500 */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
+  border: none;
+  padding: 5px; /* Increase padding for better touch targets */
+  margin: 3px;
   cursor: pointer;
+  text-transform: uppercase; /* Material Design's uppercase text */
+  border-radius: 4px; /* Standard corner radius */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
+  background-color: #D32F2F; /* Material Red 700 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hover elevation */
 }
 
 
