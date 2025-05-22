@@ -612,6 +612,20 @@ li {
 .elevation-3 {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
+  /* Tables */	
+.mdc-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #fff;
+}
+.mdc-data-table__table th,
+.mdc-data-table__table td {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mdc-data-table__table tr:hover td {
+  background: #f1f8ff;
+}
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
@@ -821,115 +835,130 @@ function myFunction() {
   <div class="modal-content">
     <span class="close" onclick="closeModal('dotPhrasesModal')">&times;</span>
     <h2><u>Dot Phrase Reference Tab</u></h2>
-	
-	<div class="info">
-<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> For the most up-to-date info on Outbound Dot Phrases, visit: <br> <a href="https://uofu.service-now.com/kbcn?sys_kb_id=6546a8cd472dea10d3d05a5c346d437d&id=uu_kb_article_view&sysparm_rank=10">Dot Phrases Outbound - Care Navigation Outbound - KB0021854</a>
-</div>
-	<div class="dotphrases-modal-foreground">
-    <table border="1" cellpadding="4" cellspacing="0">
-  <thead>
-    <tr>
-      <th>DOT PHRASE</th>
-      <th>PURPOSE</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>.PHLIST</td><td>Phone options for different service lines.</td></tr>
-    <tr>
-      <td colspan="2"><b>Bumps &amp; Appt Changes</b></td>
-    </tr>
-    <tr><td>.BUMPAPPTCHANGE</td><td>Used to send Mychart message to a patient that appt has changed time/location/provider and SMS is not an option.</td></tr>
-    <tr><td>.BUMPTICKET</td><td>Used when creating a MyChart ticket after cancelling same-day bumps</td></tr>
-    <tr><td>.BUMPTICKETSP</td><td>Spanish Version of bumpticket</td></tr>
-    <tr><td>.CANCELRESCHEDULE</td><td>Used when the appointment is canceled and a ticket is sent to help with rescheduling</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr>
-      <td colspan="2"><b>PT CRM Request</b></td>
-    </tr>
-    <tr><td>.ADDHM</td><td>Health maintenance request appt already scheduled</td></tr>
-    <tr><td>.ADDMED</td><td>Adds additional meds for refill request</td></tr>
-    <tr><td>.CRMREPLY</td><td>Used for replying to CRM messages (Name/Sex Change or spelling errors, lodging, preferred pharmacy change, scheduling)</td></tr>
-    <tr><td>.CRMINS</td><td>Used for Pt CRM messages for insurance updates</td></tr>
-    <tr>
-      <td colspan="2"><b>Appointment Requests</b></td>
-    </tr>
-    <tr><td>.APPTTICKETPROVIDER</td><td>Used for replying to mychart request (providerleft, don't support, waitlist no appt, no template, ticket sent etc )</td></tr>
-    <tr><td>.APPTTICKETPROCESS</td><td>Used for replying to mychart when needs further process for request (order, referral, labs, vaccine etc )</td></tr>
-    <tr><td>.APPTSCHEDULE</td><td>Used when the patient has sent in a MyChart appointment request for an existing appointment for the same concerns/provider scheduled before the request was sent and the patient was added to the wait list</td></tr>
-    <tr><td>.MORANVISITINSTRUCTIONS</td><td>Used to send instructions for moran visits. (adult, child, contact, retina, post op, Iritits/uvetitis)</td></tr>
-    <tr><td>.ORTHOVISITINSTRUCTIONS</td><td>Used when sending tickets for ortho joint appts that requires paperwork. Mychart message explaining we will needed imaging brought to appt.</td></tr>
-    <tr><td>.TRIAGEMORAN</td><td>Used when a mychart appointment request for Moran as triage symptoms</td></tr>
-    <tr><td>.TRTMT</td><td>Used when a request for a specific medication or treatment (medication, treatment, consult for procedure, Spanish versions)</td></tr>
-    <tr>
-      <td colspan="2"><b>Inpatient Discharge Scheduling</b></td>
-    </tr>
-    <tr><td>.IPDISCHARGE</td><td>Used discharge Mychart message when appointment scheduled</td></tr>
-    <tr><td>.IPNOCONTACT</td><td>Used in CRM/Patient List to explain why we did not outreach to the patient to schedule apt with PCP after inpatient stay.</td></tr>
-    <tr><td>.IPPATIENTSCH</td><td>Used to document inpatient discharge scheduling when the patient already had a f/u scheduled.</td></tr>
-    <tr><td>.IPSCHPL</td><td>Used to document SMS text sent with scheduled appt for inpatient discharge scheduling.</td></tr>
-    <tr><td>.IPDISCHARGESP</td><td>Used for discharge Mychart Message when appt scheduled Spanish version.</td></tr>
-    <tr><td>.IPCRM</td><td>Used for CRM note updates for contacts</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr>
-      <td colspan="2"><b>Endoscopic Spine</b></td>
-    </tr>
-    <tr><td>.ENDOIMAGE</td><td>Used for Endospine image collection attempts</td></tr>
-    <tr><td>.ENDOIMAGEFAX</td><td>Used for when a fax request for images needs to be sent</td></tr>
-    <tr><td>.ENDOIMAGEFOLLOWUP</td><td>Used to document follow-up attempts for image collection</td></tr>
-    <tr><td>.ENDOTICKET</td><td>Used for Mychart message when ticket sent for Endospine</td></tr>
-    <tr><td>.UTR</td><td>Used when advocates have tried to reach a patient two times with no answer</td></tr>
-    <tr>
-      <td colspan="2"><b>Well U HRA</b></td>
-    </tr>
-    <tr><td>.HRAPCP</td><td>Used for WELL U HRA mychart message</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr><td>.UTR</td><td>Used when advocates have tried to reach a patient two times with no answer</td></tr>
-    <tr>
-      <td colspan="2"><b>Non Compliant Kidney</b></td>
-    </tr>
-    <tr><td>.NONCOMPLIANTCRM</td><td>Used to document contacts regarding communication for Non Compliant Kidney</td></tr>
-    <tr><td>.NONCOMPLIANTTICKET</td><td>Used to send Mychart message for Non Compliant Kidney explaining ticket was sent to scheduel</td></tr>
-    <tr><td>.NONCOMPLIAANTOOS</td><td>Used for Kidney Non compliant for out of state patients under 1 year post transplant</td></tr>
-    <tr>
-      <td colspan="2"><b>New American Scheduling</b></td>
-    </tr>
-    <tr><td>.NEWAMERICANREQ</td><td>Used to document in CRM work done for New American Scheduling.</td></tr>
-    <tr>
-      <td colspan="2"><b>Ortho Web Requests</b></td>
-    </tr>
-    <tr><td>.PMREMAIL</td><td>Used to document web requests for Ortho &amp; contacts made</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr>
-      <td colspan="2"><b>Prescription Request</b></td>
-    </tr>
-    <tr><td>.RXLVM</td><td>Used for when VM left for rx request an appointment needs to be scheduled.</td></tr>
-    <tr><td>.RXREQUEST</td><td>Used for when RX refill requires an appointment and we have sent a scheduling ticket.<br>Used for when RX refill requires an appointment for services we don't support to have them call to schedule.</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr>
-      <td colspan="2"><b>Waitlist</b></td>
-    </tr>
-    <tr><td>.PTWAITLISTOFFER</td><td>Used to send mychart message to offer a sooner appt</td></tr>
-    <tr><td>.PTDAILY</td><td>Used to document work done &amp; instructions on SJHC PT waitlist</td></tr>
-    <tr><td>.PTWLREPLY</td><td>Used to document SJHC PT when the patient confirms the appointment.</td></tr>
-    <tr><td>.WLTICKET</td><td>Used for waitlist ticket</td></tr>
-    <tr>
-      <td colspan="2"><b>SSIR</b></td>
-    </tr>
-    <tr><td>.SSIRADDINFO</td><td>Used for a SSIR when additional information or action is needed from the patient.</td></tr>
-    <tr><td>.SSIRINFORM</td><td>Used when sending patient Mychart message related to SSIR to inform patient but that doesn't require action on their part. (referral needed, referral needs review, complete test/labs before appt, 2 appts same concern, TOC, no license for state, misc. )</td></tr>
-    <tr><td>.bad</td><td>Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
-    <tr>
-      <td colspan="2"><b>Registration</b></td>
-    </tr>
-    <tr><td>.WSVTRESIDENTDEFERRAL</td><td>Used when deferring an appt on Web Shceuled VT WQ due to reg missing attending</td></tr>
-    <tr><td>.REG</td><td>Used for when we need to update registration on an appointment</td></tr>
-    <tr>
-      <td colspan="2"><b>MAT Emails</b></td>
-    </tr>
-    <tr><td>.MATCOTIVITIEMAIL</td><td>Used for MAT</td></tr>
-  </tbody>
-</table>
-  </div>
+<div class="mdc-dialog__container">
+  <div class="mdc-card dotphrases-modal-foreground" style="padding: 24px; max-width: 900px; margin: 24px auto;">
+    <h2 class="mdc-typography--headline6" style="text-align: center; margin-bottom: 12px;">
+      <u>Dot Phrase Reference Tab</u>
+    </h2>
+
+    <div class="mdc-card info" style="margin-bottom: 24px; display: flex; align-items: flex-start; background: #e3f2fd; padding: 16px; border-radius: 8px;">
+      <span class="material-symbols-outlined" style="font-size: 24px; color: #1976d2; margin-right: 8px;">info</span>
+      <span>
+        For the most up-to-date info on Outbound Dot Phrases, visit:<br>
+        <a href="https://uofu.service-now.com/kbcn?sys_kb_id=6546a8cd472dea10d3d05a5c346d437d&id=uu_kb_article_view&sysparm_rank=10" style="color: #1976d2; text-decoration: underline;">
+          Dot Phrases Outbound - Care Navigation Outbound - KB0021854
+        </a>
+      </span>
+    </div>
+
+    <div style="overflow-x: auto;">
+      <table class="mdc-data-table__table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background: #f5f5f5;">
+            <th class="mdc-typography--subtitle2" style="padding: 12px; text-align: left;">DOT PHRASE</th>
+            <th class="mdc-typography--subtitle2" style="padding: 12px; text-align: left;">PURPOSE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 12px;">.PHLIST</td>
+            <td style="padding: 12px;">Phone options for different service lines.</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Bumps &amp; Appt Changes</td>
+          </tr>
+          <tr><td style="padding: 12px;">.BUMPAPPTCHANGE</td><td style="padding: 12px;">Used to send Mychart message to a patient that appt has changed time/location/provider and SMS is not an option.</td></tr>
+          <tr><td style="padding: 12px;">.BUMPTICKET</td><td style="padding: 12px;">Used when creating a MyChart ticket after cancelling same-day bumps</td></tr>
+          <tr><td style="padding: 12px;">.BUMPTICKETSP</td><td style="padding: 12px;">Spanish Version of bumpticket</td></tr>
+          <tr><td style="padding: 12px;">.CANCELRESCHEDULE</td><td style="padding: 12px;">Used when the appointment is canceled and a ticket is sent to help with rescheduling</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">PT CRM Request</td>
+          </tr>
+          <tr><td style="padding: 12px;">.ADDHM</td><td style="padding: 12px;">Health maintenance request appt already scheduled</td></tr>
+          <tr><td style="padding: 12px;">.ADDMED</td><td style="padding: 12px;">Adds additional meds for refill request</td></tr>
+          <tr><td style="padding: 12px;">.CRMREPLY</td><td style="padding: 12px;">Used for replying to CRM messages (Name/Sex Change or spelling errors, lodging, preferred pharmacy change, scheduling)</td></tr>
+          <tr><td style="padding: 12px;">.CRMINS</td><td style="padding: 12px;">Used for Pt CRM messages for insurance updates</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Appointment Requests</td>
+          </tr>
+          <tr><td style="padding: 12px;">.APPTTICKETPROVIDER</td><td style="padding: 12px;">Used for replying to mychart request (providerleft, don't support, waitlist no appt, no template, ticket sent etc )</td></tr>
+          <tr><td style="padding: 12px;">.APPTTICKETPROCESS</td><td style="padding: 12px;">Used for replying to mychart when needs further process for request (order, referral, labs, vaccine etc )</td></tr>
+          <tr><td style="padding: 12px;">.APPTSCHEDULE</td><td style="padding: 12px;">Used when the patient has sent in a MyChart appointment request for an existing appointment for the same concerns/provider scheduled before the request was sent and the patient was added to the wait list</td></tr>
+          <tr><td style="padding: 12px;">.MORANVISITINSTRUCTIONS</td><td style="padding: 12px;">Used to send instructions for moran visits. (adult, child, contact, retina, post op, Iritits/uvetitis)</td></tr>
+          <tr><td style="padding: 12px;">.ORTHOVISITINSTRUCTIONS</td><td style="padding: 12px;">Used when sending tickets for ortho joint appts that requires paperwork. Mychart message explaining we will needed imaging brought to appt.</td></tr>
+          <tr><td style="padding: 12px;">.TRIAGEMORAN</td><td style="padding: 12px;">Used when a mychart appointment request for Moran as triage symptoms</td></tr>
+          <tr><td style="padding: 12px;">.TRTMT</td><td style="padding: 12px;">Used when a request for a specific medication or treatment (medication, treatment, consult for procedure, Spanish versions)</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Inpatient Discharge Scheduling</td>
+          </tr>
+          <tr><td style="padding: 12px;">.IPDISCHARGE</td><td style="padding: 12px;">Used discharge Mychart message when appointment scheduled</td></tr>
+          <tr><td style="padding: 12px;">.IPNOCONTACT</td><td style="padding: 12px;">Used in CRM/Patient List to explain why we did not outreach to the patient to schedule apt with PCP after inpatient stay.</td></tr>
+          <tr><td style="padding: 12px;">.IPPATIENTSCH</td><td style="padding: 12px;">Used to document inpatient discharge scheduling when the patient already had a f/u scheduled.</td></tr>
+          <tr><td style="padding: 12px;">.IPSCHPL</td><td style="padding: 12px;">Used to document SMS text sent with scheduled appt for inpatient discharge scheduling.</td></tr>
+          <tr><td style="padding: 12px;">.IPDISCHARGESP</td><td style="padding: 12px;">Used for discharge Mychart Message when appt scheduled Spanish version.</td></tr>
+          <tr><td style="padding: 12px;">.IPCRM</td><td style="padding: 12px;">Used for CRM note updates for contacts</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Endoscopic Spine</td>
+          </tr>
+          <tr><td style="padding: 12px;">.ENDOIMAGE</td><td style="padding: 12px;">Used for Endospine image collection attempts</td></tr>
+          <tr><td style="padding: 12px;">.ENDOIMAGEFAX</td><td style="padding: 12px;">Used for when a fax request for images needs to be sent</td></tr>
+          <tr><td style="padding: 12px;">.ENDOIMAGEFOLLOWUP</td><td style="padding: 12px;">Used to document follow-up attempts for image collection</td></tr>
+          <tr><td style="padding: 12px;">.ENDOTICKET</td><td style="padding: 12px;">Used for Mychart message when ticket sent for Endospine</td></tr>
+          <tr><td style="padding: 12px;">.UTR</td><td style="padding: 12px;">Used when advocates have tried to reach a patient two times with no answer</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Well U HRA</td>
+          </tr>
+          <tr><td style="padding: 12px;">.HRAPCP</td><td style="padding: 12px;">Used for WELL U HRA mychart message</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr><td style="padding: 12px;">.UTR</td><td style="padding: 12px;">Used when advocates have tried to reach a patient two times with no answer</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Non Compliant Kidney</td>
+          </tr>
+          <tr><td style="padding: 12px;">.NONCOMPLIANTCRM</td><td style="padding: 12px;">Used to document contacts regarding communication for Non Compliant Kidney</td></tr>
+          <tr><td style="padding: 12px;">.NONCOMPLIANTTICKET</td><td style="padding: 12px;">Used to send Mychart message for Non Compliant Kidney explaining ticket was sent to scheduel</td></tr>
+          <tr><td style="padding: 12px;">.NONCOMPLIAANTOOS</td><td style="padding: 12px;">Used for Kidney Non compliant for out of state patients under 1 year post transplant</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">New American Scheduling</td>
+          </tr>
+          <tr><td style="padding: 12px;">.NEWAMERICANREQ</td><td style="padding: 12px;">Used to document in CRM work done for New American Scheduling.</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Ortho Web Requests</td>
+          </tr>
+          <tr><td style="padding: 12px;">.PMREMAIL</td><td style="padding: 12px;">Used to document web requests for Ortho &amp; contacts made</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Prescription Request</td>
+          </tr>
+          <tr><td style="padding: 12px;">.RXLVM</td><td style="padding: 12px;">Used for when VM left for rx request an appointment needs to be scheduled.</td></tr>
+          <tr><td style="padding: 12px;">.RXREQUEST</td><td style="padding: 12px;">Used for when RX refill requires an appointment and we have sent a scheduling ticket.<br>Used for when RX refill requires an appointment for services we don't support to have them call to schedule.</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Waitlist</td>
+          </tr>
+          <tr><td style="padding: 12px;">.PTWAITLISTOFFER</td><td style="padding: 12px;">Used to send mychart message to offer a sooner appt</td></tr>
+          <tr><td style="padding: 12px;">.PTDAILY</td><td style="padding: 12px;">Used to document work done &amp; instructions on SJHC PT waitlist</td></tr>
+          <tr><td style="padding: 12px;">.PTWLREPLY</td><td style="padding: 12px;">Used to document SJHC PT when the patient confirms the appointment.</td></tr>
+          <tr><td style="padding: 12px;">.WLTICKET</td><td style="padding: 12px;">Used for waitlist ticket</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">SSIR</td>
+          </tr>
+          <tr><td style="padding: 12px;">.SSIRADDINFO</td><td style="padding: 12px;">Used for a SSIR when additional information or action is needed from the patient.</td></tr>
+          <tr><td style="padding: 12px;">.SSIRINFORM</td><td style="padding: 12px;">Used when sending patient Mychart message related to SSIR to inform patient but that doesn't require action on their part. (referral needed, referral needs review, complete test/labs before appt, 2 appts same concern, TOC, no license for state, misc. )</td></tr>
+          <tr><td style="padding: 12px;">.bad</td><td style="padding: 12px;">Used when advocates have tried to reach a patient with no answer regarding an appointment scheduled incorrectly online or through MyChart</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">Registration</td>
+          </tr>
+          <tr><td style="padding: 12px;">.WSVTRESIDENTDEFERRAL</td><td style="padding: 12px;">Used when deferring an appt on Web Shceuled VT WQ due to reg missing attending</td></tr>
+          <tr><td style="padding: 12px;">.REG</td><td style="padding: 12px;">Used for when we need to update registration on an appointment</td></tr>
+          <tr>
+            <td colspan="2" style="background: #e3f2fd; font-weight: 500; padding: 12px; color: #1976d2;">MAT Emails</td>
+          </tr>
+          <tr><td style="padding: 12px;">.MATCOTIVITIEMAIL</td><td style="padding: 12px;">Used for MAT</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <script>
