@@ -394,6 +394,7 @@ textarea {
 .close {
   position: sticky;
   top: 16px;
+  right: 0px
   float: right;
   z-index: 10;
   font-size: 28px;
@@ -403,7 +404,7 @@ textarea {
   padding: 0px 100px;
   margin: 3px;
   cursor: pointer;
-  border-radius: 4px; /* Standard corner radius */
+  border-radius: 4px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -704,7 +705,7 @@ function myFunction() {
 
 <div id="stickyNoteModal" class="modal">
   <div class="modal-content">
-    <span class="close material-symbols-outlined" onclick="closeModal('stickyNoteModal')">keyboard_double_arrow_right Close</span>
+    <span class="material-symbols-outlined" onclick="closeModal('stickyNoteModal')">keyboard_double_arrow_right</span>
     <h2>Notes:</h2>
     <textarea id="stickyNote" class="rich-text-area" placeholder="Type your notes here..."></textarea>
   </div>
@@ -712,7 +713,7 @@ function myFunction() {
 
 <div id="phoneNumbersModal" class="modal">
   <div class="modal-content">
-    <span class="close material-symbols-outlined" onclick="closeModal('stickyNoteModal')">keyboard_double_arrow_right Close</span>
+    <span class="close material-symbols-outlined" onclick="closeModal('phoneNumbersModal')">keyboard_double_arrow_right</span>
     <h2><u>Phone Number Reference Tab</u></h2>
     <div class="phone-modal-foreground">
   <strong>General Number: </strong>
@@ -836,7 +837,7 @@ function myFunction() {
 	
 <div id="dotPhrasesModal" class="modal">
 <div class="modal-content">
-<span class="close material-symbols-outlined" onclick="closeModal('stickyNoteModal')">keyboard_double_arrow_right Close</span>
+<span class="material-symbols-outlined" onclick="closeModal('dotPhrasesModal')">keyboard_double_arrow_right</span>
 <div class="mdc-dialog__container">
   <div class="mdc-card dotphrases-modal-foreground" style="padding: 24px; max-width: 900px; margin: 24px auto;">
     <h2 class="mdc-typography--headline6" style="text-align: center; margin-bottom: 12px;">
