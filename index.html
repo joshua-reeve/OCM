@@ -20,6 +20,84 @@ body, html {
 }
 
 /* Buttons */
+.folder-div {
+  border-radius: 4px !important;  /* Try 16px, 24px, 999px for pill shape */
+  overflow: hidden; /* optional, to ensure inner content matches the radius */
+  border: 3px solid #2196f3;
+  background: #f6f6f6;
+  margin: 12px 0;
+}
+.folder-div.dragging {
+  opacity: 0.7;
+  box-shadow: 0 4px 18px rgba(33,150,243,0.20);
+}
+.folder-div.folder-drop-target {
+  border-color: #ffd600;
+  background: #fffde7;
+}
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  cursor: pointer;
+  border-radius: 0px !important;
+  font-size: 1.1em;
+  background: #2196f3;
+  color: #fff;
+  user-select: none;
+  transition: background 0.2s;
+}
+.folder-header .controls button,
+.copy-box button,
+.folder-header .controls button .material-symbols-outlined,
+.copy-box button .material-symbols-outlined {
+  font-size: 18px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 3px 3px;
+  margin: 1px 1px;
+  transition: filter 0.15s;
+}
+.folder-header .controls button:hover,
+.copy-box button:hover {
+  filter: brightness(0.95);
+}
+.buttons-list {
+  min-height: 10px;
+  padding: 1px;
+  background: #f6f6f6;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  transition: background 0.2s;
+}
+.buttons-list.button-drop-target {
+  background: #fffde7;
+}
+
+#foldersContainer {
+  margin-bottom: 0px;
+}
+#inlineAddFolderForm {
+  display: flex;
+  gap: 0px;
+  margin-bottom: 0px;
+}
+
+#inlineAddFolderForm input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: none;
+  flex: 0 0 36px;
+  cursor: pointer;
+}
+
   .button-container {
     display: flex;
     align-items: center;
@@ -37,7 +115,7 @@ body, html {
   padding: 5px;
   margin: 5px;
   border-radius: 4px;
-  width: 350px;
+  width: 95%;
   cursor: pointer;
   background-color: #2196F3;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -57,6 +135,28 @@ body, html {
   background-color: #64B5F6;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.copy-box span {
+  flex: 1;
+  font-weight: 500;
+  font-size: 1em;
+  user-select: none;
+}
+.copy-box div {
+  display: flex;
+  gap: 0px;
+}
+.copy-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 20px;
+  padding: 1px 2px;
+  margin-left: 0px;
+  transition: color 0.15s;
+}
+
 .copy-box-small {
   width: auto;
   font-size: 14px;
@@ -70,10 +170,10 @@ body, html {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
   color: white; /* White text for contrast */
   border: none;
-  padding: 5px; /* Increase padding for better touch targets */
-  margin: 3px;
+  padding: 0px; /* Increase padding for better touch targets */
+  margin: 0px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 50px;
   text-transform: uppercase; /* Material Design's uppercase text */
   border-radius: 4px; /* Standard corner radius */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -93,7 +193,7 @@ body, html {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
   color: #212121; /* Dark text for contrast */
   border: none;
-  padding: 5px; /* Increase padding for better touch targets */
+  padding: 0px; /* Increase padding for better touch targets */
   margin: 3px auto;
   cursor: pointer;
   font-size: 14px;
@@ -139,7 +239,12 @@ button:disabled, .btn:disabled {
   form {
     margin-bottom: 0px;
   }
-  
+  .actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 1px;
+}
 /* Input Fields */
 input[type="text"], textarea {
   width: 90%;
@@ -352,10 +457,49 @@ textarea {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
+.modal-actions {
+  position: Sticky;
+  top: 0.5em;
+  right: 0.5em;
+  z-index: 10;
+  background: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
 
+.modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  position: absolute; top: 12px; right: 12px;
+  justify-content: center;
+}
+
+.modal-close-btn .material-symbols-outlined {
+  font-size: 28px;
+  color: #888;
+}
+
+.modal-close-btn:hover {
+  background: #eee;
+}
+
+.modal-close-btn:active {
+  background: #e57373;
+}
+
+.modal-close-btn:hover .material-symbols-outlined {
+  color: #d32f2f;
+}
 .modal-content {
   background-color: white;
-  position: absolute;
+  position: relative;
   top: 50%;
   right: -100%;
   transform: translateY(-50%);
@@ -366,6 +510,33 @@ textarea {
   max-width: 500px;
   overflow-y: auto;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-dialog, .modal-overlay form {
+  background: #fff;
+  padding: 24px 18px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90vw;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  margin: auto;
+}
+.modal-content {
+  right: -100%;
+  transition: right 0.5s;
+}
+
+.modal.open .modal-content {
+  right: 0;
 }
 
 @keyframes slide-in {
@@ -393,23 +564,7 @@ textarea {
   }
 }
 
-.close {
-  position: sticky;
-  top: 16px;
-  right: 16px;
-  float: right;
-  z-index: 10;
-  background: #4CAF50;
-  border-radius: 50%;
-  padding: 0 8px;
-  font-size: 28px;
-  cursor: pointer;
-}
 
-.close:hover{
-  background-color: #45A049;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
 
 
 .rich-text-area {
@@ -703,7 +858,11 @@ function myFunction() {
 
 <div id="stickyNoteModal" class="modal">
   <div class="modal-content">
-    <span class="material-symbols-outlined" onclick="closeModal('stickyNoteModal')">keyboard_double_arrow_right</span>
+    <div class="modal-actions">
+      <button type="button" class="modal-close-btn" onclick="closeModal('stickyNoteModal')">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
     <h2>Notes:</h2>
     <textarea id="stickyNote" class="rich-text-area" placeholder="Type your notes here..."></textarea>
   </div>
@@ -711,12 +870,16 @@ function myFunction() {
 
 <div id="phoneNumbersModal" class="modal">
   <div class="modal-content">
-    <span class="material-symbols-outlined" onclick="closeModal('phoneNumbersModal')">keyboard_double_arrow_right</span>
+    <div class="modal-actions">
+      <button type="button" class="modal-close-btn" onclick="closeModal('phoneNumbersModal')">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
     <h2><u>Phone Number Reference Tab</u></h2>
     <div class="phone-modal-foreground">
-  <strong>General Number: </strong>
-  <div class="copy-box copy-box-small" data-message="801-213-9500">801-213-9500</div>
-</div>
+      <strong>General Number: </strong>
+      <div class="copy-box copy-box-small" data-message="801-213-9500">801-213-9500</div>
+    </div>
 
 <div class="phone-modal-foreground">
   <b>Community Clinics:</b>
@@ -834,13 +997,17 @@ function myFunction() {
 
 	
 <div id="dotPhrasesModal" class="modal">
-<div class="modal-content">
-<span class="material-symbols-outlined" onclick="closeModal('dotPhrasesModal')">keyboard_double_arrow_right</span>
-<div class="mdc-dialog__container">
-  <div class="mdc-card dotphrases-modal-foreground" style="padding: 24px; max-width: 900px; margin: 24px auto;">
-    <h2 class="mdc-typography--headline6" style="text-align: center; margin-bottom: 12px;">
-      <u>Dot Phrase Reference Tab</u>
-    </h2>
+  <div class="modal-content">
+    <div class="modal-actions">
+      <button type="button" class="modal-close-btn" onclick="closeModal('dotPhrasesModal')">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="mdc-dialog__container">
+      <div class="mdc-card dotphrases-modal-foreground" style="padding: 24px; max-width: 900px; margin: 24px auto;">
+        <h2 class="mdc-typography--headline6" style="text-align: center; margin-bottom: 12px;">
+          <u>Dot Phrase Reference Tab</u>
+        </h2>
 
     <div class="mdc-card info" style="margin-bottom: 24px; display: flex; align-items: flex-start; background: #e3f2fd; padding: 16px; border-radius: 8px;">
       <span class="material-symbols-outlined" style="font-size: 24px; color: #1976d2; margin-right: 8px;">info</span>
@@ -1083,43 +1250,25 @@ function trapFocus(modal) {
 function openModal(modalId, color) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
-
   const modalContent = modal.querySelector('.modal-content');
   if (modalContent) {
     modal.style.display = 'block';
     modal.setAttribute('aria-hidden', 'false');
     modalContent.style.backgroundColor = color;
-    modalContent.style.animation = ''; // Reset any previous animation
-    // Force reflow to restart animation
-    void modalContent.offsetWidth;
-    modalContent.style.animation = 'slide-in 0.5s forwards';
-
-    trapFocus(modal); // Trap focus in the modal
-
-    modal.dataset.lastFocused = document.activeElement;
-    setTimeout(() => {
-      const focusable = modal.querySelector('button, input, textarea');
-      if (focusable) focusable.focus();
-    }, 0);
+    // Remove and add 'open' class to trigger transition
+    modal.classList.remove('open');
+    void modal.offsetWidth; // Force reflow
+    modal.classList.add('open');
   }
 }
-
 function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
-
-  const modalContent = modal.querySelector('.modal-content');
-  if (modalContent) {
-    modalContent.style.animation = ''; // Reset animation
-    void modalContent.offsetWidth;
-    modalContent.style.animation = 'slide-out 0.5s forwards';
-    setTimeout(() => {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      const lastFocused = modal.dataset.lastFocused;
-      if (lastFocused) lastFocused.focus();
-    }, 500);
-  }
+  modal.classList.remove('open');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+  }, 500); // match your transition time
 }
 </script>
 
@@ -1133,11 +1282,30 @@ function closeModal(modalId) {
 <h1>Custom Buttons</h1>
 
 <div class="danger">
-<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons!
+<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons! Please be sure to export your folders/custom buttons before clearing your browser's cache!
 </div>
 
+<!-- Modal triggers -->
+<div class="actions-bar">
+  <div style="margin: 1px 1;">
+    <button id="openAddButtonModal" title="Add Button">
+      <span class="material-symbols-outlined" style="font-size: 18px;">variable_add</span>
+    </button>
+    <button id="openAddFolderModal" title="Add Folder">
+      <span class="material-symbols-outlined" style="font-size: 18px;">create_new_folder</span>
+    </button>
+    <button id="exportFolders" title="Export Folders/Buttons">
+      <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+    </button>
+    <button id="importFolders" title="Import Folders/Buttons">
+      <span class="material-symbols-outlined" style="font-size: 18px;">upload</span>
+    </button>
+    <input type="file" id="importFileInput" accept="application/json" style="display:none" />
+  </div>
+</div>
 
-<form id="addButtonForm">
+<!-- Hidden legacy form for compatibility (used for dropdown only) -->
+<form id="addButtonForm" style="display:none">
   <input type="text" id="buttonText" placeholder="Button Label (optional)">
   <textarea id="buttonContent" placeholder="Button Content" ></textarea>
   
@@ -1159,235 +1327,732 @@ function closeModal(modalId) {
       <option value="salmon">Salmon</option>
     </select>
   </div>
-
+<div>
+  <b>Folder:</b>
+  <select id="addButtonFolderSelect" required></select>
+</div>
 <br>
 
 <button type="submit"><span class="material-symbols-outlined" style="font-size: 18px;">variable_add</span> Add Button</button>
 </form>
-<br>
-<br>
+
 <div id="buttonsContainer"></div>
+<div id="foldersContainer"></div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', loadButtons);
-
-  document.getElementById('addButtonForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const buttonText = document.getElementById('buttonText').value.trim();
-    const buttonContent = document.getElementById('buttonContent').value.trim();
-    const buttonColor = document.getElementById('colorDropdown').value;
-
-    if (!buttonContent) {
-      alert('Button content is required!');
-      return;
+document.addEventListener('DOMContentLoaded', () => {
+  // --- MIGRATION: legacy buttons to foldersV2 ---
+  if (!localStorage.getItem('foldersV2') && localStorage.getItem('buttons')) {
+    const legacyButtons = JSON.parse(localStorage.getItem('buttons')) || [];
+    if (legacyButtons.length > 0) {
+      const foldersV2 = [{
+        folder: 'Migrated Buttons',
+        color: '#2196F3',
+        expanded: true,
+        buttons: legacyButtons.map(btn => ({
+          label: btn.label || btn.content.slice(0, 50),
+          content: btn.content,
+          color: btn.color || '#2196F3'
+        }))
+      }];
+      localStorage.setItem('foldersV2', JSON.stringify(foldersV2));
+      // Optionally: localStorage.removeItem('buttons');
+      // Optional: alert('Migration complete!');
     }
-
-    if (!buttonColor) {
-      alert('Please select a color!');
-      return;
-    }
-
-    const buttonLabel = buttonText || buttonContent.slice(0, 50);
-    createButton(buttonLabel, buttonContent, buttonColor);
-    saveButtonToStorage(buttonLabel, buttonContent, buttonColor);
-
-    this.reset();
-  });
-
-  function createButton(label, content, color) {
-    const container = document.getElementById('buttonsContainer');
-
-    const buttonContainer = document.createElement('div');
-    buttonContainer.className = 'button-container';
-    buttonContainer.draggable = true;
-    buttonContainer.dataset.label = label;
-
-    const copyButton = document.createElement('div');
-    copyButton.className = 'copy-box';
-    copyButton.textContent = label;
-    copyButton.style.backgroundColor = color;
-    copyButton.onclick = () => copyText(content);
-
-    const editButton = document.createElement('button');
-    editButton.className = 'edit-button';
-    editButton.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">edit</span>';
-    editButton.onclick = (e) => {
-      e.stopPropagation();
-      editButtonContent(label);
-    };
-
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'delete-button';
-    deleteButton.innerHTML = '<span class="material-symbols-outlined" style="font-size: 18px;">delete</span>';
-    deleteButton.onclick = (e) => {
-      e.stopPropagation();
-      deleteButtonFromStorage(label);
-      container.removeChild(buttonContainer);
-    };
-
-    buttonContainer.appendChild(copyButton);
-    buttonContainer.appendChild(editButton);
-    buttonContainer.appendChild(deleteButton);
-
-    buttonContainer.addEventListener('dragstart', dragStart);
-    buttonContainer.addEventListener('dragover', dragOver);
-    buttonContainer.addEventListener('drop', drop);
-
-    container.appendChild(buttonContainer);
   }
 
-  function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert(`Copied: ${text}`);
+  function getFolders() {
+    return JSON.parse(localStorage.getItem('foldersV2')) || [];
+  }
+  function saveFolders(folders) {
+    localStorage.setItem('foldersV2', JSON.stringify(folders));
+  }
+
+  const foldersContainer = document.getElementById('foldersContainer');
+
+  // --- Modal helpers ---
+  function showModal(content, onClose) {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.onclick = () => {
+      document.body.removeChild(overlay);
+      if (onClose) onClose();
+    };
+    if (!(content instanceof HTMLElement)) {
+      const modal = document.createElement('div');
+      modal.className = 'modal-dialog';
+      modal.appendChild(content);
+      overlay.appendChild(modal);
+    } else {
+      content.onclick = e => e.stopPropagation();
+      overlay.appendChild(content);
+    }
+    document.body.appendChild(overlay);
+    const firstInput = overlay.querySelector('input,textarea,select,button');
+    if (firstInput) firstInput.focus();
+  }
+
+  // --- Add Folder Modal with Title and Labels ---
+  function showAddFolderModal(onFolderAdded) {
+    const form = document.createElement('form');
+    form.style.display = 'flex';
+    form.style.flexDirection = 'column';
+    form.style.gap = '10px';
+
+    // Modal Title
+    const title = document.createElement('h2');
+    title.textContent = "New Folder";
+    form.appendChild(title);
+
+    // Folder Name
+    const nameLabel = document.createElement('label');
+    nameLabel.textContent = "Folder Name:";
+    nameLabel.htmlFor = "modalFolderNameInput";
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = "modalFolderNameInput";
+    nameInput.placeholder = 'Folder name';
+    nameInput.required = true;
+
+    // Folder Color
+    const colorLabel = document.createElement('label');
+    colorLabel.textContent = "Folder Color:";
+    colorLabel.htmlFor = "modalFolderColorInput";
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.id = "modalFolderColorInput";
+    colorInput.value = '#2196f3';
+    colorInput.title = "Pick a folder color";
+    colorInput.style.width = '60px';
+    colorInput.style.height = '36px';
+
+    // Add/Cancel
+    const addBtn = document.createElement('button');
+    addBtn.type = 'submit';
+    addBtn.textContent = 'Add Folder';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = (e) => {
+      e.preventDefault();
+      document.body.removeChild(form.closest('.modal-overlay'));
+    };
+
+    form.appendChild(nameLabel);
+    form.appendChild(nameInput);
+    form.appendChild(colorLabel);
+    form.appendChild(colorInput);
+    form.appendChild(addBtn);
+    form.appendChild(cancelBtn);
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      if (onFolderAdded) onFolderAdded({
+        name: nameInput.value.trim(),
+        color: colorInput.value
+      });
+      document.body.removeChild(form.closest('.modal-overlay'));
+    };
+
+    showModal(form);
+  }
+
+  // --- Add Button Modal with Title and Labels ---
+  function showAddButtonModal(folders, onButtonAdded) {
+    const form = document.createElement('form');
+    form.style.display = 'flex';
+    form.style.flexDirection = 'column';
+    form.style.gap = '10px';
+
+    // Modal Title
+    const title = document.createElement('h2');
+    title.textContent = "New Button";
+    form.appendChild(title);
+
+    // Button Label
+    const labelLabel = document.createElement('label');
+    labelLabel.textContent = "Button Label:";
+    labelLabel.htmlFor = "modalButtonLabelInput";
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.id = "modalButtonLabelInput";
+    textInput.placeholder = 'Button label (optional)';
+
+    // Button Content
+    const contentLabel = document.createElement('label');
+    contentLabel.textContent = "Button Content:";
+    contentLabel.htmlFor = "modalButtonContentInput";
+    const contentInput = document.createElement('textarea');
+    contentInput.id = "modalButtonContentInput";
+    contentInput.placeholder = 'Button content';
+    contentInput.required = true;
+    contentInput.rows = 3;
+
+    // Button Color
+    const colorLabel = document.createElement('label');
+    colorLabel.textContent = "Button Color:";
+    colorLabel.htmlFor = "modalButtonColorSelect";
+    const colorInput = document.createElement('select');
+    colorInput.id = "modalButtonColorSelect";
+    colorInput.innerHTML = `
+      <option value="#2196F3">Material Blue (Default)</option>
+      <option value="red">Red</option>
+      <option value="orange">Orange</option>
+      <option value="yellow">Yellow</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+      <option value="purple">Purple</option>
+      <option value="gray">Gray</option>
+      <option value="chartreuse">Chartreuse</option>
+      <option value="cornflowerblue">CornflowerBlue</option>
+      <option value="goldenrod">GoldenRod</option>
+      <option value="orchid">Orchid</option>
+      <option value="salmon">Salmon</option>
+    `;
+    colorInput.required = true;
+
+    // Button Folder
+    const folderLabel = document.createElement('label');
+    folderLabel.textContent = "Folder:";
+    folderLabel.htmlFor = "modalButtonFolderSelect";
+    const folderSelect = document.createElement('select');
+    folderSelect.id = "modalButtonFolderSelect";
+    folders.forEach((folder, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = folder.folder;
+      folderSelect.appendChild(opt);
+    });
+
+    // Add/Cancel
+    const addBtn = document.createElement('button');
+    addBtn.type = 'submit';
+    addBtn.textContent = 'Add Button';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = (e) => {
+      e.preventDefault();
+      document.body.removeChild(form.closest('.modal-overlay'));
+    };
+
+    form.appendChild(labelLabel);
+    form.appendChild(textInput);
+    form.appendChild(contentLabel);
+    form.appendChild(contentInput);
+    form.appendChild(colorLabel);
+    form.appendChild(colorInput);
+    form.appendChild(folderLabel);
+    form.appendChild(folderSelect);
+    form.appendChild(addBtn);
+    form.appendChild(cancelBtn);
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      if (!contentInput.value.trim()) {
+        contentInput.focus();
+        return;
+      }
+      if (onButtonAdded) onButtonAdded({
+        label: textInput.value.trim() || contentInput.value.trim().slice(0, 50),
+        content: contentInput.value.trim(),
+        color: colorInput.value,
+        folderIdx: folderSelect.value | 0
+      });
+      document.body.removeChild(form.closest('.modal-overlay'));
+    };
+
+    showModal(form);
+  }
+
+  // --- Add Folder Button Modal Logic ---
+  document.getElementById('openAddFolderModal').onclick = () => {
+    showAddFolderModal(({ name, color }) => {
+      const folders = getFolders();
+      folders.push({ folder: name, color, expanded: true, buttons: [] });
+      saveFolders(folders);
+      renderFolders();
+      updateFolderDropdown();
+    });
+  };
+
+  // --- Add Button Modal Logic ---
+  document.getElementById('openAddButtonModal').onclick = () => {
+    const folders = getFolders();
+    if (folders.length === 0) {
+      alert("Please create a folder first.");
+      return;
+    }
+    showAddButtonModal(folders, ({ label, content, color, folderIdx }) => {
+      const folders = getFolders();
+      folders[folderIdx].buttons.push({ label, content, color });
+      saveFolders(folders);
+      renderFolders();
+      updateFolderDropdown();
+    });
+  };
+
+  // --- Folders and Buttons Rendering ---
+  function renderFolders() {
+    foldersContainer.innerHTML = '';
+    const folders = getFolders();
+
+    let draggedFolderIdx = null;
+
+    folders.forEach((folder, folderIdx) => {
+      // Folder container (NOT draggable)
+      const folderDiv = document.createElement('div');
+      folderDiv.className = 'folder-div';
+      folderDiv.style.border = `1px solid ${folder.color || '#2196F3'}`;
+      folderDiv.style.background = "#ffffff";
+      // folderDiv.draggable = true;  // REMOVE THIS LINE
+
+      // Collapsible header (DRAGGABLE for folder reordering)
+      const header = document.createElement('div');
+      header.className = 'folder-header';
+      header.style.display = 'flex';
+      header.style.justifyContent = 'space-between';
+      header.style.alignItems = 'center';
+      header.style.padding = '0px';
+      header.style.cursor = 'pointer';
+      header.style.background = folder.color || '#2196F3';
+      header.style.color = '#fff';
+      header.draggable = true;
+
+      // --- Folder Drag & Drop Logic ONLY ON HEADER ---
+      header.addEventListener('dragstart', (e) => {
+        draggedFolderIdx = folderIdx;
+        e.dataTransfer.setData('type', 'folder');
+        e.dataTransfer.setData('folderIdx', folderIdx);
+        e.dataTransfer.effectAllowed = "move";
+      });
+      header.addEventListener('dragend', () => {
+        header.classList.remove('dragging');
+        document.querySelectorAll('.folder-div.folder-drop-target').forEach(el=>el.classList.remove('folder-drop-target'));
+      });
+
+      // Folder drop target (only responds to folder drags)
+      folderDiv.addEventListener('dragover', (e) => {
+        if (e.dataTransfer.getData('type') === 'folder') {
+          e.preventDefault();
+          folderDiv.classList.add('folder-drop-target');
+        }
+      });
+      folderDiv.addEventListener('dragleave', () => {
+        folderDiv.classList.remove('folder-drop-target');
+      });
+      folderDiv.addEventListener('drop', (e) => {
+        e.preventDefault();
+        folderDiv.classList.remove('folder-drop-target');
+        if (e.dataTransfer.getData('type') === 'folder') {
+          const fromIdx = parseInt(e.dataTransfer.getData('folderIdx'), 10);
+          if (!isNaN(fromIdx) && fromIdx !== folderIdx) {
+            const foldersNow = getFolders();
+            const [moved] = foldersNow.splice(fromIdx, 1);
+            foldersNow.splice(folderIdx, 0, moved);
+            saveFolders(foldersNow);
+            renderFolders();
+          }
+        }
+        draggedFolderIdx = null;
+      });
+
+      // Expand/collapse icon
+    const expandIcon = document.createElement('span');
+expandIcon.className = 'material-symbols-outlined';
+expandIcon.style.marginRight = "5px";
+expandIcon.style.marginLeft = "5px";
+expandIcon.textContent = folder.expanded ? "folder_open" : "folder";
+header.prepend(expandIcon);
+
+      // Folder name
+      const title = document.createElement('span');
+      title.textContent = folder.folder;
+      title.style.fontWeight = "bold";
+      header.appendChild(title);
+
+      // Folder controls (edit, delete)
+      const controls = document.createElement('div');
+      controls.className = "controls";
+
+      // Edit folder
+      const editBtn = document.createElement('button');
+      editBtn.innerHTML = '<span class="material-symbols-outlined">edit</span>';
+      editBtn.title = "Edit Folder";
+      editBtn.style.background = "#FFD600";
+      editBtn.style.color = "#212121";
+      editBtn.style.marginLeft = "4px";
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        openEditFolderModal(folderIdx);
+      };
+      // Delete folder
+      const delBtn = document.createElement('button');
+      delBtn.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+      delBtn.title = "Delete Folder";
+      delBtn.style.background = "#F44336";
+      delBtn.style.color = "#fff";
+      delBtn.style.marginLeft = "4px";
+	  delBtn.style.marginRight = "1px";
+      delBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (confirm('Delete this folder and all its buttons?')) {
+          folders.splice(folderIdx, 1);
+          saveFolders(folders);
+          renderFolders();
+        }
+      };
+      controls.appendChild(editBtn);
+      controls.appendChild(delBtn);
+
+      header.appendChild(controls);
+
+      // Expand/collapse
+      header.addEventListener('click', () => {
+        folder.expanded = !folder.expanded;
+        saveFolders(folders);
+        renderFolders();
+      });
+
+      folderDiv.appendChild(header);
+
+      // Buttons list (drop area)
+      const buttonsList = document.createElement('div');
+      buttonsList.className = 'buttons-list';
+      if (!folder.expanded) buttonsList.style.display = 'none';
+      buttonsList.style.minHeight = '20px';
+      buttonsList.style.padding = '8px';
+
+      // Button drag/drop highlight
+      buttonsList.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        buttonsList.classList.add('button-drop-target');
+      });
+      buttonsList.addEventListener('dragleave', () => {
+        buttonsList.classList.remove('button-drop-target');
+      });
+      buttonsList.addEventListener('drop', (e) => {
+        e.preventDefault();
+        buttonsList.classList.remove('button-drop-target');
+        const dragged = JSON.parse(e.dataTransfer.getData('text'));
+        if (dragged.folderIdx !== folderIdx) {
+          // Remove from old folder
+          const foldersNow = getFolders();
+          const [btn] = foldersNow[dragged.folderIdx].buttons.splice(dragged.buttonIdx, 1);
+          foldersNow[folderIdx].buttons.push(btn);
+          saveFolders(foldersNow);
+          renderFolders();
+        }
+      });
+
+      // Render each button
+      folder.buttons.forEach((btn, buttonIdx) => {
+        const buttonDiv = document.createElement('div');
+        buttonDiv.className = 'copy-box';
+        buttonDiv.style.background = btn.color;
+        buttonDiv.draggable = true;
+        buttonDiv.style.margin = "4px 0";
+        buttonDiv.style.display = "flex";
+        buttonDiv.style.alignItems = "center";
+        buttonDiv.style.padding = "0";
+        buttonDiv.style.borderRadius = "4px";
+        buttonDiv.style.cursor = "pointer";
+        buttonDiv.style.position = "relative";
+        buttonDiv.title = btn.content;
+
+        // Copy label (acts as copy button)
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = btn.label;
+        labelSpan.style.flex = "1";
+        labelSpan.onclick = (e) => {
+          e.stopPropagation();
+          navigator.clipboard.writeText(btn.content);
+        };
+
+        // Edit button
+        const edit = document.createElement('button');
+        edit.innerHTML = '<span class="material-symbols-outlined" style="font-size: 16px;">edit</span>';
+        edit.style.background = "#FFD600";
+        edit.style.color = "#212121";
+        edit.style.marginLeft = "4px";
+        edit.style.paddingLeft = "2px";
+        edit.style.paddingRight = "2px";
+        edit.onclick = (e) => {
+          e.stopPropagation();
+          openEditButtonModal(folderIdx, buttonIdx);
+        };
+
+        // Delete button
+        const del = document.createElement('button');
+        del.innerHTML = '<span class="material-symbols-outlined" style="font-size: 16px;">delete</span>';
+        del.style.background = "#F44336";
+        del.style.color = "#fff";
+        del.style.marginLeft = "4px";
+        del.style.paddingLeft = "2px";
+        del.style.marginRight = "4px";
+        del.style.paddingRight = "2px";
+        del.onclick = (e) => {
+          e.stopPropagation();
+          if (confirm('Delete this button?')) {
+            folder.buttons.splice(buttonIdx, 1);
+            saveFolders(folders);
+            renderFolders();
+          }
+        };
+
+        // Actions container
+        const actionsDiv = document.createElement('div');
+        actionsDiv.style.display = "flex";
+        actionsDiv.appendChild(edit);
+        actionsDiv.appendChild(del);
+
+        // Layout: label (copy), edit, delete
+        buttonDiv.appendChild(labelSpan);
+        buttonDiv.appendChild(actionsDiv);
+
+        // Drag & drop logic
+        buttonDiv.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text', JSON.stringify({
+            folderIdx, buttonIdx, button: btn
+          }));
+          setTimeout(() => (buttonDiv.style.opacity = "0.5"), 0);
+        });
+        buttonDiv.addEventListener('dragend', () => {
+          buttonDiv.style.opacity = "1";
+        });
+        buttonDiv.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+        buttonDiv.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const dragged = JSON.parse(e.dataTransfer.getData('text'));
+          const foldersNow = getFolders();
+          if (dragged.folderIdx === folderIdx) {
+            // Move within this folder
+            const [btn] = foldersNow[folderIdx].buttons.splice(dragged.buttonIdx, 1);
+            let targetIdx = buttonIdx;
+            if (dragged.buttonIdx < buttonIdx) targetIdx--;
+            foldersNow[folderIdx].buttons.splice(targetIdx, 0, btn);
+            saveFolders(foldersNow);
+            renderFolders();
+          }
+        });
+
+        buttonsList.appendChild(buttonDiv);
+      });
+
+      folderDiv.appendChild(buttonsList);
+      foldersContainer.appendChild(folderDiv);
     });
   }
 
-  function saveButtonToStorage(label, content, color) {
-    const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
-    savedButtons.push({ label, content, color });
-    localStorage.setItem('buttons', JSON.stringify(savedButtons));
-  }
+  // --- Edit Button Modal ---
+  function openEditButtonModal(folderIdx, buttonIdx) {
+    const folders = getFolders();
+    const btn = folders[folderIdx].buttons[buttonIdx];
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.onclick = () => document.body.removeChild(overlay);
 
-  function deleteButtonFromStorage(labelToDelete) {
-    let savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
-    savedButtons = savedButtons.filter(button => button.label !== labelToDelete);
-    localStorage.setItem('buttons', JSON.stringify(savedButtons));
-  }
+    const modal = document.createElement('div');
+    modal.className = 'modal-dialog';
+    modal.onclick = (e) => e.stopPropagation();
 
-function editButtonContent(label) {
-  const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
-  const button = savedButtons.find(button => button.label === label);
-  if (button) {
-    const editContainer = document.createElement('div');
-    editContainer.className = 'edit-container';
+    // Modal Title
+    const title = document.createElement('h2');
+    title.textContent = "Edit Button";
+    modal.appendChild(title);
 
+    // Inputs
     const labelLabel = document.createElement('label');
-    labelLabel.textContent = 'Button Label:';
-    labelLabel.style.fontWeight = 'bold';
+    labelLabel.textContent = "Button Label:";
     const labelInput = document.createElement('input');
     labelInput.type = 'text';
-    labelInput.value = button.label;
-    labelInput.placeholder = 'Button Label';
-    labelInput.style.width = '90%';
+    labelInput.value = btn.label;
 
     const contentLabel = document.createElement('label');
-    contentLabel.textContent = 'Button Content:';
-    contentLabel.style.fontWeight = 'bold';
-    const textArea = document.createElement('textarea');
-    textArea.value = button.content;
-    textArea.rows = 5;
-    textArea.style.width = '90%';
+    contentLabel.textContent = "Button Content:";
+    const contentInput = document.createElement('textarea');
+    contentInput.value = btn.content;
+    contentInput.rows = 3;
 
     const colorLabel = document.createElement('label');
-    colorLabel.textContent = 'Button Color (optional):';
-    colorLabel.style.fontWeight = 'bold';
+    colorLabel.textContent = "Button Color:";
     const colorInput = document.createElement('input');
     colorInput.type = 'text';
-    colorInput.value = button.color;
-    colorInput.placeholder = 'Enter a valid color (optional)';
+    colorInput.value = btn.color;
 
-    const saveButton = document.createElement('button');
-    saveButton.textContent = '✅ Save';
-    saveButton.style.marginRight = '10px'; // Adds spacing between buttons
-    saveButton.onclick = () => {
-      button.label = labelInput.value.trim() || button.content.slice(0, 50);
+    // Save/Cancel
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = "Save";
+    saveBtn.onclick = () => {
+      btn.label = labelInput.value.trim() || btn.content.slice(0, 50);
+      btn.content = contentInput.value;
+      btn.color = colorInput.value.trim() || btn.color;
+      saveFolders(folders);
+      document.body.removeChild(overlay);
+      renderFolders();
+    };
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.onclick = () => document.body.removeChild(overlay);
 
-      button.content = textArea.value;
+    // Layout
+    modal.appendChild(labelLabel);
+    modal.appendChild(labelInput);
+    modal.appendChild(document.createElement('br'));
+    modal.appendChild(contentLabel);
+    modal.appendChild(contentInput);
+    modal.appendChild(document.createElement('br'));
+    modal.appendChild(colorLabel);
+    modal.appendChild(colorInput);
+    modal.appendChild(document.createElement('br'));
+    modal.appendChild(saveBtn);
+    modal.appendChild(cancelBtn);
 
-      const newColor = colorInput.value.trim();
-      if (newColor && newColor.toLowerCase() !== 'undefined') {
-        const tempElement = document.createElement('div');
-        tempElement.style.color = newColor;
-        if (tempElement.style.color) {
-          button.color = newColor;
-        } else {
-          alert('Invalid color. Please enter a valid color name.');
-          return;
-        }
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+  }
+
+  function openEditFolderModal(folderIdx) {
+    const folders = getFolders();
+    const folder = folders[folderIdx];
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.onclick = () => document.body.removeChild(overlay);
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-dialog';
+    modal.onclick = (e) => e.stopPropagation();
+
+    // Modal Title
+    const title = document.createElement('h2');
+    title.textContent = "Edit Folder";
+    modal.appendChild(title);
+
+    // Inputs
+    const nameLabel = document.createElement('label');
+    nameLabel.textContent = "Folder Name:";
+    nameLabel.style.display = "block";
+    nameLabel.style.marginTop = "8px";
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.value = folder.folder;
+    nameInput.style.width = "90%";
+
+    const colorLabel = document.createElement('label');
+    colorLabel.textContent = "Folder Color:";
+    colorLabel.style.display = "block";
+    colorLabel.style.marginTop = "8px";
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.value = folder.color || '#2196F3';
+    colorInput.style.width = "50px";
+    colorInput.style.height = "36px";
+    colorInput.style.border = "none";
+    colorInput.style.background = "none";
+    colorInput.style.marginTop = "4px";
+    colorInput.style.marginBottom = "10px";
+
+    // Save/Cancel
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = "Save";
+    saveBtn.style.marginRight = "10px";
+    saveBtn.onclick = () => {
+      const newName = nameInput.value.trim();
+      if (!newName) {
+        nameInput.focus();
+        return;
       }
-
-      localStorage.setItem('buttons', JSON.stringify(savedButtons));
-      document.body.removeChild(editContainer);
-      location.reload();
+      folder.folder = newName;
+      folder.color = colorInput.value;
+      saveFolders(folders);
+      document.body.removeChild(overlay);
+      renderFolders();
     };
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.onclick = () => document.body.removeChild(overlay);
 
-    const cancelButton = document.createElement('button');
-    cancelButton.textContent = '❌ Cancel';
+    // Layout
+    modal.appendChild(nameLabel);
+    modal.appendChild(nameInput);
+    modal.appendChild(colorLabel);
+    modal.appendChild(colorInput);
+    modal.appendChild(document.createElement('br'));
+    modal.appendChild(saveBtn);
+    modal.appendChild(cancelBtn);
 
-    cancelButton.onclick = () => {
-      document.body.removeChild(editContainer);
-    };
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
 
-    const buttonContainer = document.createElement('div');
-    buttonContainer.style.display = 'flex';
-    buttonContainer.style.justifyContent = 'flex-end';
-    buttonContainer.style.marginTop = '10px';
-    buttonContainer.appendChild(saveButton);
-    buttonContainer.appendChild(cancelButton);
-
-    editContainer.appendChild(labelLabel);
-    editContainer.appendChild(labelInput);
-    editContainer.appendChild(contentLabel);
-    editContainer.appendChild(textArea);
-    editContainer.appendChild(colorLabel);
-    editContainer.appendChild(colorInput);
-    editContainer.appendChild(buttonContainer);
-
-    editContainer.style.position = 'fixed';
-    editContainer.style.top = '50%';
-    editContainer.style.left = '50%';
-    editContainer.style.transform = 'translate(-50%, -50%)';
-    editContainer.style.backgroundColor = '#ffffff';
-    editContainer.style.padding = '10px';
-    editContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-    editContainer.style.zIndex = 1000;
-
-    document.body.appendChild(editContainer);
-  }
-}
-
-  function loadButtons() {
-    const savedButtons = JSON.parse(localStorage.getItem('buttons')) || [];
-    savedButtons.forEach(button => createButton(button.label, button.content, button.color));
+    nameInput.focus();
   }
 
-  let draggedItem = null;
-
-  function dragStart(event) {
-    draggedItem = event.target;
-    event.dataTransfer.effectAllowed = "move";
-    setTimeout(() => (event.target.style.opacity = "0.5"), 0);
+  // Initial render
+  renderFolders();
+  function updateFolderDropdown() {
+    // For legacy/form compatibility only!
+    const folderSelect = document.getElementById('addButtonFolderSelect');
+    if (!folderSelect) return;
+    folderSelect.innerHTML = '';
+    const folders = getFolders();
+    folders.forEach((folder, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = folder.folder;
+      folderSelect.appendChild(opt);
+    });
+    folderSelect.disabled = folders.length === 0;
   }
+  updateFolderDropdown();
+  });
+  // --- Export/Import Folders/Buttons ---
 
-  function dragOver(event) {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-    const container = document.getElementById('buttonsContainer');
-    const children = Array.from(container.children);
+// Export
+document.getElementById('exportFolders').addEventListener('click', function() {
+  const folders = JSON.parse(localStorage.getItem('foldersV2') || '[]');
+  const dataStr = JSON.stringify(folders, null, 2);
+  const blob = new Blob([dataStr], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
 
-    const draggingOverElement = children.find(el => el !== draggedItem && event.clientY < el.getBoundingClientRect().bottom);
-    if (draggingOverElement) {
-      container.insertBefore(draggedItem, draggingOverElement);
-    } else {
-      container.appendChild(draggedItem);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'folders_backup.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// Import
+document.getElementById('importFolders').addEventListener('click', function() {
+  document.getElementById('importFileInput').click();
+});
+
+document.getElementById('importFileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const importedFolders = JSON.parse(e.target.result);
+      if (!Array.isArray(importedFolders)) throw new Error("Invalid format");
+      // Optionally: confirm with user before overwrite
+      if (!confirm("Importing will replace all your current folders and buttons. Continue?")) return;
+      localStorage.setItem('foldersV2', JSON.stringify(importedFolders));
+      // If you have other in-memory state, update it here
+      alert('Folders/Buttons imported successfully!\n\nThe page will now reload to apply changes.');
+      location.reload(); // safest way to re-render everything
+    } catch (err) {
+      alert('Failed to import: Invalid file format.');
     }
-  }
-
-  function drop(event) {
-    event.preventDefault();
-    draggedItem.style.opacity = "1";
-    saveNewOrder();
-  }
-
-  function saveNewOrder() {
-    const container = document.getElementById('buttonsContainer');
-    const newOrder = Array.from(container.children).map(child => ({
-      label: child.dataset.label,
-      content: JSON.parse(localStorage.getItem('buttons')).find(b => b.label === child.dataset.label).content,
-      color: JSON.parse(localStorage.getItem('buttons')).find(b => b.label === child.dataset.label).color
-    }));
-    localStorage.setItem('buttons', JSON.stringify(newOrder));
-  }
+  };
+  reader.readAsText(file);
+});
 </script>
 
 </div>
@@ -1435,24 +2100,24 @@ function editButtonContent(label) {
             <option value="Covey, PT, Conner">Covey, Conner</option>
             <option value="Culp, PT, Megan">Culp, Megan</option>
             <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
-            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
-            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
+            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option>
+            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option>
             <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
             <option value="Graddy, PT, Emma">Graddy, Emma</option>
             <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
-            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
-            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
-            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
+           <option value="Herzog, DPT, Philip">Herzog, Philip</option>
+           <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
+            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>
             <option value="James, PT, Daniel">James, Daniel</option>
             <option value="Jensen, SLP, Brayden">Jensen, Brayden</option>
             <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
-            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
+            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>
             <option value="Khong, DPT, Taryn">Khong, Taryn</option>
-            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
-            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
+           <option value="Kielgas, DPT, Brady">Kielgas, Brady</option>
+           <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option>
             <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
             <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
-            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
+            <option value="McCreedy, PT, Mary">McCreedy, Mary</option>
             <option value="Miller, DPT, Jason">Miller, Jason</option>
             <option value="Moyer, DPT, Cara">Moyer, Cara</option>
             <option value="Muhn, PT, Peter">Muhn, Peter</option>
@@ -1460,27 +2125,27 @@ function editButtonContent(label) {
             <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
             <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
             <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
-            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
-            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
-            <option value="Reich, DPT, Todd">Reich, Todd</option> 
-            <option value="Reierson, PT, Karl">Reierson, Karl</option>
+            <option value="Powers, DPT, Clayton">Powers, Clayton</option>
+            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>
+            <option value="Reich, DPT, Todd">Reich, Todd</option>
+           <option value="Reierson, PT, Karl">Reierson, Karl</option>
             <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
-            <option value="Romero, PT, Julian">Romero, Julian</option> 
-            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
-            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
+            <option value="Romero, PT, Julian">Romero, Julian</option>
+            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option>
+            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>
             <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
-            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
-            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
-            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
-            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
-            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
-            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
-            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
+           <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
+           <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
+           <option value="Shepherd, DPT, Collin">Shepherd, Collin</option>
+            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option>
+            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option>
+            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>
+            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>
             <option value="Taylor, PT, Imani">Taylor, Imani</option>
             <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
             <option value="Tucker, DPT, Kara">Tucker, Kara</option>
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
-	    <option value="Williams, PT, Christina">Williams, Christina</option>
+            <option value="Williams, PT, Christina">Williams, Christina</option>
   </select>
 <br>4. <u>Continue to Step 5.</u></br>
 <br><b><span class="material-symbols-outlined" style="font-size: 20px; color: green;">calendar_add_on</span> Start here for additional appointment offer:</b></br>
@@ -1489,7 +2154,7 @@ function editButtonContent(label) {
       <input type="text" id="patientName" style="max-width: 100px;">
     </div>
     <div class="form-group">
-      <label for="existingProviderName">6. Existing Provider Name:</label>
+      <label for="existingProviderName">6. Provider Name:</label>
       <select id="existingProviderName">
         <option value="">-- Select Provider --</option>
             <option value="Beadles, OT, Sydney">Beadles, Sydney</option>
@@ -1506,24 +2171,24 @@ function editButtonContent(label) {
             <option value="Covey, PT, Conner">Covey, Conner</option>
             <option value="Culp, PT, Megan">Culp, Megan</option>
             <option value="Erickson, SLP, Olivia">Erickson, Olivia</option>
-            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option> 
-            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option> 
+            <option value="Ferguson, DPT, Natalie">Ferguson, Natalie</option>
+            <option value="Gifford, SLP, Taylor">Gifford, Taylor</option>
             <option value="Goettsche, PTA, Hallie">Goettsche, Hallie</option>
             <option value="Graddy, PT, Emma">Graddy, Emma</option>
             <option value="Hernandez, DPT, Kristina">Hernandez, Kristina</option>
-            <option value="Herzog, DPT, Philip">Herzog, Philip</option>
-            <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
-            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>            
+           <option value="Herzog, DPT, Philip">Herzog, Philip</option>
+           <option value="Holmes, OT, Vanessa">Holmes, Vanessa</option>
+            <option value="Hudson, PT, Bradley">Hudson, Bradley</option>
             <option value="James, PT, Daniel">James, Daniel</option>
             <option value="Jensen, SLP, Brayden">Jensen, Brayden</option>
             <option value="Jamieson, SLP, Amy">Jamieson, Amy</option>
-            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>            
+            <option value="Junk, PT, Elizabeth">Junk, Elizabeth</option>
             <option value="Khong, DPT, Taryn">Khong, Taryn</option>
-            <option value="Kielgas, DPT, Brady">Kielgas, Brady</option> 
-            <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option> 
+           <option value="Kielgas, DPT, Brady">Kielgas, Brady</option>
+           <option value="Krypel, PT, Karoleena">Krypel, Karoleena</option>
             <option value="Lunn, PT, Rebecca">Lunn, Rebecca</option>
             <option value="Lyman, DPT, Brooke">Lyman, Brooke</option>
-            <option value="McCreedy, PT, Mary">McCreedy, Mary</option> 
+            <option value="McCreedy, PT, Mary">McCreedy, Mary</option>
             <option value="Miller, DPT, Jason">Miller, Jason</option>
             <option value="Moyer, DPT, Cara">Moyer, Cara</option>
             <option value="Muhn, PT, Peter">Muhn, Peter</option>
@@ -1531,27 +2196,27 @@ function editButtonContent(label) {
             <option value="Nixon, OT, Neesha">Nixon, Neesha</option>
             <option value="O'Neil, DPT, Jacqueline">O'Neil, Jacqueline</option>
             <option value="Pohlman, OT, Brooke">Pohlman, Brooke</option>
-            <option value="Powers, DPT, Clayton">Powers, Clayton</option>            
-            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>            
-            <option value="Reich, DPT, Todd">Reich, Todd</option> 
-            <option value="Reierson, PT, Karl">Reierson, Karl</option>
+            <option value="Powers, DPT, Clayton">Powers, Clayton</option>
+            <option value="Ratliff, PT, Anna">Ratliff, Anna</option>
+            <option value="Reich, DPT, Todd">Reich, Todd</option>
+           <option value="Reierson, PT, Karl">Reierson, Karl</option>
             <option value="Rodgers, OT, Claire">Rodgers, Claire</option>
-            <option value="Romero, PT, Julian">Romero, Julian</option> 
-            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option> 
-            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>            
+            <option value="Romero, PT, Julian">Romero, Julian</option>
+            <option value="Salais Duarte, PT, Luis">Salais Duarte, Luis</option>
+            <option value="Sauter, PT, Kendall">Sauter, Kendall</option>
             <option value="Savarise, DPT, Yvonne">Savarise, Yvonne</option>
-            <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
-            <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
-            <option value="Shepherd, DPT, Collin">Shepherd, Collin</option> 
-            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option> 
-            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option> 
-            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>            
-            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>            
+           <option value="Schweitzer, SLP, Lisa">Schweitzer, Lisa</option>
+           <option value="Schweitzer-Harper, SLP, Taylor">Schweitzer-Harper, Taylor</option>
+           <option value="Shepherd, DPT, Collin">Shepherd, Collin</option>
+            <option value="Sinner, DPT, Ryan">Sinner, Ryan</option>
+            <option value="Stanislaw, PT, Abigail">Stanislaw, Abigail</option>
+            <option value="Stevenson, PTA, Natali">Stevenson, Natali</option>
+            <option value="Sharpe, PT, Channing">Sharpe, Channing</option>
             <option value="Taylor, PT, Imani">Taylor, Imani</option>
             <option value="Thompson, DPT, Spencer">Thompson, Spencer</option>
             <option value="Tucker, DPT, Kara">Tucker, Kara</option>
             <option value="Walburn, PT, Monica">Walburn, Monica</option>
-	    <option value="Williams, PT, Christina">Williams, Christina</option>
+            <option value="Williams, PT, Christina">Williams, Christina</option>
       </select>
     </div>
 	</form>
@@ -1586,10 +2251,27 @@ Please fill out above form to generate the SMS you will send to the patient.
 <div class="copy-box" id="summaryBox">
   for [NEW DATE] at [NEW TIME] with [PROVIDER]
 </div>
+<br>
+<button type="button" id="clearFormButton" style="background:#f44336;color:white;margin:8px 0;">
+  Clear Form
+</button>
 
 <!--PT WL Initiative Script-->
  <script>
 document.addEventListener('DOMContentLoaded', () => {
+// Add event listener to Clear Form button
+document.getElementById('clearFormButton').addEventListener('click', () => {
+  // Reset input and select fields
+  document.getElementById('messageForm').reset();
+  document.getElementById('patientName').value = '';
+  document.getElementById('newDate').value = '';
+  document.getElementById('newTime').value = '';
+  document.getElementById('setTodayButton').blur();
+
+  // Reset summary and SMS boxes to their default text
+  document.getElementById('summaryBox').textContent = 'for [NEW DATE] at [NEW TIME] with [PROVIDER]';
+  document.getElementById('copyBox').textContent = 'Please fill out above form to generate the SMS you will send to the patient.';
+});
   // Function to get today's date in YYYY-MM-DD format
   const getTodayDate = () => {
     const today = new Date();
@@ -1749,16 +2431,21 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
   });
 });
 </script>
+
 <br>
 <hr>
 
-<h3>Wait List Message:</h3>
+<b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_busy</span> No appointment available:</b>
+
+<div class="copy-box" data-message="No availability, [DATE]: [UID]">Copy to Wait List Message</div>
+
+<br>
 
 <div class="info">
 <span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Note: To set your UID, go to <a href="#Settings">Settings</a>
 </div>
 
-<div class="copy-box" data-message="No availability, [DATE]: [UID]">Wait List Message - No availability</div>
+
 </div>
 </div>
 </div>
@@ -2225,7 +2912,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
 <br>
 <br>
-<b>Last updated: 5/20/25</b>
+<b>Last updated: 5/28/25</b>
 
   <script>
     function copyText(text) {
