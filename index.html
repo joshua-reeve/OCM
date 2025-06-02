@@ -25,7 +25,7 @@ body, html {
   overflow: hidden; /* optional, to ensure inner content matches the radius */
   border: 3px solid #2196f3;
   background: #f6f6f6;
-  margin: 12px 0;
+  margin: 5px 0;
 }
 .folder-div.dragging {
   opacity: 0.7;
@@ -41,7 +41,6 @@ body, html {
   align-items: center;
   padding: 0px;
   cursor: pointer;
-  border-radius: 0px !important;
   font-size: 1.1em;
   background: #2196f3;
   color: #fff;
@@ -396,7 +395,7 @@ textarea {
 }
 
 #mySidenav {
-  position: fixed;
+  position: sticky;
   top: 200px;
   right: 0;
   z-index: 999;
@@ -404,7 +403,7 @@ textarea {
 
 #mySidenav a {
   position: fixed;
-  right: -165px; /* Start hidden on the right */
+  right: -160px; /* Start hidden on the right */
   transition: 0.3s; /* Smooth sliding effect */
   padding: 15px;
   width: 180px; /* Adjust width for icons and text */
@@ -415,6 +414,7 @@ textarea {
   display: flex; /* Use flexbox for alignment */
   align-items: center; /* Vertically align icon and text */
   gap: 10px; /* Add space between the icon and text */
+  z-index: 999;
 }
 
 #mySidenav a:hover {
@@ -449,19 +449,19 @@ textarea {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
+  z-index: 1100;
+  right: 0;
   top: 0;
-  width: 100%;
+  width: 600px;
+  max-width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 .modal-actions {
   position: Sticky;
   top: 0.5em;
   right: 0.5em;
-  z-index: 10;
+  z-index: 1200;
   background: none;
   display: flex;
   justify-content: flex-end;
@@ -501,13 +501,15 @@ textarea {
   background-color: white;
   position: relative;
   top: 50%;
-  right: -100%;
   transform: translateY(-50%);
-  padding: 20px;
+  padding: 10px;
+  z-index: 1150;
   border-radius: 8px;
   width: 90%;
-  max-height: 90vh;
-  max-width: 500px;
+  max-height: 95vh;
+  max-width: 600px;
+  right: -100%;
+  transition: right 0.5s;
   overflow-y: auto;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -516,7 +518,7 @@ textarea {
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0,0,0,0.3);
-  z-index: 1000;
+  z-index: 1175;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -530,10 +532,7 @@ textarea {
   box-shadow: 0 4px 32px rgba(0,0,0,0.18);
   margin: auto;
 }
-.modal-content {
-  right: -100%;
-  transition: right 0.5s;
-}
+
 
 .modal.open .modal-content {
   right: 0;
@@ -557,9 +556,9 @@ textarea {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .modal-content {
-    width: 90%;
+    width: 100%;
     min-width: unset;
   }
 }
@@ -619,9 +618,45 @@ textarea {
   background-color: #d32f2f;
 }
 
-.phone-numbers-list {
-  list-style-type: none;
-  padding: 0;
+.phone-section-card {
+  background: #f6f6f6;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.07);
+  padding: 14px 16px 8px 16px;
+}
+.phone-section-header {
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  margin-bottom: 8px;
+  gap: 0.4em;
+  color: #1976D2;
+  font-weight: bold;
+}
+.phone-section-icon {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 50%;
+  padding: 2px;
+  margin-right: 4px;
+}
+.phone-number-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: 1em;
+}
+.phone-number-grid {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 6px 10px;
+  align-items: center;
+}
+.interpreter-section ol, .interpreter-section ul {
+  margin-left: 1.3em;
+  margin-bottom: 0.5em;
 }
 /* Navigation (Topnav) */
 .topnav {
@@ -875,126 +910,180 @@ function myFunction() {
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
-    <h2><u>Phone Number Reference Tab</u></h2>
-    <div class="phone-modal-foreground">
-      <strong>General Number: </strong>
-      <div class="copy-box copy-box-small" data-message="801-213-9500">801-213-9500</div>
+
+    <h2 style="margin-bottom:16px;display:flex;align-items:center;gap:0.4em;">
+      <span class="material-symbols-outlined" style="color:#1976d2;vertical-align:middle;font-size:32px;">phone</span>
+      Phone Number Reference
+    </h2>
+	
+    <!-- Support -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">support</span>
+        <span>Support Lines:</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>Leader (Supervisor) Line:</b></div><div class="copy-box copy-box-small" data-message="801-213-4610">801-213-4610</div>
+        <div><b>Outbound Support:</b></div><div class="copy-box copy-box-small" data-message="4-0556">4-0556</div>
+		<div><b>Support:</b></div><div class="copy-box copy-box-small" data-message="801-213-4674">801-213-4674</div>
+      </div>
     </div>
 
-<div class="phone-modal-foreground">
-  <b>Community Clinics:</b>
-  <ul>
-    <li>CHC: <div class="copy-box copy-box-small" data-message="801-693-7900">801-693-7900</div></li>
-    <li>FHC: <div class="copy-box copy-box-small" data-message="801-213-3200">801-213-3200</div></li>
-    <li>GWC: <div class="copy-box copy-box-small" data-message="801-213-9400">801-213-9400</div></li>
-    <li>MHC: <div class="copy-box copy-box-small" data-message="801-581-8000">801-581-8000</div></li>
-    <li>PWC: <div class="copy-box copy-box-small" data-message="801-234-8600">801-234-8600</div></li>
-    <li>RSC: <div class="copy-box copy-box-small" data-message="435-658-9200">435-658-9200</div></li>
-    <li>RWC: <div class="copy-box copy-box-small" data-message="801-213-9900">801-213-9900</div></li>
-    <li>SJHC: <div class="copy-box copy-box-small" data-message="801-213-4500">801-213-4500</div></li>
-    <li>SBC: <div class="copy-box copy-box-small" data-message="435-843-3000">435-843-3000</div></li>
-    <li>SHC: <div class="copy-box copy-box-small" data-message="801-581-2000">801-581-2000</div></li>
-    <li>WRC: <div class="copy-box copy-box-small" data-message="801-213-9200">801-213-9200</div></li>
-  </ul>
-</div>
+    <!-- General -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">call</span>
+        <span>General</span>
+      </div>
+      <div class="phone-number-grid">
+        <span>General Number:</span>
+        <div class="copy-box copy-box-small" data-message="801-213-9500">801-213-9500</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Gender Health:</b>
-  <ul>
-    <li>WH: <div class="copy-box copy-box-small" data-message="801-213-2995">801-213-2995</div></li>
-    <li>Men's Health/Uro: <div class="copy-box copy-box-small" data-message="801-213-2700">801-213-2700</div></li>
-  </ul>
-</div>
+    <!-- Community Clinics -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">local_hospital</span>
+        <span>Community Clinics</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>CHC</b></div><div class="copy-box copy-box-small" data-message="801-693-7900">801-693-7900</div>
+        <div><b>FHC</b></div><div class="copy-box copy-box-small" data-message="801-213-3200">801-213-3200</div>
+        <div><b>GWC</b></div><div class="copy-box copy-box-small" data-message="801-213-9400">801-213-9400</div>
+        <div><b>MHC</b></div><div class="copy-box copy-box-small" data-message="801-581-8000">801-581-8000</div>
+        <div><b>PWC</b></div><div class="copy-box copy-box-small" data-message="801-234-8600">801-234-8600</div>
+        <div><b>RSC</b></div><div class="copy-box copy-box-small" data-message="435-658-9200">435-658-9200</div>
+        <div><b>RWC</b></div><div class="copy-box copy-box-small" data-message="801-213-9900">801-213-9900</div>
+        <div><b>SJHC</b></div><div class="copy-box copy-box-small" data-message="801-213-4500">801-213-4500</div>
+        <div><b>SBC</b></div><div class="copy-box copy-box-small" data-message="435-843-3000">435-843-3000</div>
+        <div><b>SHC</b></div><div class="copy-box copy-box-small" data-message="801-581-2000">801-581-2000</div>
+        <div><b>WRC</b></div><div class="copy-box copy-box-small" data-message="801-213-9200">801-213-9200</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Moran:</b>
-  <ul>
-    <li>JMEC: <div class="copy-box copy-box-small" data-message="801-581-2352">801-581-2352</div></li>
-    <li>Midvalley: <div class="copy-box copy-box-small" data-message="801-585-3937">801-585-3937</div></li>
-    <li>Neuro-Ophthalmology: <div class="copy-box copy-box-small" data-message="801-585-6540">801-585-6540</div></li>
-  </ul>
-</div>
+    <!-- Gender Health -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">wc</span>
+        <span>Gender Health</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>Women's Health</b></div><div class="copy-box copy-box-small" data-message="801-213-2995">801-213-2995</div>
+        <div><b>Men's Health/Uro</b></div><div class="copy-box copy-box-small" data-message="801-213-2700">801-213-2700</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Orthopedics:</b>
-  <ul>
-    <li>SHC Rehab: <div class="copy-box copy-box-small" data-message="801-581-2221">801-581-2221</div></li>
-    <li>UOC: <div class="copy-box copy-box-small" data-message="801-587-7109">801-587-7109</div></li>
-    <li>UOC PT: <div class="copy-box copy-box-small" data-message="801-587-7005">801-587-7005</div></li>
-  </ul>
-</div>
+    <!-- Moran -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">visibility</span>
+        <span>Moran</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>JMEC</b></div><div class="copy-box copy-box-small" data-message="801-581-2352">801-581-2352</div>
+        <div><b>Midvalley</b></div><div class="copy-box copy-box-small" data-message="801-585-3937">801-585-3937</div>
+        <div><b>Neuro-Ophthalmology</b></div><div class="copy-box copy-box-small" data-message="801-585-6540">801-585-6540</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Specialty:</b>
-  <ul>
-    <li>CNC Behavioral: <div class="copy-box copy-box-small" data-message="801-585-1212">801-585-1212</div></li>
-    <li>CNC Neurology: <div class="copy-box copy-box-small" data-message="801-585-7575">801-585-7575</div></li>
-    <li>CVC: <div class="copy-box copy-box-small" data-message="801-585-7676">801-585-7676</div></li>
-    <li>Echo/Vascular: <div class="copy-box copy-box-small" data-message="801-585-2905">801-585-2905</div></li>
-    <li>General Surgery: <div class="copy-box copy-box-small" data-message="801-585-1618">801-585-1618</div></li>
-    <li>Midvalley Derm: <div class="copy-box copy-box-small" data-message="801-581-2955">801-581-2955</div></li>
-    <li>Organ Transplant: <div class="copy-box copy-box-small" data-message="801-581-6795">801-581-6795</div></li>
-    <li>Plastics: <div class="copy-box copy-box-small" data-message="801-581-7719">801-581-7719</div></li>
-    <li>SWC: <div class="copy-box copy-box-small" data-message="801-581-2016">801-581-2016</div></li>
-    <li>UDEC: <div class="copy-box copy-box-small" data-message="801-581-7761">801-581-7761</div></li>
-    <li>UH Clinical Nutrition GI: <div class="copy-box copy-box-small" data-message="801-213-8284">801-213-8284</div></li>
-  </ul>
-</div>
+    <!-- Orthopedics -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">orthopedics</span>
+        <span>Orthopedics</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>SHC Rehab</b></div><div class="copy-box copy-box-small" data-message="801-581-2221">801-581-2221</div>
+        <div><b>UOC</b></div><div class="copy-box copy-box-small" data-message="801-587-7109">801-587-7109</div>
+        <div><b>UOC PT</b></div><div class="copy-box copy-box-small" data-message="801-587-7005">801-587-7005</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Primary Care:</b>
-  <ul>
-    <li>UH Peds: <div class="copy-box copy-box-small" data-message="801-581-2205">801-581-2205</div></li>
-  </ul>
-</div>
+    <!-- Specialty -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">star</span>
+        <span>Specialty</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>CNC Behavioral</b></div><div class="copy-box copy-box-small" data-message="801-585-1212">801-585-1212</div>
+        <div><b>CNC Neurology</b></div><div class="copy-box copy-box-small" data-message="801-585-7575">801-585-7575</div>
+        <div><b>CVC</b></div><div class="copy-box copy-box-small" data-message="801-585-7676">801-585-7676</div>
+        <div><b>Echo/Vascular</b></div><div class="copy-box copy-box-small" data-message="801-585-2905">801-585-2905</div>
+        <div><b>General Surgery</b></div><div class="copy-box copy-box-small" data-message="801-585-1618">801-585-1618</div>
+        <div><b>Midvalley Derm</b></div><div class="copy-box copy-box-small" data-message="801-581-2955">801-581-2955</div>
+        <div><b>Organ Transplant</b></div><div class="copy-box copy-box-small" data-message="801-581-6795">801-581-6795</div>
+        <div><b>Plastics</b></div><div class="copy-box copy-box-small" data-message="801-581-7719">801-581-7719</div>
+        <div><b>SWC</b></div><div class="copy-box copy-box-small" data-message="801-581-2016">801-581-2016</div>
+        <div><b>UDEC</b></div><div class="copy-box copy-box-small" data-message="801-581-7761">801-581-7761</div>
+        <div><b>UH Clinical Nutrition GI</b></div><div class="copy-box copy-box-small" data-message="801-213-8284">801-213-8284</div>
+      </div>
+    </div>
 
-<div class="phone-modal-foreground">
-  <b>Miscellaneous:</b>
-  <ul>
-    <li>ARUP Clinic: <div class="copy-box copy-box-small" data-message="801-584-5144">801-584-5144</div></li>
-    <li>Covid Hotline: <div class="copy-box copy-box-small" data-message="801-587-0712">801-587-0712</div></li>
-    <li>Dental: <div class="copy-box copy-box-small" data-message="801-587-6453">801-587-6453</div></li>
-    <li>GI/ENDO/Hepatology: <div class="copy-box copy-box-small" data-message="801-213-9797">801-213-9797</div></li>
-    <li>NRH Outpatient & Wound Therapy/NRH Social Services: <div class="copy-box copy-box-small" data-message="801-581-2267">801-581-2267</div></li>
-    <li>South Main: <div class="copy-box copy-box-small" data-message="801-587-2525">801-587-2525</div></li>
-  </ul>
-</div>
+    <!-- Primary Care -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">family_restroom</span>
+        <span>Primary Care</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>UH Peds</b></div><div class="copy-box copy-box-small" data-message="801-581-2205">801-581-2205</div>
+      </div>
+    </div>
 
-	<div class="phone-modal-foreground">
-	<div id="interpreterInstructions">
-  <b><u>Interpreter Instructions:</u></b>
-  <br>
-  <br>
-  <b>SPANISH:</b>
-  <ol>
-    <li>CALL <div class="copy-box copy-box-small" data-message="4-4443">4-4443</div></li>
-    <li>MOVE TO STEP 2 BELOW - IF PROMPTED</li>
-  </ol>
-  <b>FOR ALL OTHER LANGUAGES:</b>
-  <ol>
-    <li>CALL <div class="copy-box copy-box-small" data-message="801-512-0938">801-512-0938</div></li>
-    <li>
-      STEP 2:
-      <ul>
-        <li>Press 1 for <b>Spanish</b></li>
-        <li>Press 2 for <b>Arabic</b></li>
-        <li>Press 3 for <b>Nepali</b></li>
-        <li>Press 4 for <b>Somali</b></li>
-        <li>Press 5 for <b>Farsi</b></li>
-        <li>Press 6 for <b>Vietnamese</b></li>
-        <li>Press 7 for <b>Russian</b></li>
-        <li>Press 8 for <b>Mandarin</b></li>
-        <li>Press 9 for <b>all other languages</b></li>
-      </ul>
-    </li>
-    <li>Provide Dept Code: <strong>10748</strong></li>
-    <li>Provide Dept Phone Number: <strong>801-213-4610</strong></li>
-  </ol>
-</div>
-</div>
+    <!-- Miscellaneous -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">more_horiz</span>
+        <span>Miscellaneous</span>
+      </div>
+      <div class="phone-number-grid">
+        <div><b>ARUP Clinic</b></div><div class="copy-box copy-box-small" data-message="801-584-5144">801-584-5144</div>
+        <div><b>Covid Hotline</b></div><div class="copy-box copy-box-small" data-message="801-587-0712">801-587-0712</div>
+        <div><b>Dental</b></div><div class="copy-box copy-box-small" data-message="801-587-6453">801-587-6453</div>
+        <div><b>GI/ENDO/Hepatology</b></div><div class="copy-box copy-box-small" data-message="801-213-9797">801-213-9797</div>
+        <div><b>NRH Outpatient</b></div><div class="copy-box copy-box-small" data-message="801-581-2267">801-581-2267</div>
+        <div><b>South Main</b></div><div class="copy-box copy-box-small" data-message="801-587-2525">801-587-2525</div>
+      </div>
+    </div>
+
+    <!-- Interpreter Instructions -->
+    <div class="phone-section-card">
+      <div class="phone-section-header">
+        <span class="material-symbols-outlined phone-section-icon">translate</span>
+        <span>Interpreter Instructions</span>
+      </div>
+      <div class="interpreter-section">
+        <b>SPANISH:</b>
+        <ol>
+          <li>CALL <div class="copy-box copy-box-small" data-message="4-4443">4-4443</div></li>
+          <li>MOVE TO STEP 2 BELOW - IF PROMPTED</li>
+        </ol>
+        <b>FOR ALL OTHER LANGUAGES:</b>
+        <ol>
+          <li>CALL <div class="copy-box copy-box-small" data-message="801-512-0938">801-512-0938</div></li>
+          <li>
+            STEP 2:
+            <ul>
+              <li>Press 1 for <b>Spanish</b></li>
+              <li>Press 2 for <b>Arabic</b></li>
+              <li>Press 3 for <b>Nepali</b></li>
+              <li>Press 4 for <b>Somali</b></li>
+              <li>Press 5 for <b>Farsi</b></li>
+              <li>Press 6 for <b>Vietnamese</b></li>
+              <li>Press 7 for <b>Russian</b></li>
+              <li>Press 8 for <b>Mandarin</b></li>
+              <li>Press 9 for <b>all other languages</b></li>
+            </ul>
+          </li>
+          <li>Provide Dept Code: <strong>10748</strong></li>
+          <li>Provide Dept Phone Number: <strong>801-213-4610</strong></li>
+        </ol>
+      </div>
+    </div>
   </div>
 </div>
-
 	
 <div id="dotPhrasesModal" class="modal">
   <div class="modal-content">
@@ -2249,7 +2338,7 @@ Please fill out above form to generate the SMS you will send to the patient.
   <label>11. Add to CRM</label>
 <br>
 <div class="copy-box" id="summaryBox">
-  for [NEW DATE] at [NEW TIME] with [PROVIDER]
+  with [PROVIDER] for [NEW DATE] at [NEW TIME]
 </div>
 <br>
 <button type="button" id="clearFormButton" style="background:#f44336;color:white;margin:8px 0;">
@@ -2269,7 +2358,7 @@ document.getElementById('clearFormButton').addEventListener('click', () => {
   document.getElementById('setTodayButton').blur();
 
   // Reset summary and SMS boxes to their default text
-  document.getElementById('summaryBox').textContent = 'for [NEW DATE] at [NEW TIME] with [PROVIDER]';
+  document.getElementById('summaryBox').textContent = 'with [PROVIDER] for [NEW DATE] at [NEW TIME]';
   document.getElementById('copyBox').textContent = 'Please fill out above form to generate the SMS you will send to the patient.';
 });
   // Function to get today's date in YYYY-MM-DD format
@@ -2345,7 +2434,7 @@ document.getElementById('clearFormButton').addEventListener('click', () => {
   const updateSummaryBox = () => {
     const { newDate, newTime, newProviderName, existingProviderName } = getFields();
     const providerName = newProviderName || existingProviderName; // Default to new provider if selected, otherwise existing provider
-    const msg = `for ${newDate} at ${newTime} with ${providerName}`;
+    const msg = `with ${providerName} for ${newDate} at ${newTime}`;
     document.getElementById('summaryBox').textContent = msg;
   };
 
@@ -2912,7 +3001,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
 <br>
 <br>
-<b>Last updated: 5/28/25</b>
+<b>Last updated: 5/30/25</b>
 
   <script>
     function copyText(text) {
