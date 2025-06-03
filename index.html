@@ -18,6 +18,14 @@ body, html {
   padding: 0;
   background-color: #fafafa; /* Material Design light background */
 }
+.sub-label {
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  color: #2c3e50;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+}
 
 /* Buttons */
 .folder-div {
@@ -2156,7 +2164,7 @@ document.getElementById('importFileInput').addEventListener('change', function(e
 <span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> See Also: SMS: </b><a href="#SMS PT Wait List">PT Wait List</a>
 </div>
 <div class="squircle-foreground">
-<h3><u>SMS Offer Builder:</u></h3>
+<h3><u>Offer Builder:</u></h3>
 
 
 <b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_repeat</span> Start here for reschedule appointment offer:</b>
@@ -2321,15 +2329,23 @@ document.getElementById('importFileInput').addEventListener('change', function(e
     </div>
 
 
-<label>9. SMS Format:</label>
+<label>9. Choose Format:</label>
 <br>
-  <button onclick="generateOriginal()">Reschedule</button>
-  <button onclick="generateAltEnglish()">Additional Visit</button>
-  <br>
-  <button onclick="generateSpanishEarlier()">Reschedule (Spanish)</button>
-  <button onclick="generateSpanishAdditional()">Additional Visit (Spanish)</button>
+<div class="sub-label">SMS Options:</div>
+ <button type="button" id="btnRescheduleSMS">Reschedule</button>
+ <button type="button" id="btnAdditionalSMS">Additional Visit</button>
+ <br>
+ <button type="button" id="btnRescheduleSpanishSMS">Reschedule (Spanish)</button>
+ <button type="button" id="btnAdditionalSpanishSMS">Additional Visit (Spanish)</button>
+</div>
+<div class="sub-label">MyChart Message Options:</div>
+ <button type="button" id="btnRescheduleMyChart">Reschedule</button>
+ <button type="button" id="btnAdditionalMyChart">Additional Visit</button>
 <br>
-
+ <button type="button" id="btnRescheduleSpanishMyChart">Reschedule (Spanish)</button>
+ <button type="button" id="btnAdditionalSpanishMyChart">Additional Visit (Spanish)</button>
+<br>
+<br>
 <label>10. Click to Copy:</label>
 <br>
   <div class="copy-box" id="copyBox">
@@ -2344,49 +2360,40 @@ Please fill out above form to generate the SMS you will send to the patient.
 <button type="button" id="clearFormButton" style="background:#f44336;color:white;margin:8px 0;">
   Clear Form
 </button>
-
 <!--PT WL Initiative Script-->
- <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-// Add event listener to Clear Form button
-document.getElementById('clearFormButton').addEventListener('click', () => {
-  // Reset input and select fields
-  document.getElementById('messageForm').reset();
-  document.getElementById('patientName').value = '';
-  document.getElementById('newDate').value = '';
-  document.getElementById('newTime').value = '';
-  document.getElementById('setTodayButton').blur();
+  // Clear Form button
+  document.getElementById('clearFormButton').addEventListener('click', () => {
+    document.getElementById('messageForm').reset();
+    document.getElementById('patientName').value = '';
+    document.getElementById('newDate').value = '';
+    document.getElementById('newTime').value = '';
+    document.getElementById('setTodayButton').blur();
+    document.getElementById('summaryBox').textContent = 'with [PROVIDER] for [NEW DATE] at [NEW TIME]';
+    document.getElementById('copyBox').textContent = 'Please fill out above form to generate the SMS you will send to the patient.';
+  });
 
-  // Reset summary and SMS boxes to their default text
-  document.getElementById('summaryBox').textContent = 'with [PROVIDER] for [NEW DATE] at [NEW TIME]';
-  document.getElementById('copyBox').textContent = 'Please fill out above form to generate the SMS you will send to the patient.';
-});
-  // Function to get today's date in YYYY-MM-DD format
+  // Set today's date
   const getTodayDate = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-
-  // Add event listener to the "Today" button
   document.getElementById('setTodayButton').addEventListener('click', () => {
     const todayDate = getTodayDate();
     document.getElementById('newDate').value = todayDate;
-    console.log(`Set New Date to: ${todayDate}`); // Debugging log
-    // Trigger any updates tied to the "New Date" field
     document.getElementById('newDate').dispatchEvent(new Event('input'));
   });
 
-  // Helper function to format dates
+  // Format helpers
   const formatDate = (inputDate) => {
     if (!inputDate) return '[NEW DATE]';
     const [year, month, day] = inputDate.split('-');
     return `${month}/${day}`;
   };
-
-  // Helper function to format times
   const formatTime = (inputTime) => {
     if (!inputTime) return '[NEW TIME]';
     let [hour, minute] = inputTime.split(':');
@@ -2396,11 +2403,10 @@ document.getElementById('clearFormButton').addEventListener('click', () => {
     return `${hour}:${minute} ${ampm}`;
   };
 
-  // Function to get form field values
+  // Get form values
   const getFields = () => {
     const existingProviderRaw = document.getElementById('existingProviderName').value || '[EXISTING PROVIDER NAME]';
     const newProviderRaw = document.getElementById('newProviderName').value;
-
     const formatProviderName = (providerRaw) => {
       if (providerRaw && providerRaw.includes(',')) {
         const parts = providerRaw.split(',').map(part => part.trim());
@@ -2411,14 +2417,13 @@ document.getElementById('clearFormButton').addEventListener('click', () => {
           const [last, first] = parts;
           return `${first} ${last}`;
         } else {
-          return providerRaw; // fallback
+          return providerRaw;
         }
       } else if (providerRaw) {
         return providerRaw;
       }
-      return ''; // Return an empty string if no provider is selected
+      return '';
     };
-
     return {
       patientName: document.getElementById('patientName').value || '[PATIENT NAME]',
       existingDate: formatDate(document.getElementById('existingDate').value) || '[EXISTING DATE]',
@@ -2430,87 +2435,29 @@ document.getElementById('clearFormButton').addEventListener('click', () => {
     };
   };
 
-  // Function to update the summary box dynamically
+  // Update summary
   const updateSummaryBox = () => {
     const { newDate, newTime, newProviderName, existingProviderName } = getFields();
-    const providerName = newProviderName || existingProviderName; // Default to new provider if selected, otherwise existing provider
-    const msg = `with ${providerName} for ${newDate} at ${newTime}`;
-    document.getElementById('summaryBox').textContent = msg;
+    const providerName = newProviderName || existingProviderName;
+    document.getElementById('summaryBox').textContent = `with ${providerName} for ${newDate} at ${newTime}`;
   };
-
-  // Debounce function to limit the frequency of updates
   const debounce = (func, delay) => {
     let timer;
     return (...args) => {
       clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
+      timer = setTimeout(() => func(...args), delay);
     };
   };
-
-  // Attach debounced event listeners to form fields
   const debouncedUpdate = debounce(updateSummaryBox, 300);
   ['newDate', 'newTime', 'newProviderName', 'existingProviderName'].forEach(id => {
     document.getElementById(id).addEventListener('input', debouncedUpdate);
   });
 
-  // Add click-to-copy functionality for the summary box
-  const summaryBox = document.getElementById('summaryBox');
-  summaryBox.addEventListener('click', () => {
-    const text = summaryBox.textContent;
-    navigator.clipboard.writeText(text).then(() => {
-    }).catch(err => {
-      console.error('Failed to copy text:', err);
-    });
+  // Copy to clipboard
+  document.getElementById('summaryBox').addEventListener('click', () => {
+    const text = document.getElementById('summaryBox').textContent;
+    navigator.clipboard.writeText(text).catch(err => { console.error('Failed to copy text:', err); });
   });
-
-  // SMS generation functions
-  const generateOriginal = () => {
-    const f = getFields();
-    const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
-    const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
-Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}  
-New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-    document.getElementById('copyBox').textContent = msg;
-  };
-
-  const generateAltEnglish = () => {
-    const f = getFields();
-    const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
-    const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
-New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
-    document.getElementById('copyBox').textContent = msg;
-  };
-
-  const generateSpanishEarlier = () => {
-    const f = getFields();
-    const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
-    const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
-Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}  
-Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-    document.getElementById('copyBox').textContent = msg;
-  };
-
-  const generateSpanishAdditional = () => {
-    const f = getFields();
-    const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
-    const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
-Nueva visita: ${f.newDate} a las ${f.newTime} with ${f.existingProviderName} 
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
-    document.getElementById('copyBox').textContent = msg;
-  };
-
-  // Attach event listeners to SMS generation buttons
-  document.querySelector('button[onclick="generateOriginal()"]').addEventListener('click', generateOriginal);
-  document.querySelector('button[onclick="generateAltEnglish()"]').addEventListener('click', generateAltEnglish);
-  document.querySelector('button[onclick="generateSpanishEarlier()"]').addEventListener('click', generateSpanishEarlier);
-  document.querySelector('button[onclick="generateSpanishAdditional()"]').addEventListener('click', generateSpanishAdditional);
-
-  // Add click-to-copy functionality for the SMS box
   const copyBox = document.getElementById('copyBox');
   copyBox.addEventListener('click', () => {
     const text = copyBox.textContent;
@@ -2518,9 +2465,104 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
       alert('Failed to copy text: ' + err);
     });
   });
+
+  // SMS functions
+  const generateOriginal = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
+Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}  
+New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+    copyBox.textContent = msg;
+  };
+  const generateAltEnglish = () => {
+    const f = getFields();
+    const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
+New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}  
+This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+    copyBox.textContent = msg;
+  };
+  const generateSpanishEarlier = () => {
+    const f = getFields();
+    const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
+    const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
+Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}  
+Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+    copyBox.textContent = msg;
+  };
+  const generateSpanishAdditional = () => {
+    const f = getFields();
+    const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
+Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName}  
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+    copyBox.textContent = msg;
+  };
+
+  // MyChart functions
+  const generateMyChartReschedule = () => {
+    const f = getFields();
+	const newProviderText = f.newProviderName ? ` with ${f.newProviderName}` : '';
+    const msg = `Hi ${f.patientName},
+
+An earlier visit is available:  
+
+Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}
+
+New visit: ${f.newDate} at ${f.newTime}${newProviderText}
+
+This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept.`;
+    copyBox.textContent = msg;
+  };
+  const generateMyChartAdditional = () => {
+    const f = getFields();
+    const msg = `Hi ${f.patientName},
+
+An additional visit is available:  
+
+New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}
+
+This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept.`;
+    copyBox.textContent = msg;
+  };
+  const generateMyChartRescheduleSpanish = () => {
+    const f = getFields();
+	const newProviderText = f.newProviderName ? ` con ${f.newProviderName}` : '';
+    const msg = `Hola ${f.patientName},
+
+Una visita anterior está disponible:  
+
+Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}
+
+Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}
+
+Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar.`;
+    copyBox.textContent = msg;
+  };
+  const generateMyChartAdditionalSpanish = () => {
+    const f = getFields();
+    const msg = `Hola ${f.patientName},
+
+Hay una visita adicional disponible:  
+
+Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName}
+
+Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar.`;
+    copyBox.textContent = msg;
+  };
+
+  // Attach event listeners to all buttons
+  document.getElementById('btnRescheduleSMS').addEventListener('click', generateOriginal);
+  document.getElementById('btnAdditionalSMS').addEventListener('click', generateAltEnglish);
+  document.getElementById('btnRescheduleSpanishSMS').addEventListener('click', generateSpanishEarlier);
+  document.getElementById('btnAdditionalSpanishSMS').addEventListener('click', generateSpanishAdditional);
+  document.getElementById('btnRescheduleMyChart').addEventListener('click', generateMyChartReschedule);
+  document.getElementById('btnAdditionalMyChart').addEventListener('click', generateMyChartAdditional);
+  document.getElementById('btnRescheduleSpanishMyChart').addEventListener('click', generateMyChartRescheduleSpanish);
+  document.getElementById('btnAdditionalSpanishMyChart').addEventListener('click', generateMyChartAdditionalSpanish);
 });
 </script>
-
 <br>
 <hr>
 
@@ -3001,7 +3043,7 @@ Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`
 	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
 <br>
 <br>
-<b>Last updated: 5/30/25</b>
+<b>Last updated: 6/3/25</b>
 
   <script>
     function copyText(text) {
