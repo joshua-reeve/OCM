@@ -2275,6 +2275,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 
 <h1 id="Appt Notes"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">event_note</span> Appt Notes</h1>
 
+<div class="squircle-foreground">
 <div class="copy-box" data-message="Call 34674 to remove hold">Call 34674 to remove hold</div>
 <div class="copy-box" data-message="**CN correcting error**">**CN correcting error**</div>
 <div class="copy-box" data-message="*SMS sent re appt cancelation*">*SMS sent re appt cancelation*</div>
@@ -2283,7 +2284,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 <div class="copy-box" data-message="*SMS sent re location change*">*SMS sent re location change*</div>
 <div class="copy-box" data-message="*SMS sent re provider change*">*SMS sent re provider change*</div>
 <div class="copy-box" data-message="*MyChart message sent, If pt not billing Tricare please remove from HAR for this appt, If the patient is billing Tricare advise that an Auth # will be needed for the visit and to contact their VA PCP. If pt has other information regarding their insurance coverage, add it to appt notes. Outbound Team*">MAT/Cotiviti</div>
-
+</div>
 </div>
 
 <div class="squircle-background">
@@ -2306,7 +2307,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
     </div>
   </div>
 </div>
-</div>
+
 	
 <div class="squircle-foreground">
 <h2 id="Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</h2>
@@ -2319,7 +2320,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 </form>
 <div id="sleepResult"></div>
 </div>
-
+</div>
 <script>
   function formatSleepDisplayDate(dateObj) {
     const month = dateObj.getMonth() + 1;
@@ -2561,7 +2562,9 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 </div>
 </div>
 
-<!--SCRIPTS-->
+<!--JAVASCRIPT-->
+	
+<!--Copy Buttons, Custom Copy Buttons, and General Settings-->
 <script>
 // --- UID Form and Display, Preview, and Clipboard Logic ---
 const uidForm = document.getElementById("uidForm");
