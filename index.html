@@ -10,13 +10,13 @@
 
 /* General Typography */
 body, html {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif; /* Material font */
-  font-size: 16px; /* Base font size */
-  line-height: 1.5; /* Improved readability */
-  color: #212121; /* Dark text for better contrast */
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #212121;
   margin: 0;
   padding: 0;
-  background-color: #fafafa; /* Material Design light background */
+  background-color: #fafafa;
 }
 .sub-label {
   font-weight: bold;
@@ -447,7 +447,7 @@ textarea {
 }
 #dotPhrases {
   top: 180px; /* Adjust this value so it doesn't overlap with the others */
-  background-color: #6a1b9a; /* Pick a color you like */
+  background-color: #6a1b9a;
 }
 .material-symbols-outlined {
   display: block;
@@ -996,10 +996,8 @@ li {
     <button class="dropbtn">Utilities ▾
       <i class="fa fa-caret-down"></i>
     </button>
-	<div class="dropdown-content">
-      <a href="#NOB ROB Calculator">NOB/ROB Calculator</a>
-    </div>
     <div class="dropdown-content">
+      <a href="#NOB ROB Calculator">NOB/ROB Calculator</a>
       <a href="#Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</a>
     </div>
   </div>
@@ -2290,6 +2288,26 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 
 <div class="squircle-background">
 <h1><span class="material-symbols-outlined" style="color: black; font-size: 35px;">construction</span> Utilities</h1>
+
+<div class="squircle-foreground">
+  <h2 id="NOB ROB Calculator">NOB/ROB Calculator</h2>
+  <br>
+  <div class="preg-calc-container">
+    <form id="preg-calc-form" autocomplete="off">
+      <div class="preg-calc-input-row">
+        <label for="preg-calc-lmpDate">First Day of Last Menstrual Period (LMP):</label>
+        <input type="date" id="preg-calc-lmpDate" required>
+      </div>
+      <button type="submit">Calculate Schedule</button>
+    </form>
+    <div class="preg-calc-results">
+      <div class="nob-step" id="nob-step"></div>
+      <div class="rob-step" id="rob-step"></div>
+    </div>
+  </div>
+</div>
+</div>
+	
 <div class="squircle-foreground">
 <h2 id="Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</h2>
 <br>
@@ -2333,24 +2351,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
   }
 </script>
 
-<div class="squircle-foreground">
-  <h2 id="NOB ROB Calculator">NOB/ROB Calculator</h2>
-  <br>
-  <div class="preg-calc-container">
-    <form id="preg-calc-form" autocomplete="off">
-      <div class="preg-calc-input-row">
-        <label for="preg-calc-lmpDate">First Day of Last Menstrual Period (LMP):</label>
-        <input type="date" id="preg-calc-lmpDate" required>
-      </div>
-      <button type="submit">Calculate Schedule</button>
-    </form>
-    <div class="preg-calc-results">
-      <div class="nob-step" id="nob-step"></div>
-      <div class="rob-step" id="rob-step"></div>
-    </div>
-  </div>
-</div>
-</div>
+
 </div>
 <script>
   // --- Pregnancy Calculator logic (dynamic .copy-box creation with data-message for UID/date/time support) ---
