@@ -1510,6 +1510,22 @@ function closeModal(modalId) {
 <div class="danger">
 <span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons! Please be sure to export your folders/custom buttons before clearing your browser's cache!
 </div>
+<div class="squircle-foreground">
+<h2>Tags:</h2>
+<b><u>Contextual Tags:</u></b>
+<br>
+<b>[DATE] = Today's Date</b>
+<br>
+<br>
+<b><u>User Defined Tags:</u></b>
+<br>
+<label for="vardateInput"><b>[VARDATE] =</b></label>
+<input type="date" id="vardateInput" style="margin-left:8px;">
+<button type="button" id="vardateTodayBtn" style="margin-left:4px;">Today</button>
+<br>
+<label for="varphoneInput"><b>[VARPHONE] =</b></label>
+<input type="tel" id="varphoneInput" style="margin-left:8px;" placeholder="Example: 801-213-9500">
+</div>
 
 <!-- Modal triggers -->
 <div class="actions-bar">
@@ -1765,12 +1781,12 @@ function closeModal(modalId) {
 <br>
 <label>10. Click to Copy:</label>
 <br>
-  <div class="copy-box" id="copyBox">
+  <div class="copy-box" id="copyBox" data-no-preview="true">
 Please fill out above form to generate the SMS you will send to the patient.
   </div>
   <label>11. Add to CRM</label>
 <br>
-<div class="copy-box" id="summaryBox">
+<div class="copy-box" id="summaryBox" data-no-preview="true">
   with [PROVIDER] for [NEW DATE] at [NEW TIME]
 </div>
 <br>
@@ -2354,6 +2370,59 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 
 
 </div>
+
+
+<div class="squircle-background">
+
+<h1 id="Settings"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">settings</span> Settings</h1>
+
+<div class="squircle-foreground">
+
+<br>
+  <form id="uidForm">
+    <label for="userUid">Enter Your UID (Please use lowercase u):</label>
+    <input type="text" id="userUid" placeholder="UID" required>
+    <button type="submit">Save UID</button>
+  </form>
+
+
+
+  <div style="margin-top: 20px;">
+<div class="info">
+    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> UID set to: <span id="displayUid"></span></b></p>
+  </div>
+  </div>
+
+</div>
+
+<div class="squircle-foreground">
+
+  <div>
+    <input type="checkbox" id="previewToggle">
+    <label for="previewToggle">Enable button previews on hover.</label>
+  </div>
+</div>
+</div>
+
+<div class="squircle-background">
+
+<h1 id="About"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">info</span> About</h1>
+
+<div class="squircle-foreground">
+<b>Outbound Clipboard Manager created and maintained by Joshua Reeve. 
+	<br>
+	<br>
+	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
+<br>
+<br>
+<b>Last updated: 6/10/25</b>
+
+</div>
+</div>
+
+<!--JAVASCRIPT-->
+
+<!--NOB/ROB Calculator-->
 <script>
   // --- Pregnancy Calculator logic (dynamic .copy-box creation with data-message for UID/date/time support) ---
   function parseLocalDate(inputValue) {
@@ -2514,56 +2583,6 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
   }
 </script>
 
-<div class="squircle-background">
-
-<h1 id="Settings"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">settings</span> Settings</h1>
-
-<div class="squircle-foreground">
-
-<br>
-  <form id="uidForm">
-    <label for="userUid">Enter Your UID (Please use lowercase u):</label>
-    <input type="text" id="userUid" placeholder="UID" required>
-    <button type="submit">Save UID</button>
-  </form>
-
-
-
-  <div style="margin-top: 20px;">
-<div class="info">
-    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> UID set to: <span id="displayUid"></span></b></p>
-  </div>
-  </div>
-
-</div>
-
-<div class="squircle-foreground">
-
-  <div>
-    <input type="checkbox" id="previewToggle">
-    <label for="previewToggle">Enable button previews on hover.</label>
-  </div>
-</div>
-</div>
-
-<div class="squircle-background">
-
-<h1 id="About"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">info</span> About</h1>
-
-<div class="squircle-foreground">
-<b>Outbound Clipboard Manager created and maintained by Joshua Reeve. 
-	<br>
-	<br>
-	For feedback, suggestions, to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
-<br>
-<br>
-<b>Last updated: 6/9/25</b>
-
-</div>
-</div>
-
-<!--JAVASCRIPT-->
-	
 <!--Copy Buttons, Custom Copy Buttons, and General Settings-->
 <script>
 // --- UID Form and Display, Preview, and Clipboard Logic ---
@@ -2629,6 +2648,26 @@ function processMessage(template) {
     .replaceAll("[UID]", uid);
 }
 
+// --- Utility to process VARDATE and VARPHONE, then other vars ---
+function processMessageWithVars(template) {
+  // VARDATE
+  if (template.includes("[VARDATE]")) {
+    const vardateRaw = document.getElementById('vardateInput')?.value;
+    let vardate = "";
+    if (vardateRaw) {
+      const [year, month, day] = vardateRaw.split('-');
+      vardate = `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year.slice(-2)}`;
+    }
+    template = template.replaceAll("[VARDATE]", vardate);
+  }
+  // VARPHONE
+  if (template.includes("[VARPHONE]")) {
+    const varphone = document.getElementById('varphoneInput')?.value.trim() || "";
+    template = template.replaceAll("[VARPHONE]", varphone);
+  }
+  return processMessage(template);
+}
+
 // --- Copy to Clipboard function (used globally) ---
 function copyText(text) {
   if (navigator.clipboard && window.isSecureContext) {
@@ -2649,18 +2688,47 @@ function copyText(text) {
 document.body.addEventListener("click", function(event) {
   const button = event.target.closest(".copy-box");
   if (!button) return;
-  // Prefer data-message, then data-copytext, then textContent
   let template = button.getAttribute('data-message') || button.getAttribute('data-copytext') || button.textContent.trim();
+
+  // Handle [VARDATE]
+  if (template.includes("[VARDATE]")) {
+    const vardateRaw = document.getElementById('vardateInput')?.value;
+    if (!vardateRaw) {
+      alert('Please select a date in the [VARDATE] picker first.');
+      return;
+    }
+    const [year, month, day] = vardateRaw.split('-');
+    const vardate = `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year.slice(-2)}`;
+    localStorage.setItem('lastVarDate', vardate);
+    template = template.replaceAll("[VARDATE]", vardate);
+  }
+
+  // Handle [VARPHONE]
+  if (template.includes("[VARPHONE]")) {
+    const varphone = document.getElementById('varphoneInput')?.value.trim();
+    if (!varphone) {
+      alert('Please enter a phone number in the [VARPHONE] field first.');
+      return;
+    }
+    localStorage.setItem('lastVarPhone', varphone);
+    template = template.replaceAll("[VARPHONE]", varphone);
+  }
+
   let message = processMessage(template);
   copyText(message);
 });
+
+// --- Preview logic: track current previewed button and update on input ---
+let currentPreviewButton = null;
 
 document.body.addEventListener("mouseover", function(event) {
   const button = event.target.closest(".copy-box");
   if (!button) return;
   if (previewToggle && previewToggle.checked) {
+    if (button.hasAttribute('data-no-preview')) return;
+    currentPreviewButton = button;
     let template = button.getAttribute('data-message') || button.getAttribute('data-copytext') || button.textContent.trim();
-    let message = processMessage(template);
+    let message = processMessageWithVars(template);
     preview.textContent = message;
     preview.style.left = `${event.pageX + 10}px`;
     preview.style.top = `${event.pageY + 10}px`;
@@ -2679,6 +2747,43 @@ document.body.addEventListener("mouseout", function(event) {
   const button = event.target.closest(".copy-box");
   if (!button) return;
   preview.style.display = "none";
+  currentPreviewButton = null;
+});
+
+// --- Update preview if VARDATE or VARPHONE changes ---
+function updatePreviewIfNeeded() {
+  if (currentPreviewButton && previewToggle && previewToggle.checked) {
+    let template = currentPreviewButton.getAttribute('data-message') || currentPreviewButton.getAttribute('data-copytext') || currentPreviewButton.textContent.trim();
+    let message = processMessageWithVars(template);
+    preview.textContent = message;
+  }
+}
+document.getElementById('vardateInput')?.addEventListener('input', updatePreviewIfNeeded);
+document.getElementById('varphoneInput')?.addEventListener('input', updatePreviewIfNeeded);
+
+// --- VARDATE picker: prefill from localStorage and add "Today" button ---
+window.addEventListener('DOMContentLoaded', () => {
+  const vardateInput = document.getElementById('vardateInput');
+  const lastVarDate = localStorage.getItem('lastVarDate');
+  if (vardateInput && lastVarDate) {
+    const [mm, dd, yy] = lastVarDate.split('/');
+    const yyyy = parseInt(yy, 10) > 49 ? '19' + yy : '20' + yy;
+    vardateInput.value = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+  }
+  const varphoneInput = document.getElementById('varphoneInput');
+  const lastVarPhone = localStorage.getItem('lastVarPhone');
+  if (varphoneInput && lastVarPhone) {
+    varphoneInput.value = lastVarPhone;
+  }
+
+  document.getElementById('vardateTodayBtn')?.addEventListener('click', function() {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    vardateInput.value = `${yyyy}-${mm}-${dd}`;
+    vardateInput.dispatchEvent(new Event('input')); // trigger preview update
+  });
 });
 
 // --- Custom Button/Folders Management and Rendering (with copy-box compatibility) ---
@@ -3100,19 +3205,12 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonDiv.style.borderRadius = "4px";
         buttonDiv.style.cursor = "pointer";
         buttonDiv.style.position = "relative";
-        buttonDiv.title = btn.content;
-        // Key for UID/date/time: set content as data-message!
         buttonDiv.setAttribute("data-message", btn.content);
 
         // Copy label
         const labelSpan = document.createElement('span');
         labelSpan.textContent = btn.label;
         labelSpan.style.flex = "1";
-        // Remove direct clipboard copy: global handler now handles all
-        // labelSpan.onclick = (e) => {
-        //   e.stopPropagation();
-        //   navigator.clipboard.writeText(btn.content);
-        // };
 
         // Edit button
         const edit = document.createElement('button');
