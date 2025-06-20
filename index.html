@@ -1787,7 +1787,7 @@ Add tags to the content of your buttons to dynamically update them. This is part
 <label>10. Click to Copy:</label>
 <br>
   <div class="copy-box" id="copyBox" data-no-preview="true">
-Please fill out above form to generate the SMS you will send to the patient.
+Please fill out above form to generate the communication you will send to the patient.
   </div>
   <label>11. Add to CRM</label>
 <br>
@@ -1911,14 +1911,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
 Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}  
 New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.`;
     copyBox.textContent = msg;
   };
   const generateAltEnglish = () => {
     const f = getFields();
     const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
 New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
+This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.`;
     copyBox.textContent = msg;
   };
   const generateSpanishEarlier = () => {
@@ -1927,14 +1927,14 @@ This has been offered to multiple patients. Don't delay. Reply 1 to accept.`;
     const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
 Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}  
 Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.`;
     copyBox.textContent = msg;
   };
   const generateSpanishAdditional = () => {
     const f = getFields();
     const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
 Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar.`;
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.`;
     copyBox.textContent = msg;
   };
 
@@ -1950,7 +1950,7 @@ Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProvider
 
 New visit: ${f.newDate} at ${f.newTime}${newProviderText}
 
-This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept.`;
+This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept, or to let us know you would like to get off the wait list for this visit.`;
     copyBox.textContent = msg;
   };
   const generateMyChartAdditional = () => {
@@ -1961,7 +1961,7 @@ An additional visit is available:
 
 New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}
 
-This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept.`;
+This has been offered to multiple patients. Don't delay. Reply to this message or call our team at 801-587-7005 to accept, or to let us know you would like to get off the wait list for this visit.`;
     copyBox.textContent = msg;
   };
   const generateMyChartRescheduleSpanish = () => {
@@ -1975,7 +1975,8 @@ Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProv
 
 Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}
 
-Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar.`;
+Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar, o para informarnos que le gustaría salir de la lista de espera para esta visita.
+`;
     copyBox.textContent = msg;
   };
   const generateMyChartAdditionalSpanish = () => {
@@ -1986,7 +1987,8 @@ Hay una visita adicional disponible:
 
 Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName}
 
-Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar.`;
+Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o llame a nuestro equipo al 801-587-7005 para aceptar, o para informarnos que le gustaría salir de la lista de espera para esta visita.
+`;
     copyBox.textContent = msg;
   };
 
@@ -2218,10 +2220,10 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 <span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> See Also: Initiatives: </b><a href="#PT Wait List">PT Wait List</a>
 </div>
 
-<div class="copy-box" data-message="UofU Health: (PT NAME), an earlier visit is available: Existing visit: 00/00 at 00:00 AM/PM PROVIDER NAME New visit: 00/00 at 00:00 AM/PM This has been offered to multiple patients. Don't delay. Reply 1 to accept.">Identity Verification Text (RESCHEDULE Appt)</div>
-<div class="copy-box" data-message="UofU Health: (PT NAME), una visita anterior está disponible: Visita existente: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Nueva visita: 00/00 a las 00:00 AM/PM Esto se ha ofrecido a varios pacientes. No te demores.  Responda 1 para aceptar.">Identity Verification Text (RESCHEDULE Appt) (Spanish)</div>
-<div class="copy-box" data-message="UofU Health: (PT NAME), an additional visit is available: New visit: 00/00 at 00:00 AM/PM PROVIDER NAME This has been offered to multiple patients. Don't delay. Reply 1 to accept.">Identity Verification Text (ADD Appt)</div>
-<div class="copy-box" data-message="UofU Health: (PT NAME), hay una visita adicional disponible: Nueva visita: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Esto se ha ofrecido a varios pacientes. No te demores.  Responda 1 para aceptar.">Identity Verification Text (ADD Appt) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), an earlier visit is available: Existing visit: 00/00 at 00:00 AM/PM PROVIDER NAME New visit: 00/00 at 00:00 AM/PM This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.">Identity Verification Text (RESCHEDULE Appt)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), una visita anterior está disponible: Visita existente: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Nueva visita: 00/00 a las 00:00 AM/PM Esto se ha ofrecido a varios pacientes. No te demores.  Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.">Identity Verification Text (RESCHEDULE Appt) (Spanish)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), an additional visit is available: New visit: 00/00 at 00:00 AM/PM PROVIDER NAME This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.">Identity Verification Text (ADD Appt)</div>
+<div class="copy-box" data-message="UofU Health: (PT NAME), hay una visita adicional disponible: Nueva visita: 00/00 a las 00:00 AM/PM (PROVIDER NAME) Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.">Identity Verification Text (ADD Appt) (Spanish)</div>
 <div class="copy-box" data-message="Success! (NAME), your updated visit is now scheduled on 00/00 at 0:00 am/pm. You can find information about your visit in MyChart.">Question 1 - Accept (Reply 1)</div>
 <div class="copy-box" data-message="¡Éxito! (NAME), su visita actualizada ahora está programada para el 00/00 a las 0:00 AM/PM Puede encontrar información sobre su visita en MyChart.">Question 1 - Accept (Reply 1) (Spanish)</div>
 <div class="copy-box" data-message="Thank you for letting us know. You'll be notified again if another time becomes available. Your original visit remains available in Mychart.">Pt declines offer</div>
@@ -2420,7 +2422,7 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 	For feedback, suggestions, or to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
 <br>
 <br>
-<b><span class="material-symbols-outlined" style="font-size: 25px; color: green">verified</span> Last updated: 6/17/25</b>
+<b><span class="material-symbols-outlined" style="font-size: 25px; color: green">verified</span> Last updated: 6/20/25</b>
 
 </div>
 </div>
