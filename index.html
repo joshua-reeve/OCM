@@ -175,14 +175,14 @@ body, html {
 .delete-button {
   background-color: #F44336; /* Material Red 500 */
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Material elevation */
-  color: white; /* White text for contrast */
+  color: white; 
   border: none;
-  padding: 0px; /* Increase padding for better touch targets */
-  margin: 0px;
+  padding: 4px;
+  margin-left: 5px;
   cursor: pointer;
-  font-size: 50px;
-  text-transform: uppercase; /* Material Design's uppercase text */
-  border-radius: 4px; /* Standard corner radius */
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 4px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -252,6 +252,45 @@ button:disabled, .btn:disabled {
   gap: 10px;
   margin-bottom: 1px;
 }
+	
+    .gs-form-section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0002; padding: 18px; max-width: 700px; margin: 22px auto; }
+    .gs-row { margin-bottom: 14px; }
+    label { font-weight: 500; margin-right: 6px; }
+    .gs-inline { display: inline-block; margin-right: 12px; }
+    input[type="text"], input[type="number"], select {
+      padding: 5px; border-radius: 4px; border: 1px solid #bbb; font-size: 1em; width: 180px;
+    }
+    select { width: auto; }
+    .gs-hidden { display: none; }
+    .gs-copy-box {
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 4px;
+  width: 95%;
+  cursor: pointer;
+  background-color: #2196F3;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: white;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gs-copy-box:active {
+      transform: scale(0.97);
+      background-color: #1976D2;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .gs-copy-box:hover {
+      background-color: #64B5F6;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .gs-section-title { margin: 12px 0 5px; color: #444; font-size: 1.07em; }
+    @media (max-width: 700px) {
+      .gs-form-section { max-width: 99vw; }
+      .gs-copy-box { font-size: 14px; }
+    }
 /* Input Fields */
 input[type="text"], textarea {
   width: 90%;
@@ -294,6 +333,7 @@ textarea {
     display: none;
     z-index: 1000;
   }
+
 
 /* Foreground Section (Primary Card) */
 .squircle-foreground {
@@ -379,6 +419,8 @@ textarea {
   font-family: 'Roboto', sans-serif;
   color: #0D47A1; /* Material Blue 900 for text */
 }
+
+
 
 .warning {
   background-color: #FFF8E1; /* Material Yellow 50 */
@@ -1009,7 +1051,7 @@ li {
     </button>
     <div class="dropdown-content">
       <a href="#NOB ROB Calculator">NOB/ROB Calculator</a>
-      <a href="#Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</a>
+	  <a href="#Gen Surg Appt Note">General Surgery Appt Note Generator (Experimental)</a>
     </div>
   </div>
   <a href="#Settings">Settings</a>
@@ -1370,19 +1412,29 @@ li {
 <h1>Custom Buttons</h1>
 
 <div class="danger">
-<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Clearing your browser's cache will delete all your custom buttons! Please be sure to export your folders/custom buttons before clearing your browser's cache!
+<span class="material-symbols-outlined" style="font-size: 20px; color: red">Warning</span> Warning: Clearing your browser's cache will delete all your custom buttons and tags! Please be sure to export your data before clearing your browser's cache!
 </div>
 <div class="squircle-foreground">
-<h2>Tags:</h2>
-<div class="info"><span class="material-symbols-outlined" style="font-size: 20px; color: Blue">info</span>
-Add tags to the content of your buttons to dynamically update them. This is particularly useful for changing multiple buttons at once.
+<h2 id="tags">Tags:</h2>
+
+<div class="info-collapsible">
+  <button class="info-toggle" aria-expanded="false" aria-controls="info1">Show Instructions ▾</button>
+  <div class="info info-content" id="info1" hidden>
+    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> <b><u>Instructions:</u></b> Add tags to the content of your buttons to dynamically update them. This is particularly useful for changing multiple buttons at once. Simply add the tag within brackets to your copy button.<br><b><u>Example:</u></b> "U of U Health: Your appt on [VARDATE] will be completed by a different provider, due to your provider not being available. For ?'s CALL [VARPHONE]."<br>All tags are saved to your browser's data automatically.</p>
+  </div>
 </div>
+
 <b><u>Contextual Tags:</u></b>
 <br>
-<b>[DATE] = Today's Date</b>
+<b>[Date] = Today's Date (MM/DD/YYYY)</b>
+<br><b>[TIME] = Current Time (HH:MM AM/PM)</b>
 <br>
 <br>
 <b><u>User Defined Tags:</u></b>
+<br>
+
+<label for="userUid"><strong>[UID] = </strong></label>
+<input type="uid" id="userUid" name="userUid"placeholder="Enter UID (with lowercase u)..." style="margin-left:8px; width: 185px;" />
 <br>
 <label for="vardateInput"><b>[VARDATE] =</b></label>
 <input type="date" id="vardateInput" style="margin-left:8px;">
@@ -1393,6 +1445,32 @@ Add tags to the content of your buttons to dynamically update them. This is part
 <button type="button" id="insertVarphoneBtn" style="margin-left:6px;">
   General
 </button>
+<br>
+<br>
+<div id="customTagsContainer" style="margin-top:1em;">
+<b><u>Custom Tags</u></b>
+  <div id="customTagsList"></div>
+<br>
+  New Tag Name: <input type="newTagName" id="newTagName">
+<br>
+New Tag Type: <select id="newTagType">
+  <option value="text">Text (single line)</option>
+  <option value="date">Date</option>
+  <option value="time">Time</option>
+  <option value="number">Number</option>
+  <option value="tel">Phone</option>
+  <option value="email">Email</option>
+</select>
+<br>
+<select id="newTagDateFormat" style="display:none;">
+  <option value="">-- Select Date Format --</option>
+  <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+  <option value="MM/DD/YY">MM/DD/YY</option>
+  <option value="MM/DD">MM/DD</option>
+</select>
+<br>
+<button type="button" id="addCustomTagBtn">Add Tag</button>
+</div>
 </div>
 
 <div class="actions-bar">
@@ -1403,10 +1481,10 @@ Add tags to the content of your buttons to dynamically update them. This is part
     <button id="openAddFolderModal" title="Add Folder">
       <span class="material-symbols-outlined" style="font-size: 18px;">create_new_folder</span>
     </button>
-    <button id="exportFolders" title="Export Folders/Buttons">
+    <button id="exportFolders" title="Export User Data">
       <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
     </button>
-    <button id="importFolders" title="Import Folders/Buttons">
+    <button id="importFolders" title="Import User Data">
       <span class="material-symbols-outlined" style="font-size: 18px;">upload</span>
     </button>
     <input type="file" id="importFileInput" accept="application/json" style="display:none" />
@@ -1677,7 +1755,7 @@ Please fill out above form to generate the communication you will send to the pa
 <br>
 
 <div class="info">
-<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Note: To set your UID, go to <a href="#Settings">Settings</a>
+<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Note: UID moved to <a href="#tags">Tags</a> section.
 </div>
 
 
@@ -2007,6 +2085,235 @@ Care Navigation - Guest Communications">Templates Team Standard Reply</div>
 <h1><span class="material-symbols-outlined" style="color: black; font-size: 35px;">construction</span> Utilities</h1>
 
 <div class="squircle-foreground">
+<div class="gs-form-section">
+  <h2 id="Gen Surg Appt Note">General Surgery Appointment Note Generator (Experimental)</h2>
+  
+  <div class="info-collapsible">
+  <button class="info-toggle" aria-expanded="false" aria-controls="info2">Show Instructions ▾</button>
+  <div class="info info-content" id="info2" hidden>
+    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> This is not a perfect tool, but can save you some time!<br><br><b><u>Instructions:</u></b> Check each box next to the information needed for your appointment note and fill in additional info as it appears (1 and 2 are Necessary for all General Surgery appointments). <br><br>Be sure to follow the General Surgery flow closely to know what you need to include in your note.</p>
+  </div>
+</div>
+  
+  <form id="gs-apptNoteForm" autocomplete="off" onsubmit="return false;">
+    <!-- 1. Diagnosis/Procedure -->
+    <div class="gs-row">
+      <label for="gs-diagnosis"><b>1. Diagnosis or Procedure<span style="color:red">*</span>:</b></label>
+      <input type="text" id="gs-diagnosis" required placeholder="Enter diagnosis or procedure">
+    </div>
+
+    <!-- 2. Height/Weight/BMI -->
+    <div class="gs-row">
+      <span class="gs-section-title"><b>2. Height, Weight, BMI</b><span style="color:red">*</span>:</span>
+      <div style="margin-bottom: 5px;">
+        <label>Height:</label>
+        <input type="number" min="0" max="8" id="gs-heightFt" class="gs-small" placeholder="ft" required style="width:48px;"> ft
+        <input type="number" min="0" max="11" id="gs-heightIn" class="gs-small" placeholder="in" required style="width:48px;"> in
+      </div>
+      <div style="margin-bottom: 5px;">
+        <label>Weight (lbs):</label>
+        <input type="number" min="0" id="gs-weightLb" class="gs-small" required>
+      </div>
+      <div>
+        <label>BMI:</label>
+        <input type="number" min="0" step="0.1" id="gs-bmi" class="gs-small" required>
+        <button type="button" id="gs-calcBmiBtn" class="gs-btn gs-small" title="Calculate BMI">Calc BMI</button>
+      </div>
+    </div>
+
+    <!-- 3. Imaging -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-includeImaging">
+      <label for="gs-includeImaging"><b>3. Imaging?</b></label>
+      <div id="gs-imagingFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-imagingYesNo" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-imagingYesNo" value="no">No prior images</label>
+        <div id="gs-imagingDetails">
+          <label>Modality:</label>
+          <select id="gs-imgModality">
+            <option value="CT">CT</option>
+            <option value="Ultrasound">Ultrasound</option>
+            <option value="MRI">MRI</option>
+            <option value="Endoscopy/EGD">Endoscopy/EGD</option>
+            <option value="Esophogram/Barium Swallow/X-Ray of Esophagus">Esophogram/Barium Swallow/X-Ray of Esophagus</option>
+            <option value="Esophageal Motility/Manometry">Esophageal Motility/Manometry</option>
+            <option value="24 Hour PH/Impedance Test">24 Hour PH/Impedance Test</option>
+            <option value="BRAVO">BRAVO</option>
+          </select>
+          <br>
+          <label>Body part(s) (optional):</label>
+          <label class="gs-inline"><input type="checkbox" id="gs-imgAbd" value="Abdomen">Abdomen</label>
+          <label class="gs-inline"><input type="checkbox" id="gs-imgPelvis" value="Pelvis">Pelvis</label>
+          <label class="gs-inline"><input type="checkbox" id="gs-imgChest" value="Chest">Chest</label>
+          <br>
+          <label>Date:</label>
+          <input type="text" id="gs-imgDate" placeholder="MM/DD/YYYY" style="width:120px;">
+          <label style="margin-left:8px;">Location:</label>
+          <input type="text" id="gs-imgLocation" placeholder="Where" style="width:100px;">
+          <label style="margin-left:8px;">Provider:</label>
+          <input type="text" id="gs-imgProvider" placeholder="(optional)" style="width:90px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Nicotine Use -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askNicotine">
+      <label for="gs-askNicotine"><b>4. History of nicotine use?</b></label>
+      <div id="gs-nicotineFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-nicotine" value="history" checked>History of nicotine use</label>
+        <label class="gs-inline"><input type="radio" name="gs-nicotine" value="no history">No history</label>
+      </div>
+    </div>
+
+    <!-- 5. Diabetic -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askDiabetic">
+      <label for="gs-askDiabetic"><b>5. Is the patient diabetic?</b></label>
+      <div id="gs-diabeticFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-diabeticYesNo" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-diabeticYesNo" value="no">No</label>
+        <div id="gs-diabeticDetails">
+          <label>A1C Value:</label>
+          <input type="text" id="gs-a1cValue" placeholder="A1C value" style="width:50px;">
+          <label style="margin-left:8px;">When:</label>
+          <input type="text" id="gs-a1cWhen" placeholder="When" style="width:80px;">
+          <label style="margin-left:8px;">Where:</label>
+          <input type="text" id="gs-a1cWhere" placeholder="Where" style="width:80px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. No Cardiac Event -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-noCardiacEvent">
+      <label for="gs-noCardiacEvent"><b>6. No cardiac event in the last 12 months?</b></label>
+    </div>
+
+    <!-- 7. Prior Labs -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askLabs">
+      <label for="gs-askLabs"><b>7. Prior labs related to diagnosis?</b></label>
+      <div id="gs-labsFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-labs" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-labs" value="no">No</label>
+        <div id="gs-labsDetails" style="margin-top:5px;">
+          <label>When:</label>
+          <input type="text" id="gs-labsWhen" placeholder="When" style="width:80px;">
+          <label style="margin-left:8px;">Where:</label>
+          <input type="text" id="gs-labsWhere" placeholder="Where" style="width:80px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Abdominal surgeries last 10 years -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askAbdSurg">
+      <label for="gs-askAbdSurg"><b>8. Any abdominal surgeries within last 10 years?</b></label>
+      <div id="gs-abdSurgFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-abdsurg" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-abdsurg" value="no">No</label>
+        <div id="gs-abdSurgDetails" style="margin-top:5px;">
+          <label>When:</label>
+          <input type="text" id="gs-abdSurgWhen" placeholder="When" style="width:80px;">
+          <label style="margin-left:8px;">Where:</label>
+          <input type="text" id="gs-abdSurgWhere" placeholder="Where" style="width:80px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Prior surgeries related to diagnosis -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askPriorSurg">
+      <label for="gs-askPriorSurg"><b>9. Any prior surgeries related to diagnosis?</b></label>
+      <div id="gs-priorSurgFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-priorsurg" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-priorsurg" value="no">No</label>
+        <div id="gs-priorSurgDetails" style="margin-top:5px;">
+          <label>When:</label>
+          <input type="text" id="gs-priorSurgWhen" placeholder="When" style="width:80px;">
+          <label style="margin-left:8px;">Where:</label>
+          <input type="text" id="gs-priorSurgWhere" placeholder="Where" style="width:80px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Daily Oxygen -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askOxygen">
+      <label for="gs-askOxygen"><b>10. Daily oxygen?</b></label>
+      <div id="gs-oxygenFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-oxygen" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-oxygen" value="no">No</label>
+      </div>
+    </div>
+
+    <!-- 11. Recurrent Inguinal Hernia -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askRecurrentInguinal">
+      <label for="gs-askRecurrentInguinal"><b>11. Recurrent inguinal hernia?</b></label>
+      <div id="gs-recurrentInguinalFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-recurrentInguinal" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-recurrentInguinal" value="no">No</label>
+        <div id="gs-recurrentInguinalDetails" style="margin-top:5px;">
+          <div id="gs-recurrentInguinalIfYes">
+            <label>Surgical approach:</label>
+            <select id="gs-recurrentInguinalApproach">
+              <option value="">Select</option>
+              <option value="open">Open</option>
+              <option value="laparoscopic">Laparoscopic</option>
+            </select>
+            <label style="margin-left:8px;">Side:</label>
+            <select id="gs-recurrentInguinalSide">
+              <option value="">Select</option>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select>
+            <label style="margin-left:8px;">When/Where:</label>
+            <input type="text" id="gs-recurrentInguinalWhereWhen" placeholder="facility & date" style="width:140px;">
+            <label style="margin-left:8px;">Imaging:</label>
+            <input type="text" id="gs-recurrentInguinalImaging" placeholder="(optional)" style="width:90px;">
+          </div>
+          <div id="gs-recurrentInguinalIfNo" class="gs-hidden">
+            <label>Side:</label>
+            <select id="gs-recurrentInguinalSideNo">
+              <option value="">Select</option>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Recurrent hernia -->
+    <div class="gs-row">
+      <input type="checkbox" id="gs-askRecurrentHernia">
+      <label for="gs-askRecurrentHernia"><b>12. Recurrent hernia?</b></label>
+      <div id="gs-recurrentHerniaFields" class="gs-hidden" style="margin-left: 26px; margin-top: 6px;">
+        <label class="gs-inline"><input type="radio" name="gs-recurrentHernia" value="yes" checked>Yes</label>
+        <label class="gs-inline"><input type="radio" name="gs-recurrentHernia" value="no">No</label>
+        <div id="gs-recurrentHerniaDetails" style="margin-top:5px;">
+          <div id="gs-recurrentHerniaIfYes">
+            <label>Surgical approach:</label>
+            <select id="gs-recurrentHerniaApproach">
+              <option value="">Select</option>
+              <option value="open">Open</option>
+              <option value="laparoscopic">Laparoscopic</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="gs-generateBtn" class="gs-btn">Generate Appointment Note</button>
+  </form>
+
+  <div id="gs-apptNoteCopyBoxContainer"></div>
+</div>
+</div>
+
+<div class="squircle-foreground">
   <h2 id="NOB ROB Calculator">NOB/ROB Calculator</h2>
   <br>
   <div class="preg-calc-container">
@@ -2023,19 +2330,6 @@ Care Navigation - Guest Communications">Templates Team Standard Reply</div>
     </div>
   </div>
 </div>
-
-	
-<div class="squircle-foreground">
-<h2 id="Sleep Test Follow-up Calculator">Sleep Test Follow-up Calculator</h2>
-<br>
-<form id="dateRangeForm">
-  <label for="sleepTestDate">Date of Patient's Sleep Test:</label>
-  <input type="date" id="sleepTestDate" name="sleepTestDate" required>
-  <br>
-  <button type="button" onclick="calculateSleepDateRange()">Calculate Date Range</button>
-</form>
-<div id="sleepResult"></div>
-</div>
 </div>
 </div>
 
@@ -2043,26 +2337,6 @@ Care Navigation - Guest Communications">Templates Team Standard Reply</div>
 <div class="squircle-background">
 
 <h1 id="Settings"><span class="material-symbols-outlined" style="color: black; font-size: 35px;">settings</span> Settings</h1>
-
-<div class="squircle-foreground">
-
-<br>
-  <form id="uidForm">
-    <label for="userUid">Enter Your UID (Please use lowercase u):</label>
-    <input type="text" id="userUid" placeholder="UID" required>
-    <button type="submit">Save UID</button>
-  </form>
-
-
-
-  <div style="margin-top: 20px;">
-<div class="info">
-    <p><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span><b> UID set to: <span id="displayUid"></span></b></p>
-  </div>
-  </div>
-
-</div>
-
 <div class="squircle-foreground">
 
   <div>
@@ -2084,7 +2358,7 @@ Care Navigation - Guest Communications">Templates Team Standard Reply</div>
 	For feedback, suggestions, or to report any issues you find, please send me a message in Teams, or email me at <a href="mailto:u0971743@umail.utah.edu">u0971743@umail.utah.edu</a></b>
 <br>
 <br>
-<b><span class="material-symbols-outlined" style="font-size: 25px; color: green">verified</span> Last updated: 7/21/25</b>
+<b><span class="material-symbols-outlined" style="font-size: 25px; color: green">verified</span> Last updated: 7/24/25<br><a href="https://github.com/joshua-reeve/OCM/commits/main/index.html">See what's changed</a></b> 
 </div>
 </div>
 
@@ -2449,6 +2723,324 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
 });
 </script>
 
+<!-- General Surgery Appt Note Generator -->
+<script>
+(function() {
+  // --- Show/hide logic ---
+  function gsShowOrHide(id, show) { document.getElementById(id).classList.toggle('gs-hidden', !show); }
+  // Imaging
+  document.getElementById('gs-includeImaging').addEventListener('change', function() {
+    gsShowOrHide('gs-imagingFields', this.checked);
+  });
+  // Nicotine
+  document.getElementById('gs-askNicotine').addEventListener('change', function() {
+    gsShowOrHide('gs-nicotineFields', this.checked);
+  });
+  // Diabetic
+  document.getElementById('gs-askDiabetic').addEventListener('change', function() {
+    gsShowOrHide('gs-diabeticFields', this.checked);
+  });
+  // Labs
+  document.getElementById('gs-askLabs').addEventListener('change', function() {
+    gsShowOrHide('gs-labsFields', this.checked);
+  });
+  // Abdominal Surg
+  document.getElementById('gs-askAbdSurg').addEventListener('change', function() {
+    gsShowOrHide('gs-abdSurgFields', this.checked);
+  });
+  // Prior Surg
+  document.getElementById('gs-askPriorSurg').addEventListener('change', function() {
+    gsShowOrHide('gs-priorSurgFields', this.checked);
+  });
+  // Oxygen
+  document.getElementById('gs-askOxygen').addEventListener('change', function() {
+    gsShowOrHide('gs-oxygenFields', this.checked);
+  });
+  // Recurrent Inguinal Hernia
+  document.getElementById('gs-askRecurrentInguinal').addEventListener('change', function() {
+    gsShowOrHide('gs-recurrentInguinalFields', this.checked);
+  });
+  // Recurrent Hernia
+  document.getElementById('gs-askRecurrentHernia').addEventListener('change', function() {
+    gsShowOrHide('gs-recurrentHerniaFields', this.checked);
+  });
+
+  // Radio toggles for sub-questions (Labs, Abdominal, Prior, Oxygen, Recurrent Inguinal, Recurrent Hernia)
+  function gsSetupRadioToggles() {
+    // Imaging Yes/No
+    document.getElementsByName('gs-imagingYesNo').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-imagingDetails', this.value === 'yes');
+      });
+    });
+    // Labs
+    document.getElementsByName('gs-labs').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-labsDetails', this.value === 'yes');
+      });
+    });
+    // Abdominal Surgery
+    document.getElementsByName('gs-abdsurg').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-abdSurgDetails', this.value === 'yes');
+      });
+    });
+    // Prior Surgery
+    document.getElementsByName('gs-priorsurg').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-priorSurgDetails', this.value === 'yes');
+      });
+    });
+    // Diabetic Yes/No
+    document.getElementsByName('gs-diabeticYesNo').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-diabeticDetails', this.value === 'yes');
+      });
+    });
+    // Recurrent Inguinal Hernia
+    document.getElementsByName('gs-recurrentInguinal').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-recurrentInguinalIfYes', this.value === 'yes');
+        gsShowOrHide('gs-recurrentInguinalIfNo', this.value === 'no');
+      });
+    });
+    // Recurrent Hernia
+    document.getElementsByName('gs-recurrentHernia').forEach(radio => {
+      radio.addEventListener('change', function() {
+        gsShowOrHide('gs-recurrentHerniaIfYes', this.value === 'yes');
+      });
+    });
+  }
+  window.addEventListener('DOMContentLoaded', gsSetupRadioToggles);
+
+  // BMI Calculator (feet/inches)
+  document.getElementById('gs-calcBmiBtn').addEventListener('click', function() {
+    const feet = parseFloat(document.getElementById('gs-heightFt').value);
+    const inches = parseFloat(document.getElementById('gs-heightIn').value);
+    const weightLb = parseFloat(document.getElementById('gs-weightLb').value);
+    if ((feet > 0 || inches > 0) && weightLb > 0) {
+      const totalIn = (feet * 12) + inches;
+      if (totalIn > 0) {
+        const bmi = (weightLb / (totalIn * totalIn)) * 703;
+        document.getElementById('gs-bmi').value = bmi.toFixed(1);
+      } else {
+        alert("Please enter a valid height.");
+      }
+    } else {
+      alert("Please enter height (feet/inches) and weight (in pounds).");
+    }
+  });
+
+  // Height formatting for output
+  function gsFormatHeight(ft, inches) {
+    ft = parseInt(ft, 10) || 0;
+    inches = parseInt(inches, 10) || 0;
+    return `${ft}'${inches}"`;
+  }
+
+  // Generate Note and output as gs-copy-box
+  document.getElementById('gs-generateBtn').addEventListener('click', function() {
+    let noteParts = [];
+
+    // 1. Diagnosis/Procedure (required)
+    const diagnosis = document.getElementById('gs-diagnosis').value.trim();
+    if (!diagnosis) {
+      alert('Diagnosis or procedure is required.');
+      document.getElementById('gs-diagnosis').focus();
+      return;
+    }
+    noteParts.push(`${diagnosis}`);
+
+    // 2. Height, Weight, BMI (required)
+    const heightFt = document.getElementById('gs-heightFt').value.trim();
+    const heightIn = document.getElementById('gs-heightIn').value.trim();
+    const weightLb = document.getElementById('gs-weightLb').value.trim();
+    const bmi = document.getElementById('gs-bmi').value.trim();
+    if ((!heightFt && !heightIn) || !weightLb || !bmi) {
+      alert('Height, weight, and BMI are required.');
+      return;
+    }
+    noteParts.push(`Height: ${gsFormatHeight(heightFt, heightIn)}, Weight: ${weightLb} lbs, BMI: ${bmi}`);
+
+    // 3. Imaging
+    if (document.getElementById('gs-includeImaging').checked) {
+      const imagingYesNo = document.querySelector('input[name="gs-imagingYesNo"]:checked').value;
+      if (imagingYesNo === 'no') {
+        noteParts.push("No prior images");
+      } else {
+        let imagingArr = [];
+        const modality = document.getElementById('gs-imgModality').value;
+        let regions = [];
+        if (document.getElementById('gs-imgAbd').checked) regions.push('Abdomen');
+        if (document.getElementById('gs-imgPelvis').checked) regions.push('Pelvis');
+        if (document.getElementById('gs-imgChest').checked) regions.push('Chest');
+        if (regions.length > 0) imagingArr.push(regions.join('/'));
+        imagingArr.push(modality);
+        const imgDate = document.getElementById('gs-imgDate').value.trim();
+        if (imgDate) imagingArr.push(imgDate);
+        const imgLocation = document.getElementById('gs-imgLocation').value.trim();
+        if (imgLocation) imagingArr.push(imgLocation);
+        const imgProvider = document.getElementById('gs-imgProvider').value.trim();
+        if (imgProvider) imagingArr.push(`Provider: ${imgProvider}`);
+        noteParts.push(imagingArr.filter(Boolean).join(', '));
+      }
+    }
+
+    // 4. Nicotine use
+    if (document.getElementById('gs-askNicotine').checked) {
+      const nicotineVal = document.querySelector('input[name="gs-nicotine"]:checked').value;
+      if (nicotineVal === "history") {
+        noteParts.push("History of nicotine use");
+      } else {
+        noteParts.push("No history of nicotine use");
+      }
+    }
+
+    // 5. Diabetic
+    if (document.getElementById('gs-askDiabetic').checked) {
+      const diabeticYesNo = document.querySelector('input[name="gs-diabeticYesNo"]:checked').value;
+      if (diabeticYesNo === "no") {
+        noteParts.push("Not diabetic");
+      } else {
+        const a1cValue = document.getElementById('gs-a1cValue').value.trim();
+        const a1cWhen = document.getElementById('gs-a1cWhen').value.trim();
+        const a1cWhere = document.getElementById('gs-a1cWhere').value.trim();
+        let diabStr = "Diabetic";
+        let diabArr = [];
+        if (a1cValue) diabArr.push(`A1C: ${a1cValue}`);
+        if (a1cWhen) diabArr.push(a1cWhen);
+        if (a1cWhere) diabArr.push(a1cWhere);
+        if (diabArr.length > 0) diabStr += ", " + diabArr.join(', ');
+        noteParts.push(diabStr);
+      }
+    }
+
+    // 6. No cardiac event
+    if (document.getElementById('gs-noCardiacEvent').checked) {
+      noteParts.push("No cardiac event in the last 12 months");
+    }
+
+    // 7. Prior labs
+    if (document.getElementById('gs-askLabs').checked) {
+      const labsRadio = document.querySelector('input[name="gs-labs"]:checked').value;
+      if (labsRadio === 'yes') {
+        const labsWhen = document.getElementById('gs-labsWhen').value.trim();
+        const labsWhere = document.getElementById('gs-labsWhere').value.trim();
+        let labsArr = [];
+        if (labsWhen) labsArr.push(labsWhen);
+        if (labsWhere) labsArr.push(labsWhere);
+        noteParts.push("Prior labs" + (labsArr.length ? ", " + labsArr.join(', ') : ""));
+      } else {
+        noteParts.push("No prior labs");
+      }
+    }
+
+    // 8. Abdominal surgeries last 10 years
+    if (document.getElementById('gs-askAbdSurg').checked) {
+      const abdRadio = document.querySelector('input[name="gs-abdsurg"]:checked').value;
+      if (abdRadio === 'yes') {
+        const when = document.getElementById('gs-abdSurgWhen').value.trim();
+        const where = document.getElementById('gs-abdSurgWhere').value.trim();
+        let abdArr = [];
+        if (when) abdArr.push(when);
+        if (where) abdArr.push(where);
+        noteParts.push("Abdominal surgery within last 10 years" + (abdArr.length ? ", " + abdArr.join(', ') : ""));
+      } else {
+        noteParts.push("No surgeries in the last 10 years");
+      }
+    }
+
+    // 9. Prior surgeries related to diagnosis
+    if (document.getElementById('gs-askPriorSurg').checked) {
+      const priorSurgRadio = document.querySelector('input[name="gs-priorsurg"]:checked').value;
+      if (priorSurgRadio === 'yes') {
+        const when = document.getElementById('gs-priorSurgWhen').value.trim();
+        const where = document.getElementById('gs-priorSurgWhere').value.trim();
+        let surgArr = [];
+        if (when) surgArr.push(when);
+        if (where) surgArr.push(where);
+        noteParts.push("Prior surgery related to diagnosis" + (surgArr.length ? ", " + surgArr.join(', ') : ""));
+      } else {
+        noteParts.push("No prior surgeries");
+      }
+    }
+
+    // 10. Daily oxygen
+    if (document.getElementById('gs-askOxygen').checked) {
+      const oxyRadio = document.querySelector('input[name="gs-oxygen"]:checked').value;
+      if (oxyRadio === "yes") {
+        noteParts.push("Daily oxygen");
+      } else {
+        noteParts.push("No daily oxygen");
+      }
+    }
+
+    // 11. Recurrent inguinal hernia
+    if (document.getElementById('gs-askRecurrentInguinal').checked) {
+      const recurIngRadio = document.querySelector('input[name="gs-recurrentInguinal"]:checked').value;
+      if (recurIngRadio === "yes") {
+        const approach = document.getElementById('gs-recurrentInguinalApproach').value;
+        const side = document.getElementById('gs-recurrentInguinalSide').value;
+        const whereWhen = document.getElementById('gs-recurrentInguinalWhereWhen').value.trim();
+        const imaging = document.getElementById('gs-recurrentInguinalImaging').value.trim();
+        let recArr = ["Recurrent inguinal hernia"];
+        if (approach) recArr.push(`last repair: ${approach}`);
+        if (side) recArr.push(`side: ${side}`);
+        if (whereWhen) recArr.push(whereWhen);
+        if (imaging) recArr.push(`imaging: ${imaging}`);
+        noteParts.push(recArr.filter(Boolean).join(', '));
+      } else {
+        const side = document.getElementById('gs-recurrentInguinalSideNo').value;
+        let recArr = ["Inguinal hernia"];
+        if (side) recArr.push(`side: ${side}`);
+        noteParts.push(recArr.filter(Boolean).join(', '));
+      }
+    }
+
+    // 12. Recurrent hernia
+    if (document.getElementById('gs-askRecurrentHernia').checked) {
+      const recurRadio = document.querySelector('input[name="gs-recurrentHernia"]:checked').value;
+      if (recurRadio === "yes") {
+        const approach = document.getElementById('gs-recurrentHerniaApproach').value;
+        let herniaArr = ["Recurrent hernia"];
+        if (approach === "open") herniaArr.push("last hernia repaired open");
+        else if (approach === "laparoscopic") herniaArr.push("last hernia repaired laparoscopically");
+        noteParts.push(herniaArr.filter(Boolean).join(', '));
+      } else {
+        noteParts.push("Not a recurrent hernia");
+      }
+    }
+
+    // Final output: semicolon-separated, trailing period
+    const noteText = noteParts.filter(Boolean).join('; ') + ".";
+
+    // Output as gs-copy-box
+    const container = document.getElementById('gs-apptNoteCopyBoxContainer');
+    container.innerHTML = `<div class="gs-copy-box" data-message="${noteText.replace(/"/g, '&quot;')}">${noteText}</div>`;
+  });
+
+  // gs-copy-box click to copy
+  document.body.addEventListener('click', function(e) {
+    const box = e.target.closest('.gs-copy-box');
+    if (!box) return;
+    const msg = box.getAttribute('data-message') || box.textContent;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(msg).then(() => {
+      });
+    } else {
+      const temp = document.createElement('textarea');
+      temp.value = msg;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      box.innerText = "Copied!";
+      setTimeout(() => { box.innerText = msg; }, 1200);
+    }
+  });
+})();
+</script>
+
 <!-- NOB/ROB Calculator -->
 <script>
   // --- Pregnancy Calculator logic (dynamic .copy-box creation with data-message for UID/date/time support) ---
@@ -2610,38 +3202,6 @@ Esto se ha ofrecido a varios pacientes. No se demore. Responda a este mensaje o 
   }
 </script>
 
-<!-- Sleep Test Follow-Up Calculator -->
-<script>
-  function formatSleepDisplayDate(dateObj) {
-    const month = dateObj.getMonth() + 1;
-    const day = dateObj.getDate();
-    const year = dateObj.getFullYear().toString().slice(-2);
-    return `${month}/${day}/${year}`;
-  }
-
-  function calculateSleepDateRange() {
-    const inputDateValue = document.getElementById('sleepTestDate').value;
-    if (!inputDateValue) {
-      document.getElementById('sleepResult').innerHTML = '<div class="info"><span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Please enter a valid date.</div>';
-      return;
-    }
-
-    const inputDate = new Date(inputDateValue);
-    const startRange = new Date(inputDate);
-    startRange.setDate(startRange.getDate() + 61);
-
-    const endRange = new Date(inputDate);
-    endRange.setDate(endRange.getDate() + 90);
-
-    const startFormatted = formatSleepDisplayDate(startRange);
-    const endFormatted = formatSleepDisplayDate(endRange);
-
-    document.getElementById('sleepResult').innerHTML =
-      `<br><div class="info">
-<span class="material-symbols-outlined" style="font-size: 20px; color: blue">info</span> Patient should be scheduled between:<br><b>${startFormatted}</b> and <b>${endFormatted}</b>.</div>`;
-  }
-</script>
-
 <!-- Copy Buttons, Custom Copy Buttons, and General Settings -->
 <script>
 // --- UID Form and Display, Preview, and Clipboard Logic ---
@@ -2649,22 +3209,51 @@ const uidForm = document.getElementById("uidForm");
 const displayUid = document.getElementById("displayUid");
 const previewToggle = document.getElementById("previewToggle");
 
-// Save UID
-uidForm?.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const uidInput = document.getElementById("userUid")?.value.trim();
-  if (uidInput) {
-    localStorage.setItem("userUid", uidInput);
-    if (displayUid) displayUid.textContent = uidInput;
-    alert("UID saved successfully!");
+// Restore UID on load
+window.addEventListener("DOMContentLoaded", () => {
+  const userUidInput = document.getElementById('userUid');
+  const storedUid = localStorage.getItem("userUid");
+  if (userUidInput && storedUid) {
+    userUidInput.value = storedUid;
+  }
+  // Restore VARDATE on load
+  const vardateInput = document.getElementById('vardateInput');
+  const lastVarDate = localStorage.getItem('lastVarDate');
+  if (vardateInput && lastVarDate) {
+    const [mm, dd, yy] = lastVarDate.split('/');
+    const yyyy = parseInt(yy, 10) > 49 ? '19' + yy : '20' + yy;
+    vardateInput.value = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+  }
+  // Restore VARPHONE on load
+  const varphoneInput = document.getElementById('varphoneInput');
+  const lastVarPhone = localStorage.getItem('lastVarPhone');
+  if (varphoneInput && lastVarPhone) {
+    varphoneInput.value = lastVarPhone;
   }
 });
 
-// Show saved UID on page load
-const storedUid = localStorage.getItem("userUid");
-if (storedUid && displayUid) {
-  displayUid.textContent = storedUid;
-}
+// Live-save UID as user types
+document.getElementById('userUid')?.addEventListener('input', function(e) {
+  localStorage.setItem('userUid', e.target.value.trim());
+  updatePreviewIfNeeded?.();
+});
+
+// --- Live-save VARDATE as user changes ---
+document.getElementById('vardateInput')?.addEventListener('input', function(e) {
+  const vardateRaw = e.target.value;
+  if (vardateRaw) {
+    const [year, month, day] = vardateRaw.split('-');
+    const vardate = `${month.padStart(2, '0')}/${day.padStart(2, '0')}/${year.slice(-2)}`;
+    localStorage.setItem('lastVarDate', vardate);
+  }
+  updatePreviewIfNeeded?.();
+});
+
+// --- Live-save VARPHONE as user types ---
+document.getElementById('varphoneInput')?.addEventListener('input', function(e) {
+  localStorage.setItem('lastVarPhone', e.target.value.trim());
+  updatePreviewIfNeeded?.();
+});
 
 // Restore preview toggle state on load
 window.addEventListener("load", () => {
@@ -2692,25 +3281,33 @@ preview.style.zIndex = "9999";
 document.body.appendChild(preview);
 
 // --- Utility to process message placeholders ---
-function processMessage(template) {
-  if (!template) return "";
+function processMessage(template, userUidInputValue) {
+  if (typeof template !== "string") return "";
   const now = new Date();
   const month = (now.getMonth() + 1).toString().padStart(2, '0');
   const day = now.getDate().toString().padStart(2, '0');
   const year = now.getFullYear();
   const today = `${month}/${day}/${year}`;
   const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const uid = localStorage.getItem("userUid") || "[UID not set, please set in Settings section of Outbound Clipboard Manager.]";
+  const uid = userUidInputValue || "[UID not set, please set in Tags section of Outbound Clipboard Manager.]";
   return template
     .replaceAll("[DATE]", today)
     .replaceAll("[TIME]", time)
     .replaceAll("[UID]", uid);
 }
+function formatTimeToAMPM(time24) {
+  if (!time24) return "";
+  let [hour, minute] = time24.split(":");
+  hour = parseInt(hour, 10);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  hour = hour % 12 || 12; // 0 -> 12, 13 -> 1, etc.
+  return `${hour}:${minute} ${ampm}`;
+}
 
-// --- Utility to process VARDATE and VARPHONE, then other vars ---
-function processMessageWithVars(template) {
+// --- Utility to process VARDATE, VARPHONE, and UID, then other vars ---
+function processMessageWithVars(template, userUidInputValue) {
   // VARDATE
-  if (template.includes("[VARDATE]")) {
+  if (template && template.includes("[VARDATE]")) {
     const vardateRaw = document.getElementById('vardateInput')?.value;
     let vardate = "";
     if (vardateRaw) {
@@ -2720,13 +3317,126 @@ function processMessageWithVars(template) {
     template = template.replaceAll("[VARDATE]", vardate);
   }
   // VARPHONE
-  if (template.includes("[VARPHONE]")) {
+  if (template && template.includes("[VARPHONE]")) {
     const varphone = document.getElementById('varphoneInput')?.value.trim() || "";
     template = template.replaceAll("[VARPHONE]", varphone);
   }
-  return processMessage(template);
+  // --- Custom Tag Replacement ---
+const customTags = getCustomTags();
+template = template.replace(/\[([A-Z0-9_#-]+)\]/gi, (match, tag) => {
+  if (["VARDATE", "VARPHONE", "UID", "DATE", "TIME"].includes(tag.toUpperCase())) return match;
+  const tagData = customTags[tag];
+  if (!tagData || tagData.value === undefined || tagData.value === "") return match;
+
+  // If it's a date type, format accordingly
+  if (tagData.type === "date" && /^\d{4}-\d{2}-\d{2}$/.test(tagData.value)) {
+    const [year, month, day] = tagData.value.split("-");
+    switch ((tagData.format || "MM/DD/YYYY")) {
+      case "MM/DD/YY":
+        return `${month}/${day}/${year.slice(-2)}`;
+      case "MM/DD":
+        return `${month}/${day}`;
+      default: // "MM/DD/YYYY"
+        return `${month}/${day}/${year}`;
+    }
+  }
+  // If it's a time type, format to AM/PM
+  if (tagData.type === "time" && /^\d{2}:\d{2}$/.test(tagData.value)) {
+    return formatTimeToAMPM(tagData.value);
+  }
+  return tagData.value;
+});
+  // [UID], [DATE], [TIME] handled in processMessage
+  return processMessage(template, userUidInputValue);
+}
+function getCustomTags() {
+  return JSON.parse(localStorage.getItem('customTags') || '{}');
+}
+function setCustomTags(tags) {
+  localStorage.setItem('customTags', JSON.stringify(tags));
 }
 
+// Set newTagValue input type based on dropdown selection
+document.getElementById('newTagType').addEventListener('change', function() {
+  document.getElementById('newTagValue').type = this.value;
+});
+const newTagType = document.getElementById('newTagType');
+const newTagDateFormat = document.getElementById('newTagDateFormat');
+newTagType.addEventListener('change', function() {
+  newTagDateFormat.style.display = (this.value === 'date') ? '' : 'none';
+});
+
+// Add new custom tag
+document.getElementById('addCustomTagBtn').addEventListener('click', () => {
+  const name = document.getElementById('newTagName').value.trim();
+  const type = document.getElementById('newTagType').value;
+  const dateFormat = (type === "date") ? document.getElementById('newTagDateFormat').value : undefined;
+  if (!name.match(/^[A-Z0-9_#-]+$/i)) {
+    alert('Tag name cannot be blank and should use only letters and numbers (no symbols or spaces).');
+    return;
+  }
+  const tags = getCustomTags();
+  if (tags[name]) {
+    alert('This tag already exists.');
+    return;
+  }
+  tags[name] = { type, value: "", format: dateFormat };
+  setCustomTags(tags);
+  document.getElementById('newTagName').value = '';
+  // Optionally reset date format dropdown:
+  if (type === "date") document.getElementById('newTagDateFormat').selectedIndex = 0;
+  renderCustomTags();
+  updatePreviewIfNeeded?.();
+});
+
+// Render custom tags UI and bind events
+function renderCustomTags() {
+  const tags = getCustomTags();
+  const list = document.getElementById('customTagsList');
+  list.innerHTML = '';
+  Object.entries(tags).forEach(([name, data]) => {
+    const wrapper = document.createElement('div');
+    wrapper.style.margin = '4px 0';
+    let input = document.createElement('input');
+    input.type = data.type || 'text';
+    input.value = data.value || '';
+    input.setAttribute('data-tag', name);
+    input.style.width = '120px';
+    wrapper.innerHTML = `<b>[${name}]</b> = `;
+    wrapper.appendChild(input);
+    const delBtn = document.createElement('button');
+    delBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;" >delete</span>';
+    delBtn.title = "Delete Tag";
+    delBtn.classList.add('delete-button');
+    delBtn.setAttribute('data-del', name);
+    wrapper.appendChild(delBtn);
+    list.appendChild(wrapper);
+    input.addEventListener('input', (e) => {
+      const tagName = e.target.getAttribute('data-tag');
+      const tags = getCustomTags();
+      if (tags[tagName]) {
+        tags[tagName].value = e.target.value;
+        setCustomTags(tags);
+        updatePreviewIfNeeded?.();
+      }
+    });
+    delBtn.addEventListener('click', () => {
+      const tags = getCustomTags();
+      delete tags[name];
+      setCustomTags(tags);
+      renderCustomTags();
+      updatePreviewIfNeeded?.();
+    });
+  });
+}
+window.addEventListener('DOMContentLoaded', renderCustomTags);
+
+  const newTagNameInput = document.getElementById('newTagName');
+  newTagNameInput.addEventListener('input', function(e) {
+    const cursorPos = this.selectionStart;
+    this.value = this.value.toUpperCase();
+    this.setSelectionRange(cursorPos, cursorPos);
+  });
 // --- Copy to Clipboard function (used globally) ---
 function copyText(text) {
   if (navigator.clipboard && window.isSecureContext) {
@@ -2773,13 +3483,35 @@ document.body.addEventListener("click", function(event) {
     template = template.replaceAll("[VARPHONE]", varphone);
   }
 
-  let message = processMessage(template);
+  // Handle [UID]
+  if (template.includes("[UID]")) {
+    const userUidInput = document.getElementById('userUid');
+    const userUidInputValue = userUidInput?.value.trim() || "";
+    if (!userUidInputValue) {
+      alert('ERROR: This button uses the [UID] tag, which is currently undefined. Please enter your UID in the [UID] field within Tags section of Outbound Clipboard Manager and try again.');
+      return;
+    }
+    localStorage.setItem('userUid', userUidInputValue);
+    template = template.replaceAll("[UID]", userUidInputValue);
+    if (displayUid) displayUid.textContent = userUidInputValue;
+    copyText(processMessage(template, userUidInputValue));
+    return;
+  }
+
+  // Default copy (no [UID] usage)
+  let userUidInputValue = document.getElementById('userUid')?.value.trim() || localStorage.getItem('userUid') || "";
+let message = processMessageWithVars(template, userUidInputValue);
+if (message) {
   copyText(message);
+} else {
+  copyText(template);
+}
 });
-document.getElementById('insertVarphoneBtn').addEventListener('click', function() {
+document.getElementById('insertVarphoneBtn')?.addEventListener('click', function() {
   document.getElementById('varphoneInput').value = '801-213-9500';
   document.getElementById('varphoneInput').dispatchEvent(new Event('input'));
 });
+
 // --- Preview logic: track current previewed button and update on input ---
 let currentPreviewButton = null;
 
@@ -2790,7 +3522,8 @@ document.body.addEventListener("mouseover", function(event) {
     if (button.hasAttribute('data-no-preview')) return;
     currentPreviewButton = button;
     let template = button.getAttribute('data-message') || button.getAttribute('data-copytext') || button.textContent.trim();
-    let message = processMessageWithVars(template);
+    const userUidInputValue = document.getElementById('userUid')?.value.trim() || "";
+    let message = processMessageWithVars(template, userUidInputValue);
     preview.textContent = message;
     preview.style.left = `${event.pageX + 10}px`;
     preview.style.top = `${event.pageY + 10}px`;
@@ -2812,40 +3545,30 @@ document.body.addEventListener("mouseout", function(event) {
   currentPreviewButton = null;
 });
 
-// --- Update preview if VARDATE or VARPHONE changes ---
+// --- Update preview if VARDATE or VARPHONE or UID changes ---
 function updatePreviewIfNeeded() {
   if (currentPreviewButton && previewToggle && previewToggle.checked) {
     let template = currentPreviewButton.getAttribute('data-message') || currentPreviewButton.getAttribute('data-copytext') || currentPreviewButton.textContent.trim();
-    let message = processMessageWithVars(template);
+    const userUidInputValue = document.getElementById('userUid')?.value.trim() || "";
+    let message = processMessageWithVars(template, userUidInputValue);
     preview.textContent = message;
   }
 }
 document.getElementById('vardateInput')?.addEventListener('input', updatePreviewIfNeeded);
 document.getElementById('varphoneInput')?.addEventListener('input', updatePreviewIfNeeded);
+document.getElementById('userUid')?.addEventListener('input', updatePreviewIfNeeded);
 
-// --- VARDATE picker: prefill from localStorage and add "Today" button ---
-window.addEventListener('DOMContentLoaded', () => {
+// --- VARDATE picker: add "Today" button ---
+document.getElementById('vardateTodayBtn')?.addEventListener('click', function() {
   const vardateInput = document.getElementById('vardateInput');
-  const lastVarDate = localStorage.getItem('lastVarDate');
-  if (vardateInput && lastVarDate) {
-    const [mm, dd, yy] = lastVarDate.split('/');
-    const yyyy = parseInt(yy, 10) > 49 ? '19' + yy : '20' + yy;
-    vardateInput.value = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
-  }
-  const varphoneInput = document.getElementById('varphoneInput');
-  const lastVarPhone = localStorage.getItem('lastVarPhone');
-  if (varphoneInput && lastVarPhone) {
-    varphoneInput.value = lastVarPhone;
-  }
-
-  document.getElementById('vardateTodayBtn')?.addEventListener('click', function() {
+  if (vardateInput) {
     const now = new Date();
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
     vardateInput.value = `${yyyy}-${mm}-${dd}`;
-    vardateInput.dispatchEvent(new Event('input')); // trigger preview update
-  });
+    vardateInput.dispatchEvent(new Event('input')); // trigger preview update and auto-save
+  }
 });
 
 // --- Custom Button/Folders Management and Rendering (with copy-box compatibility) ---
@@ -3512,44 +4235,72 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   updateFolderDropdown();
 
-  // --- Export/Import Folders/Buttons ---
-  document.getElementById('exportFolders').addEventListener('click', function() {
-    const folders = JSON.parse(localStorage.getItem('foldersV2') || '[]');
-    const dataStr = JSON.stringify(folders, null, 2);
-    const blob = new Blob([dataStr], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
+document.getElementById('exportFolders').addEventListener('click', function() {
+  const folders = JSON.parse(localStorage.getItem('foldersV2') || '[]');
+  const customTags = JSON.parse(localStorage.getItem('customTags') || '{}');
+  const data = {
+    folders,
+    customTags
+  };
+  const dataStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([dataStr], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'folders_backup.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  });
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'OCM_backup.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
 
   document.getElementById('importFolders').addEventListener('click', function() {
     document.getElementById('importFileInput').click();
   });
 
-  document.getElementById('importFileInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+document.getElementById('importFileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      try {
-        const importedFolders = JSON.parse(e.target.result);
-        if (!Array.isArray(importedFolders)) throw new Error("Invalid format");
-        if (!confirm("Importing will replace all your current folders and buttons. Continue?")) return;
-        localStorage.setItem('foldersV2', JSON.stringify(importedFolders));
-        alert('Folders/Buttons imported successfully!\n\nThe page will now reload to apply changes.');
-        location.reload();
-      } catch (err) {
-        alert('Failed to import: Invalid file format.');
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+
+      // Backwards compatibility: if old format, wrap in object
+      if (Array.isArray(imported)) {
+        localStorage.setItem('foldersV2', JSON.stringify(imported));
+        localStorage.removeItem('customTags');
+      } else {
+        if (imported.folders) {
+          localStorage.setItem('foldersV2', JSON.stringify(imported.folders));
+        }
+        if (imported.customTags) {
+          localStorage.setItem('customTags', JSON.stringify(imported.customTags));
+        }
       }
-    };
-    reader.readAsText(file);
+
+      alert('Folders/Buttons and Custom Tags imported successfully!\n\nThe page will now reload to apply changes.');
+      location.reload();
+    } catch (err) {
+      alert('Failed to import: Invalid file format.');
+    }
+  };
+  reader.readAsText(file);
+});
+});
+</script>
+
+<!-- Collapsable Instructions Box -->
+<script>
+document.querySelectorAll('.info-toggle').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.textContent = expanded ? 'Show Instructions ▾' : 'Hide Instructions ▴';
+    const content = document.getElementById(btn.getAttribute('aria-controls'));
+    if (content) content.hidden = expanded;
   });
 });
 </script>
