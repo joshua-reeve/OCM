@@ -1716,7 +1716,11 @@ New Tag Type: <select id="newTagType">
       <label for="newTime">8. New Time:</label>
       <input type="time" id="newTime">
     </div>
-
+<br>
+<button type="button" id="clearFormButton" style="background:#f44336;color:white;margin:8px 0;">
+  Clear Form
+</button>
+	
 <label>9. Choose Format:</label>
 <br>
 <div class="sub-label">SMS Options:</div>
@@ -1745,16 +1749,12 @@ Please fill out above form to generate the communication you will send to the pa
   with [PROVIDER] for [NEW DATE] at [NEW TIME]
 </div>
 <br>
-<button type="button" id="clearFormButton" style="background:#f44336;color:white;margin:8px 0;">
-  Clear Form
-</button>
-
 <br>
 <hr>
 
 <b><span class="material-symbols-outlined" style="font-size: 18px; color: green;">event_busy</span> No appointment available:</b>
 
-<div class="copy-box" data-message="No availability, [DATE]: [UID]">Copy to Wait List Message</div>
+<div class="copy-box" style="color: red;" data-message="No availability, [DATE]: [UID]">Copy to Wait List Message</div>
 
 <br>
 
@@ -4329,4 +4329,5 @@ document.querySelectorAll('.info-toggle').forEach(btn => {
 </script>
 </body>
 </html>
+
 
