@@ -2875,9 +2875,10 @@ function setCustomTags(tags) {
 }
 
 // Set newTagValue input type based on dropdown selection
-document.getElementById('newTagType').addEventListener('change', function() {
-  document.getElementById('newTagValue').type = this.value;
-});
+const newTagInput = document.getElementById('newTagValue');
+if (newTagInput) {
+  newTagInput.type = this.value;
+}
 const newTagType = document.getElementById('newTagType');
 const newTagDateFormat = document.getElementById('newTagDateFormat');
 newTagType.addEventListener('change', function() {
