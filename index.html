@@ -2475,14 +2475,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const msg = `UofU Health: ${f.patientName}, an earlier visit is available:  
 Existing visit: ${f.existingDate} at ${f.existingTime} with ${f.existingProviderName}  
 New visit: ${f.newDate} at ${f.newTime}${newProviderText}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.`;
+This has been offered to multiple patients. Don't delay. Reply 1 to accept, 2 to decline, or 3 to be removed from the wait list.`;
     copyBox.textContent = msg;
   };
   const generateAltEnglish = () => {
     const f = getFields();
     const msg = `UofU Health: ${f.patientName}, an additional visit is available:  
 New visit: ${f.newDate} at ${f.newTime} with ${f.existingProviderName}  
-This has been offered to multiple patients. Don't delay. Reply 1 to accept, Reply 2 to get off the wait list for this visit.`;
+This has been offered to multiple patients. Don't delay. Reply 1 to accept, 2 to decline, or 3 to be removed from the wait list.`;
     copyBox.textContent = msg;
   };
   const generateSpanishEarlier = () => {
@@ -2491,14 +2491,14 @@ This has been offered to multiple patients. Don't delay. Reply 1 to accept, Repl
     const msg = `UofU Health: ${f.patientName}, una visita anterior está disponible:  
 Visita existente: ${f.existingDate} a las ${f.existingTime} con ${f.existingProviderName}  
 Nueva visita: ${f.newDate} a las ${f.newTime}${newProviderText}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.`;
+Esto se ha ofrecido a varios pacientes. No te demores.Responda 1 para aceptar, 2 para rechazar o 3 para ser eliminado de la lista de espera.`;
     copyBox.textContent = msg;
   };
   const generateSpanishAdditional = () => {
     const f = getFields();
     const msg = `UofU Health: ${f.patientName}, hay una visita adicional disponible:  
 Nueva visita: ${f.newDate} a las ${f.newTime} con ${f.existingProviderName}  
-Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, responde 2 para salir de la lista de espera para esta visita.`;
+Esto se ha ofrecido a varios pacientes. No te demores. Responda 1 para aceptar, 2 para rechazar o 3 para ser eliminado de la lista de espera.`;
     copyBox.textContent = msg;
   };
 
